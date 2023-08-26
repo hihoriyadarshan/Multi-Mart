@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout/Layout'
-import "./Contact.css"
+import "./css/Contact.css"
 import { Link } from "react-router-dom";
 
 const Contact = () => {

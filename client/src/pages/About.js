@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/Layout/Layout'
-import "./About.css"
+import "./css/About.css"
 import { Link } from "react-router-dom";
 
 
