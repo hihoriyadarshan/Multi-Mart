@@ -1,10 +1,14 @@
 import React,{useState} from 'react'
 import Layout from '../../components/Layout/Layout'
-import "./css/Register.css"
+import "./css/Login.css"
 import toast from 'react-hot-toast';
 import axios from 'axios'
 import {useNavigate,useLocation} from 'react-router-dom'  
 import { useAuth } from '../../context/auth';
+import { MdEmail } from 'react-icons/md'; 
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { Link } from "react-router-dom";
+
 
 
 const Login = () => {
@@ -45,38 +49,37 @@ const Login = () => {
 
   return (
     <Layout title="Register - Ecommer App">
-      <div className="form-container" style={{ minHeight: "90vh" }}>
+    <div className="form-container">
+      <div className="form-box">
+       <center> <h4 className="form-title">Login FORM</h4> </center>
         <form onSubmit={handleSubmit}>
-          <h4 className="title">Login FORM</h4>
-          
-          <div className="mb-3">
+
+            <MdEmail/>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Enter Your Email "
+              className="form-input"
+              placeholder="Enter Your Email"
               required
             />
-          </div>
-          <div className="mb-3">
+
+            <RiLockPasswordFill/>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="form-control"
-              id="exampleInputPassword1"
+              className="form-input"
               placeholder="Enter Your Password"
               required
             />
-          </div>
-          
-          
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
+          <div className="forgot-password-link">
+              <Link to="/forgot-password" onClick={()=>{navigate('/forgot-password')}}>Forgot Password?</Link>
+            </div>
+            <div></div>
+          <input type='submit' value="Login" className="form-button"/>
         </form>
+      </div>
       </div>
     </Layout>
   )
