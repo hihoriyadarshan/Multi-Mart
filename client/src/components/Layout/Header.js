@@ -25,8 +25,6 @@ const Header = () => {
       <nav className="nav-links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/category">Category</NavLink>
-        {/* <NavLink to="/about">About</NavLink> */}
-        {/* <NavLink to="/contact">Contact</NavLink> */}
         {
           !auth.user ? (<>
           <NavLink to="/register">Register</NavLink>
