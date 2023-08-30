@@ -12,6 +12,10 @@ import PrivateRoute from './components/Routes/Private';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import AdminRoute from './components/Routes/AdminRoute';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+// import CreateCategory from './pages/Admin/CreateCategory';
+// import CreateProduct from './pages/Admin/CreateProduct';
+import Users from './pages/Admin/Users';
+
 
 
 
@@ -29,6 +33,10 @@ function App() {
 
         <Route path="/dashboard" element={<AdminRoute/>}>
         <Route path="admin" element={<AdminDashboard/>} />
+        {/* <Route path="admin/create-categoty" element={<CreateCategory/>} /> */}
+        {/* <Route path="admin/create-product" element={<CreateProduct/>} /> */}
+        <Route path="admin/users" element={<Users/>} />
+
         </Route>
 
 
@@ -40,6 +48,7 @@ function App() {
         <Route path='/contact' element={<Contact/>}  />
         <Route path='/policy' element={<Policy/>}  />
         <Route path='*' element={<Pagenotfound/>}  />
+
 
       </Routes>
   </>       

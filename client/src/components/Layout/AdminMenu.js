@@ -1,76 +1,99 @@
-import React from 'react'
-import './css/AdminMenu.css'
-// import './css/AdminMenu1'  
+import React, { useEffect } from 'react';
+import './css/AdminMenu.css';
+// import logo from "../../images/logo.png";
+import { NavLink } from "react-router-dom"; 
 
 const AdminMenu = () => {
+  useEffect(() => {
+    let list = document.querySelectorAll(".navigation li");
+
+    function activeLink() {
+      list.forEach((item) => {
+        item.classList.remove("hovered");
+      });
+      this.classList.add("hovered");
+    }
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+      navigation.classList.toggle("active");
+      main.classList.toggle("active");
+    };
+  }, []);
+
   return (
     <div>
       <div className="container">
   <div className="navigation">
     <ul>
       <li>
-        <a href="#">
+        <NavLink to="#">
           <span className="icon">
             <ion-icon name="logo-apple" />
           </span>
           <span className="title">Brand Name</span>
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="#">
           <span className="icon">
             <ion-icon name="home-outline" />
           </span>
           <span className="title">Dashboard</span>
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="/dashboard/admin/users">
           <span className="icon">
             <ion-icon name="people-outline" />
           </span>
           <span className="title">Customers</span>
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="/dashboard/admin/create-categoty">
           <span className="icon">
             <ion-icon name="chatbubble-outline" />
           </span>
-          <span className="title">Messages</span>
-        </a>
+          <span className="title">Category</span>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="/dashboard/admin/create-product">
           <span className="icon">
             <ion-icon name="help-outline" />
           </span>
-          <span className="title">Help</span>
-        </a>
+          <span className="title">Product</span>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="#">
           <span className="icon">
             <ion-icon name="settings-outline" />
           </span>
           <span className="title">Settings</span>
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="#">
           <span className="icon">
             <ion-icon name="lock-closed-outline" />
           </span>
           <span className="title">Password</span>
-        </a>
+        </NavLink>
       </li>
       <li>
-        <a href="#">
+        <NavLink to="/login">
           <span className="icon">
             <ion-icon name="log-out-outline" />
           </span>
-          <span className="title">Sign Out</span>
-        </a>
+          <span className="title" >Sign Out</span>
+        </NavLink>
       </li>
     </ul>
   </div>
@@ -134,7 +157,7 @@ const AdminMenu = () => {
       <div className="recentOrders">
         <div className="cardHeader">
           <h2>Recent Orders</h2>
-          <a href="#" className="btn">View All</a>
+          <NavLink to="#" className="btn">View All</NavLink>
         </div>
         <table>
           <thead>

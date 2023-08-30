@@ -1,10 +1,11 @@
 // Header.js
 import React from "react";
-import { NavLink } from "react-router-dom"; // If using React Router
+import { NavLink, Routes } from "react-router-dom"; // If using React Router
 import logo from "../../images/logo.png";
 import "./css/Header.css";
 import { useAuth } from "../../context/auth";
 import toast  from "react-hot-toast";
+
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -38,6 +39,7 @@ const Header = () => {
 
         <ul class="dropdown-menu">
           <li><NavLink to={`dashboard/${auth?.user?.role === 1? 'admin' : 'user'}`} class="dropdown-item" href="#">Dashboard</NavLink></li>
+          <li><NavLink to="/Profile">profile</NavLink></li>
           <li><NavLink onClick={handleLogout} to="/logout">Logout</NavLink></li>
         </ul>
       </NavLink>
