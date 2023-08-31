@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import './css/user.css';
-// import logo from "../../images/logo.png";
 import { NavLink } from "react-router-dom";
 
-const User = () => {
+const Product = () => {
     useEffect(() => {
         let list = document.querySelectorAll(".navigation li");
     
@@ -118,7 +117,7 @@ const User = () => {
         <div className="details">
           <div className="recentOrders">
             <div className="cardHeader">
-              <h2>Customer</h2>
+              <center><h2>Create Product</h2></center>
               <NavLink to="#" className="btn">View All</NavLink>
             </div>
             <table>
@@ -200,4 +199,5 @@ const User = () => {
       )
     }
 
-export default User
+
+export default Product
