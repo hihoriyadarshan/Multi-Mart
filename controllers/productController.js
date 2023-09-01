@@ -2,6 +2,8 @@ import productModel from "../models/productModel.js";
 import fs from 'fs'
 import slugify from "slugify";
 
+
+//create product
 export const createProductController = async (req, res) => {
     try {
       const { name, description, price, category, quantity, shipping } =
@@ -42,6 +44,75 @@ export const createProductController = async (req, res) => {
         success: false,
         error,
         message: "Error in crearing product",
+      });
+    }
+  };
+  
+
+
+//get all products
+export const getProductController = async (req, res) => {
+    try {
+      const products = await productModel
+        .find({})
+        .populate("category")
+        .select("-photo")
+        .limit(12)
+        .sort({ createdAt: -1 });
+      res.status(200).send({
+        success: true,
+        counTotal: products.length,
+        message: "ALlProducts ",
+        products,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Erorr in getting products",
+        error: error.message,
+      });
+    }
+  };
+  
+
+// get single product
+export const getSingleProductController = async (req, res) => {
+    try {
+      const product = await productModel
+        .findOne({ slug: req.params.slug })
+        .select("-photo")
+        .populate("category");
+      res.status(200).send({
+        success: true,
+        message: "Single Product Fetched",
+        product,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Eror while getitng single product",
+        error,
+      });
+    }
+  };
+
+
+  // get photo
+export const productPhotoController = async (req, res) => {
+    try {
+      const product = await productModel.findById(req.params.pid).select("photo");
+      if (product.photo.data) {
+        res.set("Content-type", product.photo.contentType);
+        return res.status(200).send(product.photo.data);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Erorr while getting photo",
+        error,
       });
     }
   };
