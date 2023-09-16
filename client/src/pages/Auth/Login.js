@@ -61,6 +61,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="form-input"
               placeholder="Enter Your Email"
+              name='email'
               required
             />
 
@@ -71,6 +72,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="form-input"
               placeholder="Enter Your Password"
+              name="password"
               required
             />
           <div className="forgot-password-link">
