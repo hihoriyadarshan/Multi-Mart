@@ -4,11 +4,11 @@ import AdminMenu from '../../components/Layout/AdminMenu'
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 const CreateProduct = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -35,6 +35,34 @@ const CreateProduct = () => {
     getAllCategory();
   }, []);
 
+//create product 
+const handleCreate = async (e) => {
+  e.preventDefault();
+    try {
+      const productData = new FormData();
+      productData.append("name", name);
+      productData.append("description", description);
+      productData.append("price", price);
+      productData.append("quantity", quantity);
+      productData.append("photo", photo);
+      productData.append("category", category);
+      const { data } = axios.post(`${process.env.REACT_APP_API}/api/v1/product/create-product`,
+        productData
+      );
+      if (data?.success) {
+        toast.error(data?.message);
+   } else {
+    toast.success("Product Created Successfully");
+    navigate("/dashboard/admin/products");
+  }
+}
+    catch(error){
+      console.log(error)
+      toast.error('Something went wrong')
+    }
+};
+
+  
   return (
     <Layout>
       <div className="container-fluid m-3 p-3">
