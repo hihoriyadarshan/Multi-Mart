@@ -5,6 +5,8 @@ import logo from "../../images/logo.png";
 import "./css/Header.css";
 import { useAuth } from "../../context/auth";
 import toast  from "react-hot-toast";
+import Search from "antd/es/input/Search";
+import SearchInput from "../Form/SearchInput";
 
 
 const Header = () => {
@@ -23,6 +25,7 @@ const Header = () => {
           <img src={logo} alt="Logo" className="logo" />
         </NavLink>
       </div>
+      <SearchInput/>
       <nav className="nav-links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/category">Category</NavLink>
