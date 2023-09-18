@@ -1,3 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 .banner{
     background-image: linear-gradient(to right, #635dc0, #3027ae);
     height: 100vmin;

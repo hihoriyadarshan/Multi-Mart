@@ -39,5 +39,44 @@
     color: #eb4034;
   }
 
-  
+  /* Dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.dropdown button {
+  background-color: transparent;
+  border: none;
+  /* color: #0000; */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  /* background-color: #333; */
+  min-width: 160px;
+  display: none;
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  text-align: left;
+  /* border-bottom: ; */
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+
+
+
   

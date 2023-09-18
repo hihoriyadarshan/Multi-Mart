@@ -6,9 +6,12 @@ import {Checkbox, Radio} from 'antd'
 import "./css/Home.css"
 import { Prices } from '../components/Prices';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/cart';
+import toast from 'react-hot-toast';
 
 const Homepage = () => {
  const navigate = useNavigate()
+ const [cart,setCart] =useCart()
  const [products,setProducts] = useState([])
  const [categories,setCategories] = useState([])
  const [checked, setChecked] = useState([]);
@@ -124,7 +127,7 @@ const filterProduct = async () => {
       </div>
 
      <h2 className="homeHeading">Featured Products</h2>
-     <div className='row mt-3'>
+     <div className='row mt-4'>
      <div className='col-md-2'>
       <h4 className='text-center'>Filter By Category</h4>
       <div className="d-flex flex-column">
@@ -154,10 +157,10 @@ const filterProduct = async () => {
      </div>
      <div className='col-md-9'>
         {/* {JSON.stringify(radio,null, 4)} */}
-     <div className='d-flex flex-wrap'>
+     <div className='d-flex flex-wrap ms-3'>
      {products?.map((p) => (
               
-                <div className="card m-2" style={{ width: "18rem" }}>
+                <div className="card m-4" style={{ width: "18rem" }}>
                   <img
                     src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
@@ -168,7 +171,9 @@ const filterProduct = async () => {
                     <p className="card-text">{p.description.substring(0, 26)}...</p>
                     <p className="card-text">₹{p.price}</p>
                     <button className='btn btn-primary ms-1' onClick={() =>navigate(`/product/${p.slug}`)}>More Details</button>
-                    <button className='btn btn-Secondary ms-1'>ADD TO Cart</button>
+                    <button className='btn btn-Secondary ms-1' onClick={()=>{setCart([...cart,p])
+                    toast.success('Item Added  to cart')
+                    }}>ADD TO Cart</button>
 
                   </div>
                 </div>
