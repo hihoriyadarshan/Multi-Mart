@@ -85,7 +85,7 @@ useEffect(()=>{
   loadMore()
 },[page])
 
-//load more
+//View more Product
 
 const loadMore = async () => {
   try {
@@ -141,7 +141,7 @@ const filterProduct = async () => {
 
       {/* Price filter */}
 
-      <h4 className='text-center mt-4'>Filter By Prices</h4>
+         <h4 className='text-center mt-4'>Filter By Prices</h4>
       <div className="d-flex flex-column">
       <Radio.Group onChange={e => setRadio(e.target.value)}>
         {Prices?.map(p => (
@@ -155,18 +155,21 @@ const filterProduct = async () => {
       <button className='btn btn-danger' onClick={() => window.location.reload()}> Reset Filter</button>
       </div>
      </div>
+    
      <div className='col-md-9'>
+     <div className='All-Product-Card'>
         {/* {JSON.stringify(radio,null, 4)} */}
-     <div className='d-flex flex-wrap ms-3'>
+     <div className='d-flex flex-wrap'>
+      
      {products?.map((p) => (
               
-                <div className="card m-4" style={{ width: "18rem" }}>
+                <div className="productCard " style={{ width: "18rem" }}>
                   <img
                     src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />
-                  <div className="card-body">
+                  <div className="container">
                     <h5 className="card-title">{p.name}</h5>
                     <p className="card-text">{p.description.substring(0, 26)}...</p>
                     <p className="card-text">₹{p.price}</p>
@@ -188,9 +191,10 @@ const filterProduct = async () => {
             setPage(page+1);
           }}
           >
-              {loading ? "Loading ..." : "Loadmore"}
+              {loading ? "Loading ..." : "View more"}
             </button>
           )}
+       </div>
        </div>
        </div>
        </div>

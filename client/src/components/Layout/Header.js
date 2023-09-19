@@ -92,7 +92,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/Profile">Profile</NavLink>
+              <NavLink to="/dashboard/user/profile">Profile</NavLink>
               </li>
               <li>
                 <NavLink onClick={handleLogout} to="/logout">
