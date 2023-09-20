@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./css/AdminMenu.css"; 
+
 const AdminMenu = () => {
   return (
     <>
@@ -31,17 +33,17 @@ const AdminMenu = () => {
             {/* user */}
           </NavLink>
           <NavLink
-            to="/dashboard/admin/users"
+            to="/dashboard/admin/Orders"
             className="list-group-item list-group-item-action"
           >
-            USer
+            Order
           </NavLink>
-          {/* <NavLink
+          <NavLink
             to="/dashboard/admin/users"
             className="list-group-item list-group-item-action"
           >
             Users
-          </NavLink> */}
+          </NavLink>
         </div>
       </div>
     </>

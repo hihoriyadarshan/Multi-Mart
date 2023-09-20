@@ -171,13 +171,21 @@ const filterProduct = async () => {
                   />
                   <div className="container">
                     <h5 className="card-title">{p.name}</h5>
-                    <p className="card-text">{p.description.substring(0, 26)}...</p>
-                    <p className="card-text">₹{p.price}</p>
-                    <button className='btn btn-primary ms-1' onClick={() =>navigate(`/product/${p.slug}`)}>More Details</button>
-                    <button className='btn btn-Secondary ms-1' onClick={()=>{setCart([...cart,p]);
+                    <p className="card-text ms-25">{p.description.substring(0, 26)}...</p>
+                    <div className='price'>
+                    <p className="card-text ms-2">₹{p.price}</p>
+                    </div>
+                    <div>
+                    <button className='btn-moredetails' onClick={() =>navigate(`/product/${p.slug}`)}>More Details</button>
+                    <button className='btn-cart' onClick={()=>{setCart([...cart,p]);
                     localStorage.setItem('cart', JSON.stringify([...cart,p]))
                     toast.success('Item Added  to cart')
                     }}>ADD TO Cart</button>
+                    
+                    
+                    </div>
+                   
+                    
 
                   </div>
                 </div>

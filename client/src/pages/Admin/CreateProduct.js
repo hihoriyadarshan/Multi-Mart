@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import "./Admin.css"; 
+
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -65,7 +67,7 @@ const handleCreate = async (e) => {
   
   return (
     <Layout>
-      <div className="container-fluid m-3 p-3">
+      <div  className="container-fluid m-3 p-3 dashboard">
         <div  className='row'>
           <div className='col-md-3'>
             <AdminMenu/>

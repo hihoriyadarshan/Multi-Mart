@@ -4,7 +4,7 @@ import Layout from "./../../components/Layout/Layout";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { FaUser, FaEnvelope, FaKey, FaPhone, FaMapMarker } from "react-icons/fa"; // Import Font Awesome icons
+import { FaUser, FaEnvelope, FaKey, FaPhone, FaMapMarker } from "react-icons/fa"; 
 import "../css/profile.css";
 
 const Profile = () => {
@@ -56,16 +56,22 @@ const Profile = () => {
 
   return (
     <Layout title={"Your Profile"}>
+      <div className="main">
       <div className="container-fluid m-3 p-3 dashboard">
         <div className="row">
           <div className="col-md-3">
             <UserMenu />
           </div>
+          {/* <div className="" */}
+          <div className="container">
+          <div className="container-1">
+
           <div className="col-md-8">
-            <div className="form-container" style={{ marginTop: "-40px" }}>
+            <div className="container-2" style={{ marginTop: "-40px" }}>
+            <h4 className="">USER PROFILE</h4>
+
               <form onSubmit={handleSubmit}>
-                <h4 className="title">USER PROFILE</h4>
-                <div className="mb-3">
+                <div className="field-row">
                   <div className="input-icon">
                     <FaUser />
                     <input
@@ -79,7 +85,7 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <div className="mb-3">
+                <div className="field-row">
                   <div className="input-icon">
                     <FaEnvelope />
                     <input
@@ -93,7 +99,7 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <div className="mb-3">
+                <div className="field-row">
                   <div className="input-icon">
                     <FaKey />
                     <input
@@ -106,7 +112,7 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <div className="mb-3">
+                <div className="field-row">
                   <div className="input-icon">
                     <FaPhone />
                     <input
@@ -119,7 +125,7 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-                <div className="mb-3">
+                <div className="field-row">
                   <div className="input-icon">
                     <FaMapMarker />
                     <input
@@ -132,14 +138,18 @@ const Profile = () => {
                     />
                   </div>
                 </div>
-
+                <div className="submit-btn">
                 <button type="submit" className="btn btn-primary">
                   UPDATE
                 </button>
+                </div>
               </form>
             </div>
           </div>
         </div>
+      </div>
+      </div>
+      </div>
       </div>
     </Layout>
   );

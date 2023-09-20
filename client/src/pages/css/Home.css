@@ -84,9 +84,10 @@ body{
     padding-bottom: 0.5vmax;
 }
   
-/* .productCard  img { */
-    /* width: 14vmax; */
-/* } */
+.productCard  img {
+    width: 18rem;
+    height: 14rem;
+  }
   
 .productCard  div {
     margin: 0.5vmax;
@@ -118,6 +119,11 @@ body{
 .productCard:hover {
     box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
     transform: translateY(-1vmax);
+  }
+
+.card-text-left{
+  margin-right: 1000px;
+
   }
 
   @media screen and (max-width: 600px) {
@@ -300,14 +306,6 @@ body{
 }
 
 
-
-
-/*  */
-
-
-/* Add this CSS code to your existing Home.css file */
-
-/* Additional styles for the banner section */
 .banner p {
     font-size: 1.4rem;
   }
@@ -502,3 +500,28 @@ body{
     }
   }
   
+
+.btn-cart{
+  margin-top: 20px;
+  margin-left: 13px;
+  color: white;
+  background-color: rgb(251, 100, 27);
+  height: 40px;
+  width: 130px;
+  border-radius: 5px;
+  border: none;
+}  
+
+.btn-moredetails{
+margin-top: 20px;
+background-color: rgb(255, 159, 0);
+border-radius: 5px;
+margin-left: -25px;
+height: 40px;
+width: 130px;
+border: none;
+}
+
+.price{
+  margin-top: -20px;
+}
