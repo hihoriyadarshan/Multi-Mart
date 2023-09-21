@@ -62,24 +62,7 @@ export const registerController = async (req, res) => {
     }
   };
 
-//get all users
-// export const  userControlller = async (req, res) => {
-//   try {
-//     const user = await userModel.find({});
-//     res.status(200).send({
-//       success: true,
-//       message: "All User List",
-//       user,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({
-//       success: false,
-//       error,
-//       message: "Error while getting all user",
-//     });
-//   }
-// };
+//get all users(Admin)
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -102,6 +85,27 @@ export const getAllUsers = async (req, res) => {
       success: false,
       error: "Internal server error",
       message: "Error while getting all users",
+    });
+  }
+};
+
+// delete user(Admin)
+
+//delete category
+export const deleteuserController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await userModel.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: "user Deleted Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error while deleting user",
+      error,
     });
   }
 };
