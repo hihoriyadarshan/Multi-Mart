@@ -62,6 +62,49 @@ export const registerController = async (req, res) => {
     }
   };
 
+//get all users
+// export const  userControlller = async (req, res) => {
+//   try {
+//     const user = await userModel.find({});
+//     res.status(200).send({
+//       success: true,
+//       message: "All User List",
+//       user,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       success: false,
+//       error,
+//       message: "Error while getting all user",
+//     });
+//   }
+// };
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    if (!users || users.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No users found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "All User List",
+      users,
+    });
+  } catch (error) {
+    console.error("Error while getting all users:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      message: "Error while getting all users",
+    });
+  }
+};
 
 
 //POST LOGIN
@@ -168,7 +211,7 @@ export const forgotPasswordController = async (req, res) => {
 };
 
 
-//update prfile
+//update profile
 export const updateProfileController = async (req, res) => {
   try {
     const { name, email, password, address, phone } = req.body;

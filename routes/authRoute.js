@@ -1,5 +1,5 @@
 import express from 'express'
-import {registerController,loginController,testController,forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController} from '../controllers/authController.js'
+import {registerController,loginController,testController,forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController, getAllUsers} from '../controllers/authController.js'
 import { requireSignIn,isAdmin } from '../middleware/authMiddleware.js';
 
 
@@ -13,6 +13,10 @@ router.post("/register", registerController);
 
 //LOGIN 
 router.post("/login", loginController);
+
+//get ALl users 
+router.get("/get-users",requireSignIn,isAdmin,getAllUsers); 
+
 
 //forgot Password
 router.post("/forgot-password", forgotPasswordController);

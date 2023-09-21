@@ -8,7 +8,7 @@ const router = express.Router();
 //routes
 router.post("/create-product",requireSignIn,isAdmin,formidable(),createProductController);
 
-//get products
+//All products get
 router.get("/get-product", getProductController);
 
 //single product

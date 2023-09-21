@@ -171,7 +171,7 @@ const filterProduct = async () => {
                   />
                   <div className="container">
                     <h5 className="card-title">{p.name}</h5>
-                    <p className="card-text ms-25">{p.description.substring(0, 26)}...</p>
+                    <p className="card-text ms-25">{p.description.substring(0, 35)}...</p>
                     <div className='price'>
                     <p className="card-text ms-2">₹{p.price}</p>
                     </div>
