@@ -2,7 +2,7 @@ import userModel from "../models/userModel.js"
 import orderModel from "../models/orderModel.js"
 import { comparePassword,hashPassword } from "./../helpers/authHelper.js";
 import JWT from 'jsonwebtoken';
-
+import ContactModel from "../models/contactModel.js";
 
 export const registerController = async (req, res) => {
     try {
@@ -62,6 +62,7 @@ export const registerController = async (req, res) => {
     }
   };
 
+
 //get all users(Admin)
 
 export const getAllUsers = async (req, res) => {
@@ -88,6 +89,38 @@ export const getAllUsers = async (req, res) => {
     });
   }
 };
+
+
+
+
+// Create a function for creating a new contact
+export const createContact = async (req, res) => {
+  try {   
+    const { firstname, lastname, phone, message } = req.body;
+
+    const newContact = new ContactModel({
+      firstname,
+      lastname,
+      phone,
+      message,
+    });
+
+
+    await newContact.save();
+
+   
+    res.status(201).json({ message: "Contact created successfully" });
+  } catch (error) {
+  
+    console.error("Error creating contact:", error);
+    res.status(500).json({ error: "Failed to create contact" });
+  }
+};
+
+
+
+
+
 
 // delete user(Admin)
 

@@ -4,6 +4,8 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "./css/users.css"; 
+import { AiFillDelete } from 'react-icons/ai';
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -75,7 +77,7 @@ const Users = () => {
                               handleDelete(user._id);
                             }}
                           >
-                            Delete
+                              <AiFillDelete/>
                           </button>
                     </td>
                     <td>..</td>

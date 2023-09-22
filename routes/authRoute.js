@@ -1,5 +1,5 @@
 import express from 'express'
-import {registerController,loginController,testController,forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController, getAllUsers, deleteuserController} from '../controllers/authController.js'
+import {registerController,loginController,testController,forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController, getAllUsers, deleteuserController, createContact} from '../controllers/authController.js'
 import { requireSignIn,isAdmin } from '../middleware/authMiddleware.js';
 
 
@@ -10,6 +10,9 @@ const router =express.Router()
 
 //REGISTER 
 router.post("/register", registerController);
+
+router.post('/contacts', createContact);
+
 
 //LOGIN 
 router.post("/login", loginController);
@@ -47,5 +50,7 @@ router.get("/all-orders", requireSignIn, getAllOrdersController);
 
 // order status update
 router.put("/order-status/:orderId",requireSignIn,isAdmin,orderStatusController);
+
+//contact-us
 
 export default router
