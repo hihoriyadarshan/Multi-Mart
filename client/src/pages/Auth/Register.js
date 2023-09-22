@@ -4,7 +4,7 @@ import './css/Register.css';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { MdDriveFileRenameOutline, MdEmail } from 'react-icons/md'; // Import the icons you need
+import { MdDriveFileRenameOutline, MdEmail } from 'react-icons/md'; 
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { GiRotaryPhone } from 'react-icons/gi';
 import { AiFillHome } from 'react-icons/ai';

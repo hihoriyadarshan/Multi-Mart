@@ -44,6 +44,12 @@ const AdminMenu = () => {
           >
             Users
           </NavLink>
+          <NavLink
+            to="/dashboard/admin/Contact_us"
+            className="list-group-item list-group-item-action"
+          >
+            Contact
+          </NavLink>
         </div>
       </div>
     </>

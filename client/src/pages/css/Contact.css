@@ -18,7 +18,7 @@
   }
   .grid-70-30 {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 70% 41%;
   }
   .get_form_inner {
     display: block;

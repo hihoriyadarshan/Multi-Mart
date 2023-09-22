@@ -91,16 +91,15 @@ export const getAllUsers = async (req, res) => {
 };
 
 
-
-
-// Create a function for creating a new contact
+// contact-us
 export const createContact = async (req, res) => {
   try {   
-    const { firstname, lastname, phone, message } = req.body;
+    const { firstname, lastname, email, phone, message } = req.body;
 
     const newContact = new ContactModel({
       firstname,
       lastname,
+      email,
       phone,
       message,
     });
@@ -108,23 +107,38 @@ export const createContact = async (req, res) => {
 
     await newContact.save();
 
-   
     res.status(201).json({ message: "Contact created successfully" });
   } catch (error) {
   
     console.error("Error creating contact:", error);
-    res.status(500).json({ error: "Failed to create contact" });
+    // res.status(500).json({ error: "Failed to create contact" });
+  }
+};
+
+//get all contact data
+
+export const getAllContacts = async (req, res) => {
+  try {
+    const contacts = await ContactModel.find({});
+    
+    res.status(200).json({
+      success: true,
+      message: "All contact details",
+      contacts,
+    });
+  } catch (error) {
+    console.error("Error retrieving contact data:", error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Error while retrieving contact details",
+    });
   }
 };
 
 
-
-
-
-
 // delete user(Admin)
 
-//delete category
 export const deleteuserController = async (req, res) => {
   try {
     const { id } = req.params;
