@@ -24,7 +24,7 @@ const Users = () => {
     getAllUsers();
   }, []);
 
-    //delete category
+    //delete user
     const handleDelete = async (pId) => {
       try {
         const { data } = await axios.delete(
