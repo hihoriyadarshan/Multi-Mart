@@ -27,9 +27,9 @@ const ContactUs = () => {
 
   const handleDeleteContact = async (contactId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API}/api/v1/auth/delete-contact/${contactId}`);
+      await axios.delete(`${process.env.REACT_APP_API}/api/v1/auth/contacts/${contactId}`);
       toast.success("Contact deleted successfully");
-      getAllContacts(); // Refresh the contact list after deletion
+      getAllContacts(); 
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete contact");
