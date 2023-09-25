@@ -1,10 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./css/AdminMenu.css";
-
+import { useAuth } from "../../context/auth";
+import toast from "react-hot-toast";
 
 
 const AdminMenu = () => {
+  const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
+
   return (
 <div>
 <div>
@@ -13,7 +26,7 @@ const AdminMenu = () => {
     <ul className="utilities">
       <br />
       <li className="users"><NavLink to="/dashboard/user/profile">My Account</NavLink></li>
-      <li className="logout warn"><NavLink to="#">Log Out</NavLink></li>
+      <li className="logout warn"><NavLink onClick={handleLogout} to="/logout">Log Out</NavLink></li>
     </ul>
   </header>
   <nav  role="navigation">

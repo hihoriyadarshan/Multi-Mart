@@ -34,6 +34,8 @@ const Header = () => {
       <SearchInput />
       <nav className="nav-links">
         <NavLink to="/">Home</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
 
         <div className="dropdown">
           <button
@@ -52,7 +54,7 @@ const Header = () => {
             <li>
               <NavLink to={"/categories"}>All categories</NavLink>
             </li>
-
+              
             {Array.isArray(categories) &&
               categories.map((c) => (
                 <li key={c.slug}>
@@ -70,6 +72,7 @@ const Header = () => {
           <>
             <NavLink to="/register">Register</NavLink>
             <NavLink to="/login">Login</NavLink>
+
           </>
         ) : (
           <div className="dropdown">
@@ -100,6 +103,8 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
+            <li>
+              </li>
           </div>
         )}
         
