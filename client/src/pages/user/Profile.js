@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import UserMenu from "../../components/Layout/UserMenu";
 import Layout from "./../../components/Layout/Layout";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
@@ -55,14 +54,13 @@ const Profile = () => {
   };
 
   return (
-    <Layout title={"Your Profile"}>
+    // <Layout title={"Your Profile"}>
       <div className="main">
       <div className="container-fluid m-3 p-3 dashboard">
         <div className="row">
           <div className="col-md-3">
         
           </div>
-          {/* <div className="" */}
           <div className="container">
           <div className="container-1">
 
@@ -142,6 +140,9 @@ const Profile = () => {
                 <button type="submit" className="btn btn-primary">
                   UPDATE
                 </button>
+                <button type="#" className="btn btn-primary">
+                  Back
+                </button>
                 </div>
               </form>
             </div>
@@ -151,7 +152,7 @@ const Profile = () => {
       </div>
       </div>
       </div>
-    </Layout>
+    // </Layout>
   );
 };
 

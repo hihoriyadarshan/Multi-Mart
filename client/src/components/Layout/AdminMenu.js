@@ -19,7 +19,7 @@ const AdminMenu = () => {
   <nav  role="navigation">
     <div className="bg">
     <ul>
-      <li className="dashboard"><NavLink to="admindashboard">Dashboard</NavLink></li>
+      <li className="dashboard"><NavLink to="/dashboard/admin">Dashboard</NavLink></li>
       <li className="write"><NavLink to="/dashboard/admin/create-category">create Category</NavLink></li>
       <li className="write"><NavLink to="/dashboard/admin/create-product">create Product</NavLink></li>
       <li className="edit"><NavLink to="/dashboard/admin/products">Update Product</NavLink></li>
