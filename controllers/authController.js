@@ -113,7 +113,7 @@ export const deleteuserController = async (req, res) => {
 };
 
 
-//POST LOGIN
+//LOGIN
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;

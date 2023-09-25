@@ -33,7 +33,19 @@ body.login {
 header[role="banner"] {
   background: white;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+
+  
 }
+
+header[role="banner"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: 79px;
+}
+
 header[role="banner"] h1 {
   margin: 0;
   font-weight: 300;
@@ -72,6 +84,8 @@ header[role="banner"] .utilities li a {
 .users a:before {
   content: "";
 }
+
+
 
 nav[role="navigation"] {
   background: #2a3542;
