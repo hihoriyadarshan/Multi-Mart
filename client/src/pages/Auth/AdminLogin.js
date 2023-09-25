@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 
 
-const Login = () => {
+const AdminLogin = () => {
     const [email,setEmail] =useState("")
     const [password,setPassword] =useState("")
     const[auth,setAuth] =useAuth("")
@@ -51,7 +51,7 @@ const Login = () => {
     <Layout title="Register - Ecommer App">
     <div className="form-container">
       <div className="form-box">
-       <center> <h4 className="form-title">Login FORM</h4> </center>
+       <center> <h4 className="form-title">Admin Login</h4> </center>
         <form onSubmit={handleSubmit}>
 
             <MdEmail/>
@@ -87,4 +87,13 @@ const Login = () => {
   )
 }
 
-export default Login
+export default AdminLogin
+
+
+
+
+
+
+
+
+

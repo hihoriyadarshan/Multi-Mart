@@ -49,6 +49,7 @@ const Login = () => {
 
   return (
     <Layout title="Register - Ecommer App">
+
     <div className="form-container">
       <div className="form-box">
        <center> <h4 className="form-title">Login FORM</h4> </center>
@@ -77,12 +78,15 @@ const Login = () => {
             />
           <div className="forgot-password-link">
               <Link to="/forgot-password" onClick={()=>{navigate('/forgot-password')}}>Forgot Password?</Link>
+             <br/>
+              <Link to="/admin-login" onClick={()=>{navigate('/admin-login')}}>Admin Login</Link>
             </div>
             <div></div>
           <input type='submit' value="Login" className="form-button"/>
         </form>
       </div>
       </div>
+    
     </Layout>
   )
 }
