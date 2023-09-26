@@ -72,9 +72,19 @@ const handleCreate = async (e) => {
           <div className='col-md-3'>
             <AdminMenu/>
             </div>
-            <div className='col-md-9'>
-            <h1>Create Product</h1>
-            <div className="m-1 w-75">
+
+            <section className="panel important">
+                <h2>Create Product</h2>
+                  <ul>
+                    {/* <li>Information Panel</li> */}
+                  </ul>
+            </section>
+
+
+            <div className='panel important'>
+              <div className="twothirds">
+            
+            
               <Select
                 bordered={false}
                 placeholder="Select a category"
@@ -176,6 +186,7 @@ const handleCreate = async (e) => {
             </div>
           </div>
           </div>
+         
        
     </Layout>
   )

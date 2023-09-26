@@ -45,12 +45,21 @@ const ContactUs = () => {
           <div className="col-md-3">
             <AdminMenu />
           </div>
-          <div className="col-md-9">
-            <h1>All Contacts</h1>
+          <section className="panel important">
+          <div className="add">
+            <div className="head-2">
+              User </div>
+          </div>
+          </section>
+
+          <div className='panel important'>
+              <div className="twothirds">
             <table className="user-table">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  {/* <th>id</th> */}
+                  <th>Firstname</th>
+                  <th>Lastname</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Message</th>
@@ -60,7 +69,9 @@ const ContactUs = () => {
               <tbody>
                 {contacts.map((contact) => (
                   <tr key={contact._id}>
-                    <td>{contact.firstname} {contact.lastname}</td>
+                    {/* <td></td> */}
+                    <td>{contact.firstname} </td>
+                    <td>{contact.lastname}</td>
                     <td>{contact.email}</td>
                     <td>{contact.phone}</td>
                     <td>{contact.message}</td>
@@ -80,6 +91,7 @@ const ContactUs = () => {
             </table>
           </div>
         </div>
+      </div>
       </div>
     </Layout>
   )

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import Layout from "./../../components/Layout/Layout";
+import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import "./css/users.css"; 
 import { AiFillDelete } from 'react-icons/ai';
-
+import "./css/users.css"; 
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -24,23 +23,22 @@ const Users = () => {
     getAllUsers();
   }, []);
 
-    //delete user
-    const handleDelete = async (pId) => {
-      try {
-        const { data } = await axios.delete(
-          `${process.env.REACT_APP_API}/api/v1/auth/delete-user/${pId}`
-        );
-        if (data.success) {
-          toast.success(`user is deleted`);
-  
-          getAllUsers();
-        } else {
-          toast.error(data.message);
-        }
-      } catch (error) {
-        toast.error("Somtihing went wrong");
+  // Delete user
+  const handleDelete = async (pId) => {
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_API}/api/v1/auth/delete-user/${pId}`
+      );
+      if (data.success) {
+        toast.success(`User is deleted`);
+        getAllUsers();
+      } else {
+        toast.error(data.message);
       }
-    };
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <Layout title={"Dashboard - All Users"}>
@@ -49,17 +47,23 @@ const Users = () => {
           <div className="col-md-3">
             <AdminMenu />
           </div>
-          <div className="col-md-9">
-            <h1>All Users</h1>
-            <table className="user-table">
+          <section className="panel important">
+          <div className="add">
+            <div className="head-2">
+              User </div>
+          </div>
+          </section>
+          <section className="panel important">
+            <table className="table" style={{ fontSize: 16 }}>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>DOB</th>
-                  <th>Address</th>
-                  <th>Action</th>
+                <th scope="col">Username</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">DOB</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -72,22 +76,21 @@ const Users = () => {
                     <td>{user.address}</td>
                     <td>
                       <button
-                            className="delete-button"
-                            onClick={() => {
-                              handleDelete(user._id);
-                            }}
-                          >
-                              <AiFillDelete/>
-                          </button>
+                        onClick={() => handleDelete(user._id)}
+                        className="btn btn-danger"
+                      >
+                        <AiFillDelete />
+                      </button>
                     </td>
-                    <td>..</td>
                   </tr>
                 ))}
               </tbody>
+              
             </table>
+            </section>
           </div>
         </div>
-      </div>
+      
     </Layout>
   );
 };
