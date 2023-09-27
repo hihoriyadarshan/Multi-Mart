@@ -67,18 +67,20 @@ const handleCreate = async (e) => {
   
   return (
     <Layout>
-      <div  className="container-fluid m-3 p-3 dashboard">
-        <div  className='row'>
-          <div className='col-md-3'>
-            <AdminMenu/>
-            </div>
+      <div className="container-fluid m-3 p-3">
+       <div className="row">
+          <div className="col-md-3">
+            <AdminMenu />
+          </div>
 
-            <section className="panel important">
-                <h2>Create Product</h2>
-                  <ul>
-                    {/* <li>Information Panel</li> */}
-                  </ul>
-            </section>
+          <section className="panel important">
+          <div className="add">
+            <div className="head-2">
+            <div className="write-title"> Create Product
+                   </div>
+               </div>
+          </div>
+          </section>
 
 
             <div className='panel important'>

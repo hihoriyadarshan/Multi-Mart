@@ -17,7 +17,7 @@ router.post('/contacts', createContact);
 router.get('/get-contact',requireSignIn,isAdmin,getAllContacts);
 
 //delete contact
-router.delete('/contacts/:id', deleteContactController);
+router.delete('/contacts/:id', requireSignIn,isAdmin,deleteContactController);
 
 //LOGIN 
 router.post("/login", loginController);

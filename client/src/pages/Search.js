@@ -1,5 +1,5 @@
-import { Layout as AntdLayout } from 'antd'; // Rename the imported Layout from 'antd'
-import CustomLayout from '../components/Layout/Layout'; // Use a different name for the custom Layout component
+import { Layout as AntdLayout } from 'antd'; 
+import CustomLayout from '../components/Layout/Layout'; 
 import { useSearch } from '../context/search';
 
 const Search = () => {

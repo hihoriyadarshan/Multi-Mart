@@ -48,7 +48,9 @@ const ContactUs = () => {
           <section className="panel important">
           <div className="add">
             <div className="head-2">
-              User </div>
+            <div className="write-title"> Contact Us
+                   </div>
+               </div>
           </div>
           </section>
 
@@ -77,7 +79,7 @@ const ContactUs = () => {
                     <td>{contact.message}</td>
                     <td>
                       <button
-                        className="delete-button"
+                        className="btn btn-danger"
                         onClick={() => {
                           handleDeleteContact(contact._id);
                         }}
