@@ -83,3 +83,8 @@ td {
   font-weight: 600;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.pagination{
+  margin-left: 225px;
+  font-size: 18px;
+}

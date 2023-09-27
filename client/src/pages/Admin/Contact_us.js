@@ -3,11 +3,13 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import "./css/users.css"; 
+import "./css/users.css";
 import { AiFillDelete } from 'react-icons/ai';
 
 const ContactUs = () => {
   const [contacts, setContacts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [itemsPerPage] = useState(10); // Items per page
 
   const getAllContacts = async () => {
     try {
@@ -23,20 +25,27 @@ const ContactUs = () => {
     getAllContacts();
   }, []);
 
-
-
   const handleDeleteContact = async (contactId) => {
     try {
       await axios.delete(`${process.env.REACT_APP_API}/api/v1/auth/contacts/${contactId}`);
       toast.success("Contact deleted successfully");
-      getAllContacts(); 
+      getAllContacts();
     } catch (error) {
       console.error(error);
       toast.error("Failed to delete contact");
     }
   };
 
+  // Calculate index of the last item to be displayed on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  // Calculate index of the first item to be displayed on the current page
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // Slice the contacts array to display only the items for the current page
+  const currentContacts = contacts.slice(indexOfFirstItem, indexOfLastItem);
 
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <Layout title={"Dashboard - All Contacts"}>
@@ -46,54 +55,70 @@ const ContactUs = () => {
             <AdminMenu />
           </div>
           <section className="panel important">
-          <div className="add">
-            <div className="head-2">
-            <div className="write-title"> Contact Us
-                   </div>
-               </div>
-          </div>
+            <div className="add">
+              <div className="head-2">
+                <div className="write-title">Contact Us</div>
+              </div>
+            </div>
           </section>
 
           <div className='panel important'>
-              <div className="twothirds">
-            <table className="user-table">
-              <thead>
-                <tr>
-                  {/* <th>id</th> */}
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Message</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {contacts.map((contact) => (
-                  <tr key={contact._id}>
-                    {/* <td></td> */}
-                    <td>{contact.firstname} </td>
-                    <td>{contact.lastname}</td>
-                    <td>{contact.email}</td>
-                    <td>{contact.phone}</td>
-                    <td>{contact.message}</td>
-                    <td>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => {
-                          handleDeleteContact(contact._id);
-                        }}
-                      >
-                        <AiFillDelete />
-                      </button>
-                    </td>
+            <div className="twothirds">
+              <table className="user-table">
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Message</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {currentContacts.map((contact) => (
+                    <tr key={contact._id}>
+                      <td>{contact.firstname} </td>
+                      <td>{contact.lastname}</td>
+                      <td>{contact.email}</td>
+                      <td>{contact.phone}</td>
+                      <td>{contact.message}</td>
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => {
+                            handleDeleteContact(contact._id);
+                          }}
+                        >
+                          <AiFillDelete />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="pagination">
+              <ul className="pagination">
+                {Array(Math.ceil(contacts.length / itemsPerPage))
+                  .fill()
+                  .map((_, i) => (
+                    <li
+                      key={i}
+                      className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => paginate(i + 1)}
+                      >
+                        {i + 1}
+                      </button>
+                    </li>
+                  ))}
+              </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </Layout>
   )

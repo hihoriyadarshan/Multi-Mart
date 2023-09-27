@@ -4,14 +4,12 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AiFillDelete } from 'react-icons/ai';
-import ReactPaginate from 'react-paginate'; // Import the react-paginate component
-import "./css/users.css";
-
+import "./css/users.css"; 
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0); // Added state for current page
-  const usersPerPage = 10; // Number of users to display per page
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [itemsPerPage] = useState(5); // Items per page
 
   const getAllUsers = async () => {
     try {
@@ -28,10 +26,10 @@ const Users = () => {
   }, []);
 
   // Delete user
-  const handleDelete = async (userId) => {
+  const handleDelete = async (pId) => {
     try {
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_API}/api/v1/auth/delete-user/${userId}`
+        `${process.env.REACT_APP_API}/api/v1/auth/delete-user/${pId}`
       );
       if (data.success) {
         toast.success(`User is deleted`);
@@ -44,13 +42,15 @@ const Users = () => {
     }
   };
 
-  // Calculate the index range for the current page
-  const pagesVisited = pageNumber * usersPerPage;
-  const displayedUsers = users.slice(pagesVisited, pagesVisited + usersPerPage);
+  // Calculate index of the last item to be displayed on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  // Calculate index of the first item to be displayed on the current page
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // Slice the users array to display only the items for the current page
+  const currentUsers = users.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Function to handle page change
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -63,7 +63,7 @@ const Users = () => {
           <section className="panel important">
             <div className="add">
               <div className="head-2">
-                <div className="write-title"> User </div>
+                <div className="write-title"> User</div>
               </div>
             </div>
           </section>
@@ -81,7 +81,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedUsers.map((user) => (
+                  {currentUsers.map((user) => (
                     <tr key={user._id}>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
@@ -100,21 +100,23 @@ const Users = () => {
                   ))}
                 </tbody>
               </table>
-           
-              <ReactPaginate
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
-                pageCount={Math.ceil(users.length / usersPerPage)}
-                onPageChange={changePage}
-                containerClassName={"pagination"}
-                previousLinkClassName={"previous"}
-                nextLinkClassName={"next"}
-                disabledClassName={"disabled"}
-                activeClassName={"active"}
-              />
-             
             </div>
           </section>
+        </div>
+        
+        {/* Pagination */}
+      <div className="pagination">
+        <ul className="pagination">
+          {Array(Math.ceil(users.length / itemsPerPage))
+            .fill()
+            .map((_, i) => (
+              <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                <button className="page-link" onClick={() => paginate(i + 1)}>
+                  {i + 1}
+                </button>
+              </li>
+            ))}
+        </ul>
         </div>
       </div>
     </Layout>
