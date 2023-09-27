@@ -3,11 +3,12 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AiFillDelete } from 'react-icons/ai';
-import "./css/users.css"; 
+import { AiFillDelete } from "react-icons/ai";
+import "./css/users.css";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [itemsPerPage] = useState(5); // Items per page
 
@@ -28,9 +29,7 @@ const Users = () => {
   // Delete user
   const handleDelete = async (pId) => {
     try {
-      const { data } = await axios.delete(
-        `${process.env.REACT_APP_API}/api/v1/auth/delete-user/${pId}`
-      );
+      const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/auth/delete-user/${pId}`);
       if (data.success) {
         toast.success(`User is deleted`);
         getAllUsers();
@@ -53,6 +52,13 @@ const Users = () => {
     setCurrentPage(pageNumber);
   };
 
+  // Filter users based on the search query
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <Layout title={"Dashboard - All Users"}>
       <div className="container-fluid m-3 p-3">
@@ -69,6 +75,14 @@ const Users = () => {
           </section>
           <section className="panel important">
             <div className="twothirds">
+              <div className="search-container">
+                <input
+                  type="text"
+                  placeholder="Search by name or email..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
               <table className="user-table">
                 <thead>
                   <tr>
@@ -81,7 +95,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentUsers.map((user) => (
+                  {filteredUsers.map((user) => (
                     <tr key={user._id}>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
@@ -103,20 +117,25 @@ const Users = () => {
             </div>
           </section>
         </div>
-        
+
         {/* Pagination */}
-      <div className="pagination">
-        <ul className="pagination">
-          {Array(Math.ceil(users.length / itemsPerPage))
-            .fill()
-            .map((_, i) => (
-              <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                <button className="page-link" onClick={() => paginate(i + 1)}>
-                  {i + 1}
-                </button>
-              </li>
-            ))}
-        </ul>
+        <div className="pagination">
+          <ul className="pagination">
+            {Array(Math.ceil(filteredUsers.length / itemsPerPage))
+              .fill()
+              .map((_, i) => (
+                <li
+                  key={i}
+                  className={`page-item ${
+                    currentPage === i + 1 ? "active" : ""
+                  }`}
+                >
+                  <button className="page-link" onClick={() => paginate(i + 1)}>
+                    {i + 1}
+                  </button>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </Layout>
