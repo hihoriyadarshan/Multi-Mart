@@ -10,6 +10,8 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [itemsPerPage] = useState(9); // Items per page
+  const [searchInput, setSearchInput] = useState(""); // Search input
+  const [searchResults, setSearchResults] = useState([]); // Search results
 
   // Get all products
   const getAllProducts = async () => {
@@ -34,11 +36,23 @@ const Products = () => {
   // Calculate index of the first item to be displayed on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // Slice the products array to display only the items for the current page
-  const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+  const currentProducts = searchInput ? searchResults : products.slice(indexOfFirstItem, indexOfLastItem);
 
   // Function to change the current page
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // Function to handle search input change
+  const handleSearchInputChange = (e) => {
+    const inputValue = e.target.value;
+    setSearchInput(inputValue);
+
+    // Filter products based on the search input
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setSearchResults(filteredProducts);
   };
 
   return (
@@ -58,6 +72,14 @@ const Products = () => {
           <div className="product-left-3">
             <div className="col-md-9">
               <div className="All-Product-Card">
+                {/* Search input */}
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchInput}
+                  onChange={handleSearchInputChange}
+                />
+
                 <div className="d-flex flex-wrap">
                   {currentProducts.map((product) => (
                     <Link
@@ -80,7 +102,7 @@ const Products = () => {
                 </div>
                 {/* Pagination */}
                 <ul className="pagination">
-                  {Array(Math.ceil(products.length / itemsPerPage))
+                  {Array(Math.ceil((searchInput ? searchResults.length : products.length) / itemsPerPage))
                     .fill()
                     .map((_, i) => (
                       <li

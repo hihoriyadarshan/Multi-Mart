@@ -56,7 +56,11 @@ const Users = () => {
   const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())||
+      user.phone.toLowerCase().includes(searchQuery.toLowerCase())||
+      user.answer.toLowerCase().includes(searchQuery.toLowerCase())||
+      user.address.toLowerCase().includes(searchQuery.toLowerCase())
+
   );
 
   return (

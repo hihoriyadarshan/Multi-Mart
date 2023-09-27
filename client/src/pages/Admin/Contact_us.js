@@ -3,11 +3,12 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import "./css/users.css";
 import { AiFillDelete } from 'react-icons/ai';
+import "./css/users.css";
 
 const ContactUs = () => {
   const [contacts, setContacts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [itemsPerPage] = useState(10); // Items per page
 
@@ -40,8 +41,21 @@ const ContactUs = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   // Calculate index of the first item to be displayed on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // Slice the contacts array to display only the items for the current page
-  const currentContacts = contacts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Filter contacts based on the search query
+  const filteredContacts = contacts.filter((contact) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      contact.firstname.toLowerCase().includes(query) ||
+      contact.lastname.toLowerCase().includes(query) ||
+      contact.email.toLowerCase().includes(query) ||
+      contact.phone.toLowerCase().includes(query) ||
+      contact.message.toLowerCase().includes(query)
+    );
+  });
+
+  // Slice the filtered contacts array to display only the items for the current page
+  const currentContacts = filteredContacts.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -62,8 +76,16 @@ const ContactUs = () => {
             </div>
           </section>
 
-          <div className='panel important'>
+          <div className="panel important">
             <div className="twothirds">
+              <div className="search-container">
+                <input
+                  type="text"
+                  placeholder="Search by name, email, phone, or message..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
               <table className="user-table">
                 <thead>
                   <tr>
@@ -98,30 +120,32 @@ const ContactUs = () => {
                 </tbody>
               </table>
               <div className="pagination">
-              <ul className="pagination">
-                {Array(Math.ceil(contacts.length / itemsPerPage))
-                  .fill()
-                  .map((_, i) => (
-                    <li
-                      key={i}
-                      className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}
-                    >
-                      <button
-                        className="page-link"
-                        onClick={() => paginate(i + 1)}
+                <ul className="pagination">
+                  {Array(Math.ceil(filteredContacts.length / itemsPerPage))
+                    .fill()
+                    .map((_, i) => (
+                      <li
+                        key={i}
+                        className={`page-item ${
+                          currentPage === i + 1 ? 'active' : ''
+                        }`}
                       >
-                        {i + 1}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
+                        <button
+                          className="page-link"
+                          onClick={() => paginate(i + 1)}
+                        >
+                          {i + 1}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
 export default ContactUs;
