@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { AiFillDelete } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
 import "./css/users.css";
+import { saveAs } from "file-saver";
+import papaparse from 'papaparse'; // Import papaparse
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -79,6 +81,13 @@ const Users = () => {
       </tr>
     ));
 
+  // CSV download
+  const downloadCSV = () => {
+    const csvData = papaparse.unparse(filteredUsers, { header: true });
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "users-data.csv");
+  };
+
   return (
     <Layout title={"Dashboard - All Users"}>
       <div className="container-fluid m-3 p-3">
@@ -90,9 +99,13 @@ const Users = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> User</div>
+                <button onClick={downloadCSV} className="download-csv">
+                  Download CSV
+                </button>
               </div>
             </div>
           </section>
+
           <section className="panel important">
             <div className="twothirds">
               <div className="search-container">

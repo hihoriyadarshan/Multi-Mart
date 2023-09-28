@@ -5,6 +5,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AiFillDelete } from 'react-icons/ai';
 import "./css/users.css";
+import { saveAs } from "file-saver";
+import papaparse from 'papaparse'; // Import papaparse
+
+
 
 const ContactUs = () => {
   const [contacts, setContacts] = useState([]);
@@ -61,6 +65,12 @@ const ContactUs = () => {
     setCurrentPage(pageNumber);
   };
 
+  const downloadCSV = () => {
+    const csvData = papaparse.unparse(filteredContacts, { header: true });
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "Contact_us-data.csv");
+  };
+
   return (
     <Layout title={"Dashboard - All Contacts"}>
       <div className="container-fluid m-3 p-3">
@@ -71,7 +81,10 @@ const ContactUs = () => {
           <section className="panel important">
             <div className="add">
               <div className="head-2">
-                <div className="write-title">Contact Us</div>
+                <div className="write-title"> User</div>
+                <button onClick={downloadCSV} className="download-csv">
+                  Download CSV
+                </button>
               </div>
             </div>
           </section>
