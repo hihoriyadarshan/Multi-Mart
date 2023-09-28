@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
@@ -7,13 +7,16 @@ import { AiFillDelete } from 'react-icons/ai';
 import ReactPaginate from 'react-paginate';
 import "./css/users.css";
 import { saveAs } from "file-saver";
-import papaparse from 'papaparse'; // Import papaparse
+import papaparse from 'papaparse';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
   const usersPerPage = 10;
+  const contentRef = useRef(null);
 
   const getAllUsers = async () => {
     try {
@@ -81,16 +84,25 @@ const Users = () => {
       </tr>
     ));
 
-  // CSV download
   const downloadCSV = () => {
     const csvData = papaparse.unparse(filteredUsers, { header: true });
     const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "users-data.csv");
   };
 
+  const downloadPDF = () => {
+    const pdf = new jsPDF('p', 'pt', 'letter');
+
+    html2canvas(contentRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 40, 40, 500, 600);
+      pdf.save('users-data.pdf');
+    });
+  };
+
   return (
     <Layout title={"Dashboard - All Users"}>
-      <div className="container-fluid m-3 p-3">
+      <div className="container-fluid m-3 p-3" ref={contentRef}>
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -101,6 +113,9 @@ const Users = () => {
                 <div className="write-title"> User</div>
                 <button onClick={downloadCSV} className="download-csv">
                   Download CSV
+                </button>
+                <button onClick={downloadPDF} className="download-pdf">
+                  Download PDF
                 </button>
               </div>
             </div>

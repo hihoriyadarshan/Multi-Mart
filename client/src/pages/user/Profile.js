@@ -53,19 +53,12 @@ const Profile = () => {
   };
 
   return (
-    // <Layout title={"Your Profile"}>
-      <div className="main">
-      <div className="container-fluid m-3 p-3 dashboard">
-        <div className="row">
-          <div className="col-md-3">
-        
-          </div>
-          <div className="container">
-          <div className="container-1">
+   
+          <div className="container123">
+          <div className="container-11">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaxuCl-tyOMjfTNy-jlX0xF-qKWybFP8AhA&usqp=CAU" alt />
 
-          <div className="col-md-8">
-            <div className="container-2" style={{ marginTop: "-40px" }}>
-            <h4 className="">USER PROFILE</h4>
+            <div className="container-21" >
 
               <form onSubmit={handleSubmit}>
                 <div className="field-row">
@@ -136,22 +129,22 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="submit-btn">
+                  <div className="button1">
                 <button type="submit" className="btn btn-primary">
                   UPDATE
                 </button>
+                
                 <button type="#" className="btn btn-primary">
                   Back
                 </button>
+                </div>
+                
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-      </div>
-      </div>
-      </div>
-    // </Layout>
+     
   );
 };
 

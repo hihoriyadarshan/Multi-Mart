@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import { AiFillDelete } from 'react-icons/ai';
 import "./css/users.css";
 import { saveAs } from "file-saver";
-import papaparse from 'papaparse'; // Import papaparse
+import papaparse from 'papaparse';
+import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
 
 
 
@@ -71,6 +72,29 @@ const ContactUs = () => {
     saveAs(blob, "Contact_us-data.csv");
   };
 
+  
+  const downloadPDF = () => {
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
+    doc.text("Contact Us Data", 10, 10);
+
+    // Create a table for the data
+    doc.autoTable({
+      head: [["Firstname", "Lastname", "Email", "Phone", "Message"]],
+      body: currentContacts.map((contact) => [
+        contact.firstname,
+        contact.lastname,
+        contact.email,
+        contact.phone,
+        contact.message,
+      ]),
+    });
+
+
+    // Save the PDF as "Contact_us-data.pdf"
+    doc.save("Contact_us-data.pdf");
+  };
+
   return (
     <Layout title={"Dashboard - All Contacts"}>
       <div className="container-fluid m-3 p-3">
@@ -81,9 +105,12 @@ const ContactUs = () => {
           <section className="panel important">
             <div className="add">
               <div className="head-2">
-                <div className="write-title"> User</div>
+                <div className="write-title"> Contact_us</div>
                 <button onClick={downloadCSV} className="download-csv">
                   Download CSV
+                </button>
+                <button onClick={downloadPDF} className="download-pdf">
+                  Download PDF
                 </button>
               </div>
             </div>
