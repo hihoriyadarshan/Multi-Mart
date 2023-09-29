@@ -3,6 +3,9 @@ import orderModel from "../models/orderModel.js"
 import { comparePassword,hashPassword } from "./../helpers/authHelper.js";
 import JWT from 'jsonwebtoken';
 import ContactModel from "../models/contactModel.js";
+import PDFDocument from 'pdfkit';
+import fs from 'fs';
+
 
 export const registerController = async (req, res) => {
     try {
@@ -61,6 +64,57 @@ export const registerController = async (req, res) => {
       });
     }
   };
+
+
+  export const downloadUsersAsPDF = async (req, res) => {
+    try {
+      const users = await userModel.find({});
+      if (!users || users.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "No users found",
+        });
+      }
+  
+      // Create a new PDF document
+      const doc = new PDFDocument();
+      const pdfFileName = 'userList.pdf'; // Set the PDF file name
+  
+      // Set response headers for PDF download
+      res.setHeader('Content-Disposition', `attachment; filename="${pdfFileName}"`);
+      res.setHeader('Content-Type', 'application/pdf');
+  
+      // Create a write stream to send the PDF content to the response
+      doc.pipe(res);
+  
+      // Add content to the PDF document
+      doc.fontSize(12).text('User List\n\n');
+      users.forEach((user, index) => {
+        doc.text(`User ${index + 1}:`);
+        doc.text(`Name: ${user.name}`);
+        doc.text(`Email: ${user.email}`);
+        doc.text(`Phone: ${user.phone}`);
+        doc.text('-----------------------');
+      });
+  
+      // Finalize the PDF document
+      doc.end();
+  
+      res.status(200);
+    } catch (error) {
+      console.error("Error while generating and downloading PDF:", error);
+      res.status(500).json({
+        success: false,
+        error: "Internal server error",
+        message: "Error while generating and downloading PDF",
+      });
+    }
+  };
+
+
+
+
+
 
 
 //get all users(Admin)

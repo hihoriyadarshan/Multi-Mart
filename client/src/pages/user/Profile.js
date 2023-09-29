@@ -56,7 +56,7 @@ const Profile = () => {
    
           <div className="container123">
           <div className="container-11">
-         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaxuCl-tyOMjfTNy-jlX0xF-qKWybFP8AhA&usqp=CAU" alt />
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuaxuCl-tyOMjfTNy-jlX0xF-qKWybFP8AhA&usqp=CAU" alt  className="img1"/>
 
             <div className="container-21" >
 

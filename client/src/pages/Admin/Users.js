@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AiFillDelete } from 'react-icons/ai';
+import { ImSearch } from 'react-icons/im';
 import ReactPaginate from 'react-paginate';
 import "./css/users.css";
 import { saveAs } from "file-saver";
@@ -111,26 +112,32 @@ const Users = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> User</div>
-                <button onClick={downloadCSV} className="download-csv">
-                  Download CSV
-                </button>
-                <button onClick={downloadPDF} className="download-pdf">
-                  Download PDF
-                </button>
+                
+               
+                <input
+                  type="text"
+                  placeholder="Search by name or email..."
+                  value={searchQuery}
+                  className="search-container1"
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <div className="search-icone">  
+                             <ImSearch/>
+                  </div>
+              
               </div>
             </div>
           </section>
 
           <section className="panel important">
             <div className="twothirds">
-              <div className="search-container">
-                <input
-                  type="text"
-                  placeholder="Search by name or email..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
+              
+              <button onClick={downloadCSV} className="download-csv">
+                  Download CSV
+                </button>
+                <button onClick={downloadPDF} className="download-pdf">
+                  Download PDF
+                </button>
               <table className="user-table">
                 <thead>
                   <tr>
