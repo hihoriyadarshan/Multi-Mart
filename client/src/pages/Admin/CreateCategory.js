@@ -4,7 +4,8 @@ import AdminMenu from '../../components/Layout/AdminMenu';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import CategoryForm from '../../components/Form/CategoryForm';
-import { Modal } from 'antd';
+import { Modal, Input, Button } from 'antd';
+import Papa from 'papaparse'; // Import PapaParse library
 import './Admin.css';
 
 const CreateCategory = () => {
@@ -13,8 +14,17 @@ const CreateCategory = () => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [itemsPerPage] = useState(5); // Items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [csvData, setCsvData] = useState([]); // Initialize csvData state
+
+  // Function to populate the csvData state with category data
+  const prepareCSVData = (categories) => {
+    return categories.map((category) => {
+      return [category.name]; // Format data for CSV
+    });
+  };
 
   // Handle Form
   const handleSubmit = async (e) => {
@@ -34,16 +44,17 @@ const CreateCategory = () => {
     }
   };
 
-  // Get all category
+  // Get all categories and set the currentPage to 1
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
+        setCurrentPage(1); // Reset current page when fetching new data
       }
     } catch (error) {
       console.log(error);
-      toast.error('Something went wrong in getting category');
+      toast.error('Something went wrong in getting categories');
     }
   };
 
@@ -90,12 +101,30 @@ const CreateCategory = () => {
     }
   };
 
+  // Function to generate and download a CSV file
+  const downloadCSV = () => {
+    const dataForCSV = prepareCSVData(categories);
+    const csv = Papa.unparse({ fields: ['Name'], data: dataForCSV });
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'categories.csv';
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   // Calculate index of the last item to be displayed on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   // Calculate index of the first item to be displayed on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // Slice the categories array to display only the items for the current page
-  const currentCategories = categories.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Filter and slice the categories array based on search term and pagination
+  const filteredCategories = categories
+    .filter((c) => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -120,6 +149,18 @@ const CreateCategory = () => {
           <div className="panel important">
             <div className="twothirds">
               <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
+
+              <Input
+                placeholder="Search categories"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="mb-3"
+              />
+
+              <Button type="primary" onClick={downloadCSV} className="mb-3">
+                Download CSV
+              </Button>
+
               <div className="w-75">
                 <table className="table">
                   <thead>
@@ -130,23 +171,30 @@ const CreateCategory = () => {
                   </thead>
 
                   <tbody>
-                    {currentCategories.map((c) => (
-                      <>
-                        <tr>
-                          <td key={c._id}>{c.name}</td>
-                          <td>
-                            <button className="btn btn-primary ms-2" onClick={() => {setVisible(true); setUpdatedName(c.name); setSelected(c);}}>Edit</button>
-                            <button
-                              className="btn btn-danger ms-2"
-                              onClick={() => {
-                                handleDelete(c._id);
-                              }}
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      </>
+                    {filteredCategories.map((c) => (
+                      <tr key={c._id}>
+                        <td>{c.name}</td>
+                        <td>
+                          <button
+                            className="btn btn-primary ms-2"
+                            onClick={() => {
+                              setVisible(true);
+                              setUpdatedName(c.name);
+                              setSelected(c);
+                            }}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn btn-danger ms-2"
+                            onClick={() => {
+                              handleDelete(c._id);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
@@ -156,17 +204,17 @@ const CreateCategory = () => {
               </Modal>
               {/* Pagination */}
               <div className="pagination">
-              <ul className="pagination">
-                {Array(Math.ceil(categories.length / itemsPerPage))
-                  .fill()
-                  .map((_, i) => (
-                    <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                      <button className="page-link" onClick={() => paginate(i + 1)}>
-                        {i + 1}
-                      </button>
-                    </li>
-                  ))}
-              </ul>
+                <ul className="pagination">
+                  {Array(Math.ceil(categories.length / itemsPerPage))
+                    .fill()
+                    .map((_, i) => (
+                      <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                        <button className="page-link" onClick={() => paginate(i + 1)}>
+                          {i + 1}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
               </div>
             </div>
           </div>
