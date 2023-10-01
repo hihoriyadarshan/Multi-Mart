@@ -5,6 +5,8 @@ import "jspdf-autotable";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import moment from "moment";
+import { CSVLink } from "react-csv";
+
 import { Select, Input, Button } from "antd";
 
 const { Option } = Select;
@@ -17,6 +19,16 @@ const AdminOrders = () => {
     "delivered",
     "cancel",
   ]);
+
+  const headers = [
+    { label: "#", key: "#" },
+    { label: "Status", key: "Status" },
+    { label: "Buyer", key: "Buyer" },
+    { label: "Date", key: "Date" },
+    { label: "Payment", key: "Payment" },
+    { label: "Quantity", key: "Quantity" },
+  ];
+
   const [changeStatus, setChangeStatus] = useState("");
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -115,11 +127,36 @@ const AdminOrders = () => {
             <Button onClick={generatePDF} className="download-pdf">
               Download PDF
             </Button>
+
+            <CSVLink
+              data={currentOrders.map((o, i) => ({
+                "#": i + 1,
+                "Status": o?.status,
+                "Buyer": o.buyer?.name,
+                "Date": moment(o.createAt).fromNow(),
+                "Payment": o.payment.success ? "Success" : "Failed",
+                "Quantity": o.products.length,
+              }))}
+              headers={headers}
+              filename={"orders.csv"}
+              className="csv-link" // You can style this link as needed
+            >
+              Download CSV
+            </CSVLink>
+
+
+
+
             <Input
               placeholder="Search by buyer name"
               onChange={handleSearchChange}
               value={searchQuery}
             />
+
+
+
+
+
             {currentOrders.map((o, i) => {
               return (
                 <div className="border shadow" key={i}>

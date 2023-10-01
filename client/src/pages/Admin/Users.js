@@ -9,8 +9,9 @@ import ReactPaginate from 'react-paginate';
 import "./css/users.css";
 import { saveAs } from "file-saver";
 import papaparse from 'papaparse';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from "jspdf";
+
+
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -92,14 +93,34 @@ const Users = () => {
   };
 
   const downloadPDF = () => {
-    const pdf = new jsPDF('p', 'pt', 'letter');
-
-    html2canvas(contentRef.current).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      pdf.addImage(imgData, 'PNG', 40, 40, 500, 600);
-      pdf.save('users-data.pdf');
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
+  
+    // Define the columns and rows for your PDF table
+    const columns = ["Username", "E-mail", "Phone", "DOB", "Address"];
+    const rows = filteredUsers.map((user) => [
+      user.name,
+      user.email,
+      user.phone,
+      user.answer,
+      user.address,
+    ]);
+  
+    // Add the table to the PDF
+    doc.autoTable({
+      head: [columns],
+      body: rows,
     });
+  
+    // Define the PDF file name
+    const fileName = "users-data.pdf";
+  
+    // Save the PDF file
+    doc.save(fileName);
   };
+  
+
+
 
   return (
     <Layout title={"Dashboard - All Users"}>
@@ -135,9 +156,12 @@ const Users = () => {
               <button onClick={downloadCSV} className="download-csv">
                   Download CSV
                 </button>
+
                 <button onClick={downloadPDF} className="download-pdf">
                   Download PDF
                 </button>
+  
+
               <table className="user-table">
                 <thead>
                   <tr>
