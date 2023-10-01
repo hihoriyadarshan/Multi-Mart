@@ -19,8 +19,8 @@ const AdminOrders = () => {
   const [changeStatus, setChangeStatus] = useState("");
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [itemsPerPage] = useState(5); // Items per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [itemsPerPage] = useState(5); 
 
   const getOrders = async () => {
     try {

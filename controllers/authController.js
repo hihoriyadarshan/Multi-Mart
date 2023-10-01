@@ -7,6 +7,8 @@ import PDFDocument from 'pdfkit';
 import fs from 'fs';
 
 
+
+//Registration
 export const registerController = async (req, res) => {
     try {
       const { name, email, password, phone, address,answer} = req.body;
@@ -65,6 +67,8 @@ export const registerController = async (req, res) => {
     }
   };
 
+
+  //download pdf
 
   export const downloadUsersAsPDF = async (req, res) => {
     try {
@@ -372,7 +376,7 @@ export const orderStatusController = async (req, res) => {
 
 // contact-us
 export const createContact = async (req, res) => {
-  try {   
+  try {
     const { firstname, lastname, email, phone, message } = req.body;
 
     const newContact = new ContactModel({
@@ -383,14 +387,12 @@ export const createContact = async (req, res) => {
       message,
     });
 
-
     await newContact.save();
 
-    res.status(201).json({ message: "Contact created successfully" });
+    res.status(201).json({ success: true, message: "Contact created successfully" });
   } catch (error) {
-  
     console.error("Error creating contact:", error);
-    // res.status(500).json({ error: "Failed to create contact" });
+    res.status(500).json({ success: false, message: "Failed to create contact" });
   }
 };
 

@@ -100,6 +100,7 @@ const Header = () => {
               <li>
                 <NavLink onClick={handleLogout} to="/logout">
                   Logout
+                  
                 </NavLink>
               </li>
             </ul>

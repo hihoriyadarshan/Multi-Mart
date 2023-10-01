@@ -1,10 +1,12 @@
+// contact.js
+
 import React, { useState } from 'react';
 import Layout from '../components/Layout/Layout';
 import './css/Contact.css';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {Link} from "react-router-dom";
+
 
 const Contact = () => {
   const [firstname, setFirstname] = useState('');
@@ -28,7 +30,7 @@ const Contact = () => {
       if (data.success) {
         toast.success(data.message);
 
-        // Clear state
+        // Clear form data
         setFirstname('');
         setLastname('');
         setEmail('');
@@ -36,7 +38,7 @@ const Contact = () => {
         setMessage('');
 
         // Navigate home page
-        navigate('/'); 
+        navigate('/contact');
       } else {
         toast.error(data.message);
       }
@@ -102,33 +104,48 @@ const Contact = () => {
                 </div>
               </div>
               <div className="colmun-30 get_say_form">
-          <h5>Say Hi!</h5>
-          <ul className="get_say_info_sec">
-            <li>
-              <i className="fa fa-envelope" />
-              <Link to="mailto:">{"Multimart3194@gmail.com"}</Link>
-            </li>
-            <li>
-              <i className="fa fa-whatsapp" />
-              <Link to="tel:">+91 9602381997</Link>
-            </li>
-            <li>
-              <i className="fa fa-skype" />
-              <Link to="#">Stackfindover</Link> 
-            </li>
-          </ul>  
-            <ul className="get_say_social-icn">
-            <li><Link to="#"><i className="fa fa-facebook" /></Link></li>
-            <li><Link to="#"><i className="fa fa-instagram" /></Link></li>
-            <li><Link to="#"><i className="fa fa-twitter" /></Link></li>
-            <li><Link to="#"><i className="fa fa-linkedin" /></Link></li>
-          </ul>          
-        </div> 
+                <h5>Say Hi!</h5>
+                <ul className="get_say_info_sec">
+                  <li>
+                    <i className="fa fa-envelope" />
+                    <a href="mailto:Multimart3194@gmail.com">Multimart3194@gmail.com</a>
+                  </li>
+                  <li>
+                    <i className="fa fa-whatsapp" />
+                    <a href="tel:+919602381997">+91 9602381997</a>
+                  </li>
+                  <li>
+                    <i className="fa fa-skype" />
+                    <a href="#">Stackfindover</a>
+                  </li>
+                </ul>
+                <ul className="get_say_social-icn">
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-facebook" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-instagram" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-twitter" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-linkedin" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
       </div>
-      
     </Layout>
   );
 };
