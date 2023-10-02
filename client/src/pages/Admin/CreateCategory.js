@@ -5,8 +5,10 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import CategoryForm from '../../components/Form/CategoryForm';
 import { Modal, Input, Button } from 'antd';
-import Papa from 'papaparse'; // Import PapaParse library
+import Papa from 'papaparse'; 
 import './Admin.css';
+import {ImSearch} from 'react-icons/im';
+
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -142,21 +144,31 @@ const CreateCategory = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> Manage Category</div>
-              </div>
-            </div>
-          </section>
-
-          <div className="panel important">
-            <div className="twothirds">
-              <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
-
-              <Input
+                <div className="search-container-left">
+                <Input
                 placeholder="Search categories"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="mb-3"
               />
+              <div className="search-icon">
+                <ImSearch />
+              </div>
+              </div>
+            </div>
+            </div>
+          </section>
 
+          <div className="panel important">
+          <h2>Add Category</h2>
+            <div className="twothirds">
+              <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
+
+              </div>
+              </div>
+
+              <div className="panel important">
+            <div className="twothirds">
               <Button type="primary" onClick={downloadCSV} className="mb-3">
                 Download CSV
               </Button>
@@ -219,7 +231,7 @@ const CreateCategory = () => {
             </div>
           </div>
         </div>
-      </div>
+       </div>
     </Layout>
   );
 };

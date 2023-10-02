@@ -7,7 +7,11 @@ import { AiFillDelete } from 'react-icons/ai';
 import "./css/users.css";
 import { saveAs } from "file-saver";
 import papaparse from 'papaparse';
-import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
+import jsPDF from 'jspdf'; 
+import {ImSearch} from 'react-icons/im';
+import {FaFileCsv, FaFilePdf} from 'react-icons/fa';
+import {MdFileDownload  } from "react-icons/md";
+
 
 
 
@@ -16,6 +20,7 @@ const ContactUs = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [itemsPerPage] = useState(10); // Items per page
+  const [selectedOption, setSelectedOption] = useState('csv');
 
   const getAllContacts = async () => {
     try {
@@ -54,8 +59,8 @@ const ContactUs = () => {
       contact.firstname.toLowerCase().includes(query) ||
       contact.lastname.toLowerCase().includes(query) ||
       contact.email.toLowerCase().includes(query) ||
-      contact.phone.toLowerCase().includes(query) ||
-      contact.message.toLowerCase().includes(query)
+      contact.phone.toLowerCase().includes(query) 
+      
     );
   });
 
@@ -95,6 +100,23 @@ const ContactUs = () => {
     doc.save("Contact_us-data.pdf");
   };
 
+  //pdf csv radio button
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const downloadFile = () => {
+    if (selectedOption === 'csv') {
+      downloadCSV();
+    } else if (selectedOption === 'pdf') {
+      downloadPDF();
+    }
+  };
+
+
+
+
   return (
     <Layout title={"Dashboard - All Contacts"}>
       <div className="container-fluid m-3 p-3">
@@ -106,26 +128,75 @@ const ContactUs = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> Contact_us</div>
-                <button onClick={downloadCSV} className="download-csv">
-                  Download CSV
-                </button>
-                <button onClick={downloadPDF} className="download-pdf">
-                  Download PDF
-                </button>
-              </div>
+            <div className="search-container-left">
+              <input
+                type="text"
+                placeholder="Search by name, email, phone..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                 />
+              <div className="search-icon">
+                <ImSearch />
+             </div>
+            </div>
+            </div>
             </div>
           </section>
 
+         
           <div className="panel important">
-            <div className="twothirds">
-              <div className="search-container">
-                <input
-                  type="text"
-                  placeholder="Search by name, email, phone, or message..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+            
+          
+          <div className="download-1">
+              <div className="download-options">
+              <div className="download-options-inner">
+              <span> Download Type : </span>
+                <label>
+                  <input
+                    type="radio"
+                    id="csvOption"
+                    name="downloadOption"
+                    value="csv"
+                    checked={selectedOption === 'csv'}
+                    onChange={handleOptionChange}
+                  />
+                  Excel
+                  {/* <label htmlFor="csvOption">Download CSV</label> */}
+                  </label>
+                  
+
+                  
+                
+
+               <label>
+                  <input
+                    type="radio"
+                    id="pdfOption"
+                    name="downloadOption"
+                    value="pdf"
+                    checked={selectedOption === 'pdf'}
+                    onChange={handleOptionChange}
+                  />
+                  PDF
+                  {/* <label htmlFor="pdfOption">Download PDF</label> */}
+                  </label>
+
+
+                <button
+                  onClick={downloadFile}
+                  className="download-button"
+                  disabled={selectedOption === ''}
+                >
+                  <span className="button-text">Download</span>
+                </button>
               </div>
+              </div>
+              </div>
+
+
+
+            <div className="twothirds">
+
               <table className="user-table">
                 <thead>
                   <tr>

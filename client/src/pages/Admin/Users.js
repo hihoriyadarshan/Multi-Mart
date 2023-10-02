@@ -17,6 +17,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
+  const [downloadOption, setDownloadOption] = useState("csv");
   const usersPerPage = 10;
   const contentRef = useRef(null);
 
@@ -121,6 +122,21 @@ const Users = () => {
   
 
 
+// Download PDf & CSv
+
+const handleOptionChange = (event) => {
+  setDownloadOption(event.target.value);
+};
+
+const downloadFile = () => {
+  if (downloadOption === "csv") {
+    downloadCSV();
+  } else if (downloadOption === "pdf") {
+    downloadPDF();
+  }
+};
+
+
 
   return (
     <Layout title={"Dashboard - All Users"}>
@@ -133,7 +149,7 @@ const Users = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> User</div>
-                
+                    <div className="search-container-left">
                
                 <input
                   type="text"
@@ -142,26 +158,53 @@ const Users = () => {
                   className="search-container1"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <div className="search-icone">  
-                             <ImSearch/>
-                  </div>
-              
+                 <div className="search-icon">
+                <ImSearch />
+                </div>
+              </div>
               </div>
             </div>
           </section>
 
           <section className="panel important">
-            <div className="twothirds">
               
-              <button onClick={downloadCSV} className="download-csv">
-                  Download CSV
-                </button>
 
-                <button onClick={downloadPDF} className="download-pdf">
-                  Download PDF
-                </button>
-  
 
+          <div className="download-1">
+<div className="download-options-inner">
+<div className="download-options">
+              <span>Download Type:</span>
+              <label>
+                <input
+                  type="radio"
+                  name="downloadOption"
+                  value="csv"
+                  checked={downloadOption === "csv"}
+                  onChange={handleOptionChange}
+                />
+                CSV
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="downloadOption"
+                  value="pdf"
+                  checked={downloadOption === "pdf"}
+                  onChange={handleOptionChange}
+                />
+                PDF
+              </label>
+              <button
+                onClick={downloadFile}
+                className="download-button"
+                disabled={downloadOption === ""}
+              >
+                <span className="button-text">Download</span>
+              </button>
+              </div>
+  </div>
+  </div>
+          <div className="twothirds">
               <table className="user-table">
                 <thead>
                   <tr>

@@ -6,8 +6,8 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import moment from "moment";
 import { CSVLink } from "react-csv";
-
-import { Select, Input, Button } from "antd";
+import { ImSearch } from "react-icons/im";
+import { Select, Input, Radio ,Button} from "antd";
 
 const { Option } = Select;
 
@@ -35,6 +35,7 @@ const AdminOrders = () => {
   const [itemsPerPage] = useState(5);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [exportFormat, setExportFormat] = useState("pdf"); // Default export format
 
   const getOrders = async () => {
     try {
@@ -90,23 +91,48 @@ const AdminOrders = () => {
     setCurrentPage(pageNumber);
   };
 
-  // Function to generate and download a PDF
-  const generatePDF = () => {
-    const doc = new jsPDF();
+  // Function to generate and download a PDF or CSV based on the selected format
+  const generateExport = () => {
+    if (exportFormat === "pdf") {
+      const doc = new jsPDF();
 
-    doc.autoTable({
-      head: [["#", "Status", "Buyer", "Date", "Payment", "Quantity"]],
-      body: currentOrders.map((o, i) => [
-        i + 1,
-        o?.status,
-        o.buyer?.name,
-        moment(o.createAt).fromNow(),
-        o.payment.success ? "Success" : "Failed",
-        o.products.length,
-      ]),
-    });
+      doc.autoTable({
+        head: [["#", "Status", "Buyer", "Date", "Payment", "Quantity"]],
+        body: currentOrders.map((o, i) => [
+          i + 1,
+          o?.status,
+          o.buyer?.name,
+          moment(o.createAt).fromNow(),
+          o.payment.success ? "Success" : "Failed",
+          o.products.length,
+        ]),
+      });
 
-    doc.save("orders.pdf");
+      doc.save("orders.pdf");
+    } else if (exportFormat === "csv") {
+      // Prepare CSV data and trigger download
+      const csvData = currentOrders.map((o, i) => ({
+        "#": i + 1,
+        "Status": o?.status,
+        "Buyer": o.buyer?.name,
+        "Date": moment(o.createAt).fromNow(),
+        "Payment": o.payment.success ? "Success" : "Failed",
+        "Quantity": o.products.length,
+      }));
+
+      const csvHeaders = headers.map((header) => header.label).join(",");
+      const csvValues = csvData.map((item) =>
+        headers.map((header) => item[header.key]).join(",")
+      );
+      const csvContent = [csvHeaders, ...csvValues].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "orders.csv";
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
   };
 
   return (
@@ -120,43 +146,32 @@ const AdminOrders = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> Manage Orders </div>
+                <div className="search-container-left">
+                  <Input
+                    placeholder="Search by buyer name"
+                    onChange={handleSearchChange}
+                    value={searchQuery}
+                  />
+                  <div className="search-icon">
+                    <ImSearch />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
           <div className="panel important">
-            <Button onClick={generatePDF} className="download-pdf">
-              Download PDF
+            <div>
+              <Radio.Group
+                value={exportFormat}
+                onChange={(e) => setExportFormat(e.target.value)}
+              >
+                <Radio.Button value="pdf">PDF</Radio.Button>
+                <Radio.Button value="csv">CSV</Radio.Button>
+              </Radio.Group>
+            </div>
+            <Button onClick={generateExport} className="download-pdf">
+              Export
             </Button>
-
-            <CSVLink
-              data={currentOrders.map((o, i) => ({
-                "#": i + 1,
-                "Status": o?.status,
-                "Buyer": o.buyer?.name,
-                "Date": moment(o.createAt).fromNow(),
-                "Payment": o.payment.success ? "Success" : "Failed",
-                "Quantity": o.products.length,
-              }))}
-              headers={headers}
-              filename={"orders.csv"}
-              className="csv-link" // You can style this link as needed
-            >
-              Download CSV
-            </CSVLink>
-
-
-
-
-            <Input
-              placeholder="Search by buyer name"
-              onChange={handleSearchChange}
-              value={searchQuery}
-            />
-
-
-
-
-
             {currentOrders.map((o, i) => {
               return (
                 <div className="border shadow" key={i}>

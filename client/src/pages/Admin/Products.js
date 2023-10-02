@@ -5,6 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "./Admin.css";
+import {ImSearch} from 'react-icons/im';
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -66,12 +68,7 @@ const Products = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> Manage Product</div>
-              </div>
-            </div>
-          </section>
-          <div className="product-left-3">
-            <div className="col-md-9">
-              <div className="All-Product-Card">
+                <div className="search-container-left">
                 {/* Search input */}
                 <input
                   type="text"
@@ -79,6 +76,17 @@ const Products = () => {
                   value={searchInput}
                   onChange={handleSearchInputChange}
                 />
+                <div className="search-icon">
+                <ImSearch />
+              </div>
+              </div>
+            </div>
+            </div>
+          </section>
+          <div className="product-left-3">
+            <div className="col-md-9">
+              <div className="All-Product-Card">
+                
 
                 <div className="d-flex flex-wrap">
                   {currentProducts.map((product) => (
