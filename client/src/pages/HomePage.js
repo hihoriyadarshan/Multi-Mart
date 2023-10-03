@@ -176,17 +176,15 @@ const filterProduct = async () => {
                     <p className="card-text ms-2">₹{p.price}</p>
                     </div>
                     <div>
+                      <div className='cart-addmore'>
                     <button className='btn-moredetails' onClick={() =>navigate(`/product/${p.slug}`)}>More Details</button>
                     <button className='btn-cart' onClick={()=>{setCart([...cart,p]);
                     localStorage.setItem('cart', JSON.stringify([...cart,p]))
                     toast.success('Item Added  to cart')
                     }}>ADD TO Cart</button>
                     
-                    
+                    </div>                    
                     </div>
-                   
-                    
-
                   </div>
                 </div>
              

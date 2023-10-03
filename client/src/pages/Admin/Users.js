@@ -11,8 +11,6 @@ import { saveAs } from "file-saver";
 import papaparse from 'papaparse';
 import jsPDF from "jspdf";
 
-
-
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,13 +67,14 @@ const Users = () => {
 
   const displayedUsers = filteredUsers
     .slice(offset, offset + usersPerPage)
-    .map((user) => (
+    .map((user, index) => (
       <tr key={user._id}>
+        {/* <td>{index + 1}</td> */}
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>{user.phone}</td>
         <td>{user.answer}</td>
-        <td>{user.address}</td>
+        <td className="msg-1">{user.address}</td>
         <td>
           <button
             onClick={() => handleDelete(user._id)}
@@ -96,47 +95,44 @@ const Users = () => {
   const downloadPDF = () => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
-  
+
     // Define the columns and rows for your PDF table
-    const columns = ["Username", "E-mail", "Phone", "DOB", "Address"];
-    const rows = filteredUsers.map((user) => [
+    const columns = ["#", "Username", "E-mail", "Phone", "DOB", "Address"];
+    const rows = filteredUsers.map((user, index) => [
+      // index + 1,
       user.name,
       user.email,
       user.phone,
       user.answer,
       user.address,
     ]);
-  
+
     // Add the table to the PDF
     doc.autoTable({
       head: [columns],
       body: rows,
     });
-  
+
     // Define the PDF file name
     const fileName = "users-data.pdf";
-  
+
     // Save the PDF file
     doc.save(fileName);
   };
-  
 
+  // Download PDf & CSV
 
-// Download PDf & CSv
+  const handleOptionChange = (event) => {
+    setDownloadOption(event.target.value);
+  };
 
-const handleOptionChange = (event) => {
-  setDownloadOption(event.target.value);
-};
-
-const downloadFile = () => {
-  if (downloadOption === "csv") {
-    downloadCSV();
-  } else if (downloadOption === "pdf") {
-    downloadPDF();
-  }
-};
-
-
+  const downloadFile = () => {
+    if (downloadOption === "csv") {
+      downloadCSV();
+    } else if (downloadOption === "pdf") {
+      downloadPDF();
+    }
+  };
 
   return (
     <Layout title={"Dashboard - All Users"}>
@@ -149,65 +145,62 @@ const downloadFile = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> User</div>
-                    <div className="search-container-left">
-               
-                <input
-                  type="text"
-                  placeholder="Search by name or email..."
-                  value={searchQuery}
-                  className="search-container1"
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                 <div className="search-icon">
-                <ImSearch />
+                <div className="search-container-left">
+                  <input
+                    type="text"
+                    placeholder="Search by name or email..."
+                    value={searchQuery}
+                    className="search-container1"
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <div className="search-icon">
+                    <ImSearch />
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </section>
 
           <section className="panel important">
-              
-
-
-          <div className="download-1">
-<div className="download-options-inner">
-<div className="download-options">
-              <span>Download Type:</span>
-              <label>
-                <input
-                  type="radio"
-                  name="downloadOption"
-                  value="csv"
-                  checked={downloadOption === "csv"}
-                  onChange={handleOptionChange}
-                />
-                CSV
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="downloadOption"
-                  value="pdf"
-                  checked={downloadOption === "pdf"}
-                  onChange={handleOptionChange}
-                />
-                PDF
-              </label>
-              <button
-                onClick={downloadFile}
-                className="download-button"
-                disabled={downloadOption === ""}
-              >
-                <span className="button-text">Download</span>
-              </button>
+            <div className="download-1">
+              <div className="download-options-inner">
+                <div className="download-options">
+                  <span>Download Type:</span>
+                  <label>
+                    <input
+                      type="radio"
+                      name="downloadOption"
+                      value="csv"
+                      checked={downloadOption === "csv"}
+                      onChange={handleOptionChange}
+                    />
+                    Excel
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="downloadOption"
+                      value="pdf"
+                      checked={downloadOption === "pdf"}
+                      onChange={handleOptionChange}
+                    />
+                    PDF
+                  </label>
+                  <button
+                    onClick={downloadFile}
+                    className="download-button"
+                    disabled={downloadOption === ""}
+                  >
+                    <span className="button-text">Download</span>
+                  </button>
+                </div>
               </div>
-  </div>
-  </div>
-          <div className="twothirds">
+            </div>
+            <div className="twothirds">
               <table className="user-table">
                 <thead>
                   <tr>
+                    {/* <th scope="col">#</th> */}
                     <th scope="col">Username</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Phone</th>

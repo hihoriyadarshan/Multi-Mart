@@ -160,25 +160,37 @@ const AdminOrders = () => {
             </div>
           </section>
           <div className="panel important">
-            <div>
+          
+          <div className="download-2">
+                <div className="download-options-inner">
+                    <div className="download-options">
+                    Download Type:
               <Radio.Group
                 value={exportFormat}
                 onChange={(e) => setExportFormat(e.target.value)}
               >
-                <Radio.Button value="pdf">PDF</Radio.Button>
-                <Radio.Button value="csv">CSV</Radio.Button>
+                <Radio value="pdf" className="download-button">PDF</Radio>
+                <Radio value="csv" className="download-button">Excel</Radio>
               </Radio.Group>
-            </div>
-            <Button onClick={generateExport} className="download-pdf">
-              Export
+            
+            <Button onClick={generateExport} >
+            <span className="button-text">Download</span>
             </Button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
             {currentOrders.map((o, i) => {
               return (
                 <div className="border shadow" key={i}>
                   <table className="table">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Status</th>
                         <th scope="col">Buyer</th>
                         <th scope="col"> date</th>

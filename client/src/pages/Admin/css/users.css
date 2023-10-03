@@ -16,6 +16,7 @@ th {
   padding: 0 40px;
   padding-bottom: 14px;
   color: black;
+  border-color: #e5e5e5 ;
   
   /* width: 96%; */
 
@@ -38,6 +39,8 @@ td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
   background-color: #ffffff;
   color:black;
+  border-color: #e5e5e5 ;
+
   /* width: 96%; */
 
 }
@@ -127,7 +130,15 @@ td {
   margin-bottom: -30px;
 }
 
+.download-2{
+  margin-left: 790px;
+  margin-bottom: 0px;
+}
 
+.download-3{
+  margin-left: 1080px;
+  margin-bottom: 0px;
+}
 
 
 .container-fluid {
@@ -161,7 +172,6 @@ label {
   font-size: 16px;
  
 }
-
 
 
 

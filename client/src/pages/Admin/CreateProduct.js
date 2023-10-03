@@ -75,7 +75,7 @@ const handleCreate = async (e) => {
 
           <section className="panel important">
           <div className="add">
-            <div className="head-2">
+            <div className="head-3">
             <div className="write-title"> Create Product
                    </div>
                </div>

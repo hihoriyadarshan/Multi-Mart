@@ -502,7 +502,7 @@ body{
   
 
 .btn-cart{
-  margin-top: 20px;
+  margin-bottom: 0px;
   margin-left: 13px;
   color: white;
   background-color: rgb(251, 100, 27);
@@ -513,7 +513,7 @@ body{
 }  
 
 .btn-moredetails{
-margin-top: 20px;
+margin-bottom: 0px;
 background-color: rgb(255, 159, 0);
 border-radius: 5px;
 margin-left: -25px;
@@ -529,4 +529,25 @@ border: none;
 .product-left-3{
 margin-left: 228px;
 margin-top: 30px;
+}
+
+.cart-addmore{
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.card-img-top{
+  width: 100px;
+}
+
+.desc{
+  white-space: nowrap; 
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis;
+  width: 20px; 
+ border-color: #e5e5e5;
+}
+
+.all-product-1{
+  margin-left: -500px;
 }

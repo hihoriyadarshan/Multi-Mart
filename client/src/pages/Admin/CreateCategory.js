@@ -168,13 +168,22 @@ const CreateCategory = () => {
               </div>
 
               <div className="panel important">
-            <div className="twothirds">
-              <Button type="primary" onClick={downloadCSV} className="mb-3">
-                Download CSV
+              <div className="download-3">
+            <div className="download-options-inner">
+            <div className="download-options">
+            
+              <Button className="download-button" onClick={downloadCSV} >
+                Download Excel
               </Button>
+              </div>
+              </div>
+              </div>
 
+
+              <div className="twothirds">
+                
               <div className="w-75">
-                <table className="table">
+                <table className="table" >
                   <thead>
                     <tr>
                       <th scope="col">Name</th>

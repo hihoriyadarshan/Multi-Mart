@@ -9,8 +9,7 @@ import { saveAs } from "file-saver";
 import papaparse from 'papaparse';
 import jsPDF from 'jspdf'; 
 import {ImSearch} from 'react-icons/im';
-import {FaFileCsv, FaFilePdf} from 'react-icons/fa';
-import {MdFileDownload  } from "react-icons/md";
+
 
 
 
@@ -214,7 +213,7 @@ const ContactUs = () => {
                       <td>{contact.firstname} </td>
                       <td>{contact.lastname}</td>
                       <td>{contact.email}</td>
-                      <td>{contact.phone}</td>
+                      <td >{contact.phone}</td>
                       <td>{contact.message}</td>
                       <td>
                         <button
