@@ -26,7 +26,7 @@ const AdminMenu = () => {
     <h1>Admin Panel</h1>
     <ul className="utilities">
       <br />
-      <li className="users"><NavLink to="/dashboard/user/profile">My Account</NavLink></li>
+      <li className="users"><NavLink to="/dashboard/admin/Adminprofile">My Account</NavLink></li>
       <li className="logout warn"><NavLink onClick={handleLogout} to="/logout">Log Out</NavLink></li>
     </ul>
   </header>

@@ -422,9 +422,9 @@ body{
     background-color: #0056b3;
   }
   
-  /* Media query for responsiveness */
+
   @media screen and (max-width: 600px) {
-    /* Adjust styles for smaller screens */
+ 
     .homeHeading {
       font-size: 1.6rem;
     }
@@ -550,4 +550,14 @@ margin-top: 30px;
 
 .all-product-1{
   margin-left: -500px;
+}
+
+.card45{
+  margin-top: 80px;
+  margin-left: -100px;
+  width: 420px;
+}
+
+.button-mb{
+  margin-top: 20px;
 }

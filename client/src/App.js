@@ -28,6 +28,8 @@ import AdminOrders from './pages/Admin/AdminOrders';
 import Contact_us from './pages/Admin/Contact_us';
 import AdminLogin from './pages/Auth/AdminLogin';
 import AllProduct from './pages/Admin/AllProduct';
+import Adminprofile from './pages/Admin/Adminprofile';
+import AdminUpdateProfile from './pages/Admin/AdminUpdateProfile';
 
 
 
@@ -61,7 +63,8 @@ function App() {
         <Route path="admin/orders" element={<AdminOrders/>} />
         <Route path="admin/Contact_us" element={<Contact_us/>} />
         <Route path="admin/AllProduct" element={<AllProduct/>} />
-
+        <Route path="admin/Adminprofile" element={<Adminprofile/>} />
+        <Route path="admin/AdminUpdateProfile" element={<AdminUpdateProfile/>} />
         </Route>
 
 
