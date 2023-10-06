@@ -5,58 +5,74 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const CategoryProduct = () => {
   const navigate = useNavigate();
+  const { slug } = useParams();
   const [products, setProducts] = useState([]);
-  const params = useParams();
-  const [category, setCategory] = useState(null); // Initialize category as null
+  const [category, setCategory] = useState(null);
+  const [error, setError] = useState(null); // State for validation error
 
   useEffect(() => {
-    if (params?.slug) getProductByCat();
-  }, [params?.slug]);
+    if (slug) {
+      getProductByCat(slug);
+    } else {
+      setError("Category slug is required.");
+    }
+  }, [slug]);
 
-  const getProductByCat = async () => {
+  const getProductByCat = async (categorySlug) => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/product-category/${params.slug}`);
-      setProducts(data?.products);
-      setCategory(data?.category);
+      const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/product-category/${categorySlug}`);
+      const data = response.data;
+      if (data) {
+        setProducts(data.products || []);
+        setCategory(data.category || null);
+      } else {
+        setError("Category not found.");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching category products:", error);
     }
   };
 
   return (
     <Layout>
       <div className="container mt-3">
-        <h4 className="text-center">Category - {category?.name}</h4>
+        {error ? (
+          <h4 className="text-center text-danger">{error}</h4>
+        ) : (
+          <h4 className="text-center">Category - {category?.name}</h4>
+        )}
       </div>
-      <div className="container mt-3">
-        <h6 className="text-center">{products.length} result found</h6>
-        <div className="row">
-          <div className="d-flex flex-wrap ms-3">
-            {products.map((p) => (
-              <div className="card m-4" style={{ width: '18rem' }} key={p._id}>
-                <img
-                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                  className="card-img-top"
-                  alt={p.name}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{p.name}</h5>
-                  <p className="card-text">{p.description.substring(0, 26)}...</p>
-                  <p className="card-text">₹{p.price}</p>
-                  <button
-                    className="btn btn-primary ms-1"
-                    onClick={() => navigate(`/product/${p.slug}`)}
-                  >
-                    More Details
-                  </button>
-                  <button className="btn btn-Secondary ms-1">ADD TO Cart</button>
+      {error ? null : (
+        <div className="container mt-3">
+          <h6 className="text-center">{products.length} results found</h6>
+          <div className="row">
+            <div className="d-flex flex-wrap ms-3">
+              {products.map((product) => (
+                <div className="card m-4" style={{ width: '18rem' }} key={product._id}>
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                    className="card-img-top"
+                    alt={product.name}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text">{product.description.substring(0, 26)}...</p>
+                    <p className="card-text">₹{product.price}</p>
+                    <button
+                      className="btn btn-primary ms-1"
+                      onClick={() => navigate(`/product/${product.slug}`)}
+                    >
+                      More Details
+                    </button>
+                    <button className="btn btn-secondary ms-1">Add to Cart</button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      )}
+    </Layout> 
   );
 };
 

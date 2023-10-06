@@ -75,13 +75,16 @@ body{
   
 .productCard {
     width: 14vmax;
+    height: 520px;
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: rgb(48, 48, 48);
     margin: 2vmax;
     transition: all 0.5s;
-    padding-bottom: 0.5vmax;
+    /* padding-bottom: 0.5vmax; */
+    position: relative;
+
 }
   
 .productCard  img {
@@ -89,12 +92,16 @@ body{
     height: 14rem;
   }
   
-.productCard  div {
-    margin: 0.5vmax;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    /* margin-left: -10vh; */
+.productCard .container{
+  /* position: absolute; */
+  top: 14rem;
+}
+
+.cart-addmore{
+  margin: 0px;
+  left: 24px;
+  position: absolute;
+  bottom: 0px;
 }
   
 .productCardSpan {

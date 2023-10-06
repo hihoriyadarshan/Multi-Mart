@@ -1,0 +1,256 @@
+/* contact section */
+
+.contact {
+    position: relative;
+    min-height: 100vh;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 150%;
+    background: #f0c808;
+    transform: rotate(-8deg) translateY(-450px) translateX(-100px);
+}
+
+.contact .bg-design {
+    position: absolute;
+    top: 53.5%;
+    left: 5%;
+    height: 35px;
+    width: 200px;
+    background: #e7e393;
+    border-radius: 2px;
+    transform: skewY(-8deg);
+    opacity: 0.6;
+}
+
+.contact .bg-design:nth-child(2) {
+    top: 28%;
+    left: 92%;
+}
+
+.contact .bg-design:nth-child(3) {
+    top: 64%;
+    left: 2%;
+    height: 8px;
+    width: 50px;
+}
+
+.contact .bg-design:nth-child(4) {
+    top: 38%;
+    left: 85%;
+    height: 8px;
+    width: 150px;
+    background: #e7e393;
+}
+
+.con-div {
+    position: relative;
+    height: 500px;
+    width: 900px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 28px;
+    z-index: 1000;
+}
+
+.con-div h1 {
+    color: #f0c808;
+    font-size: 32px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+.con-div p {
+    color: #1a1a1a;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: left;
+    padding-top: 12px;
+}
+
+.set-con-div {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.con-div .set-con-div .msg-div {
+    height: 80%;
+    width: 50%;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.con-div .set-con-div .msg-div input[type="text"] {
+    height: 40px;
+    width: 100%;
+    background: #efefef;
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: 'calibri';
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.con-div .set-con-div .msg-div input[type="text"]:focus {
+    border-bottom: 2px solid #f0c808;
+}
+
+.con-div .set-con-div .msg-div #con-div-msg {
+    height: 150px;
+    width: 100%;
+    background: #efefef;
+    border-radius: 2px;
+    font-size: 16px;
+    font-family: 'calibri';
+    letter-spacing: 1px;
+    text-align: start;
+    border: none;
+    outline: none;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.con-div .set-con-div .msg-div #con-div-msg:focus {
+    border-bottom: 2px solid #f0c808;
+}
+
+input[type="submit"] {
+    height: 45px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #ffd500 20%, #ddb800);
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+input[type="submit"]:hover {
+    background-image: linear-gradient(30deg, #ffd500 60%, #ddb800);
+}
+
+.con-div .set-con-div .con-social-div {
+    position: relative;
+    height: 80%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-110px);
+}
+
+.con-social-div .soc-head {
+    content: '';
+    position: absolute;
+    top: -25%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.con-social-div .soc-head span {
+    height: 2px;
+    width: 40px;
+    background: #f0c808;
+}
+
+.con-social-div .soc-head p {
+    color: #f0c808;
+    padding: 10px;
+}
+
+.con-social-div .soc-icon {
+    height: 80px;
+    width: 80px;
+    border: 2px solid #efefef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.con-social-div .soc-icon:hover {
+    background: #f0c808;
+    border: none;
+    transition: background 0.65s ease-in-out;
+}
+
+.con-social-div .soc-icon i {
+    color: #f0c808;
+    font-size: 28px;
+}
+
+.con-social-div .soc-icon:hover i {
+    color: #fff;
+    transform: scale(1.5) translateY(-1px);
+    transition: color 0.25s ease-in-out;
+}
+
+.con-div .set-con-div .con-num-div {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 200px;
+    width: 48%;
+}
+
+.con-num-div .num-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 20px;
+}
+
+.con-num-div .num-info i {
+    content: '';
+    position: absolute;
+    left: 10%;
+    color: #f0c808;
+    font-size: 20px;
+}
+
+.con-num-div .num-info p {
+    font-size: 16px;
+    transform: translateX(70px) translateY(-5px);
+}
+
+
+/* contrect section Ends */
+
+.darshan {
+    font-size: larger;
+    font-weight: 100;
+    font-style: normal;
+}

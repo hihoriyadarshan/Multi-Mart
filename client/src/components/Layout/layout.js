@@ -20,7 +20,8 @@ const layout = ({children,title,description,keywords,author}) => {
     </main>
 
     </div>
-  )
+  
+)
 }
 
 layout.defultProps ={

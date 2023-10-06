@@ -30,6 +30,7 @@ import AdminLogin from './pages/Auth/AdminLogin';
 import AllProduct from './pages/Admin/AllProduct';
 import Adminprofile from './pages/Admin/Adminprofile';
 import AdminUpdateProfile from './pages/Admin/AdminUpdateProfile';
+import Feedback from './pages/user/Feedback';
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='/cart' element={<CartPage/>}  />
         <Route path='/category/:slug' element={<CategoryProduct/>}  />
         <Route path='/search' element={<Search/>}  />
+        <Route path='/feedback' element={<Feedback/>} />
         
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />

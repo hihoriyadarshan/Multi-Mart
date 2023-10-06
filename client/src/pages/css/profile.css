@@ -4,7 +4,8 @@
 }
 
 .container123 {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background-color: #9debe5;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -16,20 +17,14 @@
 
 .container-11 {
   background-color: #48444470;
-  /* background: transparent; */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* opacity: 0.2; */
   border: 1px solid gray;
   box-shadow: 0px 0px 3px #ffffff95;
   width: 995px;
-  height: 500px;
-  /* float: left; */
-  /* display: inline-block; */
-
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  height: 500px;  
+  border-radius: 20px;
 }
 
 .img1 {
@@ -41,7 +36,7 @@
 }
 
 .container-21 {
-  background-color: gold;
+  background-color: #fff9fc;
   width: 611px;
   height: 500px;
   /* display: inline-block; */
@@ -62,3 +57,6 @@
 
 }
 
+.form-control{
+  background-color: #9debe5;
+}
