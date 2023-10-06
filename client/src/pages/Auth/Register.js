@@ -9,8 +9,6 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { GiRotaryPhone } from 'react-icons/gi';
 import { AiFillHome } from 'react-icons/ai';
 
-
-
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +20,14 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Password validation
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      toast.error('Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one numeric character.');
+      return;
+    }
+
     try {
       const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/register`, {
         name,
@@ -47,7 +53,7 @@ const Register = () => {
     <Layout title="Register - Ecommer App">
       <div className="form-container">
         <div className="form-box">
-         <center> <h4 className="form-title">REGISTER FORM</h4> </center>
+          <center><h4 className="form-title">REGISTER FORM</h4></center>
           <form onSubmit={handleSubmit}>
             <MdDriveFileRenameOutline/>
             <input
@@ -79,7 +85,6 @@ const Register = () => {
             />
             <GiRotaryPhone/>
             <input
-              
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
