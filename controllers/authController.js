@@ -1,125 +1,119 @@
-import userModel from "../models/userModel.js"
-import orderModel from "../models/orderModel.js"
-import { comparePassword,hashPassword } from "./../helpers/authHelper.js";
-import JWT from 'jsonwebtoken';
+import userModel from "../models/userModel.js";
+import orderModel from "../models/orderModel.js";
+import { comparePassword, hashPassword } from "./../helpers/authHelper.js";
+import JWT from "jsonwebtoken";
 import ContactModel from "../models/contactModel.js";
-import PDFDocument from 'pdfkit';
-import fs from 'fs';
-
-
+import PDFDocument from "pdfkit";
+import fs from "fs";
 
 //Registration
 export const registerController = async (req, res) => {
-    try {
-      const { name, email, password, phone, address,answer} = req.body;
-      //validations
-      if (!name) {
-        return res.send({ error: "Name is Required" });
-      }
-      if (!email) {
-        return res.send({ message: "Email is Required" });
-      }
-      if (!password) {
-        return res.send({ message: "Password is Required" });
-      }
-      if (!phone) {
-        return res.send({ message: "Phone no is Required" });
-      }
-      if (!address) {
-        return res.send({ message: "Address is Required" });
-      }
-      if (!answer) {
-        return res.send({ message: "Answer is Required" });
-      }
-      //check user
-      const exisitingUser = await userModel.findOne({ email });
-      //exisiting user
-      if (exisitingUser) {
-        return res.status(200).send({
-          success: false,
-          message: "Already Register please login",
-        });
-      }
-      //register user
-      const hashedPassword = await hashPassword(password);
-      //save
-      const user = await new userModel({
-        name,
-        email,
-        phone,
-        address,
-        password: hashedPassword,
-        answer,
-      }).save();
-  
-      res.status(201).send({
-        success: true,
-        message: "User Register Successfully",
-        user,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
+  try {
+    const { name, email, password, phone, address, answer } = req.body;
+    //validations
+    if (!name) {
+      return res.send({ error: "Name is Required" });
+    }
+    if (!email) {
+      return res.send({ message: "Email is Required" });
+    }
+    if (!password) {
+      return res.send({ message: "Password is Required" });
+    }
+    if (!phone) {
+      return res.send({ message: "Phone no is Required" });
+    }
+    if (!address) {
+      return res.send({ message: "Address is Required" });
+    }
+    if (!answer) {
+      return res.send({ message: "Answer is Required" });
+    }
+    //check user
+    const exisitingUser = await userModel.findOne({ email });
+    //exisiting user
+    if (exisitingUser) {
+      return res.status(200).send({
         success: false,
-        message: "Errro in Registeration",
-        error,
+        message: "Already Register please login",
       });
     }
-  };
+    //register user
+    const hashedPassword = await hashPassword(password);
+    //save
+    const user = await new userModel({
+      name,
+      email,
+      phone,
+      address,
+      password: hashedPassword,
+      answer,
+    }).save();
 
+    res.status(201).send({
+      success: true,
+      message: "User Register Successfully",
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Errro in Registeration",
+      error,
+    });
+  }
+};
 
-  //download pdf
+//download pdf
 
-  export const downloadUsersAsPDF = async (req, res) => {
-    try {
-      const users = await userModel.find({});
-      if (!users || users.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: "No users found",
-        });
-      }
-  
-      // Create a new PDF document
-      const doc = new PDFDocument();
-      const pdfFileName = 'userList.pdf'; // Set the PDF file name
-  
-      // Set response headers for PDF download
-      res.setHeader('Content-Disposition', `attachment; filename="${pdfFileName}"`);
-      res.setHeader('Content-Type', 'application/pdf');
-  
-      // Create a write stream to send the PDF content to the response
-      doc.pipe(res);
-  
-      // Add content to the PDF document
-      doc.fontSize(12).text('User List\n\n');
-      users.forEach((user, index) => {
-        doc.text(`User ${index + 1}:`);
-        doc.text(`Name: ${user.name}`);
-        doc.text(`Email: ${user.email}`);
-        doc.text(`Phone: ${user.phone}`);
-        doc.text('-----------------------');
-      });
-  
-      // Finalize the PDF document
-      doc.end();
-  
-      res.status(200);
-    } catch (error) {
-      console.error("Error while generating and downloading PDF:", error);
-      res.status(500).json({
+export const downloadUsersAsPDF = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    if (!users || users.length === 0) {
+      return res.status(404).json({
         success: false,
-        error: "Internal server error",
-        message: "Error while generating and downloading PDF",
+        message: "No users found",
       });
     }
-  };
 
+    // Create a new PDF document
+    const doc = new PDFDocument();
+    const pdfFileName = "userList.pdf"; // Set the PDF file name
 
+    // Set response headers for PDF download
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${pdfFileName}"`
+    );
+    res.setHeader("Content-Type", "application/pdf");
 
+    // Create a write stream to send the PDF content to the response
+    doc.pipe(res);
 
+    // Add content to the PDF document
+    doc.fontSize(12).text("User List\n\n");
+    users.forEach((user, index) => {
+      doc.text(`User ${index + 1}:`);
+      doc.text(`Name: ${user.name}`);
+      doc.text(`Email: ${user.email}`);
+      doc.text(`Phone: ${user.phone}`);
+      doc.text("-----------------------");
+    });
 
+    // Finalize the PDF document
+    doc.end();
 
+    res.status(200);
+  } catch (error) {
+    console.error("Error while generating and downloading PDF:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      message: "Error while generating and downloading PDF",
+    });
+  }
+};
 
 //get all users(Admin)
 
@@ -148,8 +142,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-
-
 // delete user(Admin)
 
 export const deleteuserController = async (req, res) => {
@@ -169,7 +161,6 @@ export const deleteuserController = async (req, res) => {
     });
   }
 };
-
 
 //LOGIN
 export const loginController = async (req, res) => {
@@ -234,7 +225,6 @@ export const testController = (req, res) => {
   }
 };
 
-
 //forgotPasswordController
 
 export const forgotPasswordController = async (req, res) => {
@@ -274,7 +264,6 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-
 //update profile
 export const updateProfileController = async (req, res) => {
   try {
@@ -310,7 +299,6 @@ export const updateProfileController = async (req, res) => {
   }
 };
 
-
 //Get  Order
 export const getOrdersController = async (req, res) => {
   try {
@@ -328,7 +316,6 @@ export const getOrdersController = async (req, res) => {
     });
   }
 };
-
 
 //Get allorders
 export const getAllOrdersController = async (req, res) => {
@@ -371,28 +358,29 @@ export const orderStatusController = async (req, res) => {
   }
 };
 
-
-
-
 // contact-us
 export const createContact = async (req, res) => {
   try {
-    const { firstname, lastname, email, phone, message } = req.body;
+    const { firstname, subject, email, message } = req.body;
 
     const newContact = new ContactModel({
       firstname,
-      lastname,
+      subject,
       email,
-      phone,
+
       message,
     });
 
     await newContact.save();
 
-    res.status(201).json({ success: true, message: "Contact created successfully" });
+    res
+      .status(201)
+      .json({ success: true, message: "Contact created successfully" });
   } catch (error) {
     console.error("Error creating contact:", error);
-    res.status(500).json({ success: false, message: "Failed to create contact" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create contact" });
   }
 };
 
@@ -401,7 +389,7 @@ export const createContact = async (req, res) => {
 export const getAllContacts = async (req, res) => {
   try {
     const contacts = await ContactModel.find({});
-    
+
     res.status(200).json({
       success: true,
       message: "All contact details",
@@ -416,7 +404,6 @@ export const getAllContacts = async (req, res) => {
     });
   }
 };
-
 
 //delete contact
 export const deleteContactController = async (req, res) => {

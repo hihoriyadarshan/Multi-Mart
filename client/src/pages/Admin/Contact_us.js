@@ -3,27 +3,25 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete } from "react-icons/ai";
 import "./css/users.css";
 import { saveAs } from "file-saver";
-import papaparse from 'papaparse';
-import jsPDF from 'jspdf'; 
-import {ImSearch} from 'react-icons/im';
-
-
-
-
+import papaparse from "papaparse";
+import jsPDF from "jspdf";
+import { ImSearch } from "react-icons/im";
 
 const ContactUs = () => {
   const [contacts, setContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [itemsPerPage] = useState(10); // Items per page
-  const [selectedOption, setSelectedOption] = useState('csv');
+  const [selectedOption, setSelectedOption] = useState("csv");
 
   const getAllContacts = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/get-contact`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/auth/get-contact`
+      );
       setContacts(data.contacts);
     } catch (error) {
       console.error(error);
@@ -37,7 +35,9 @@ const ContactUs = () => {
 
   const handleDeleteContact = async (contactId) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API}/api/v1/auth/contacts/${contactId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API}/api/v1/auth/contacts/${contactId}`
+      );
       toast.success("Contact deleted successfully");
       getAllContacts();
     } catch (error) {
@@ -56,15 +56,15 @@ const ContactUs = () => {
     const query = searchQuery.toLowerCase();
     return (
       contact.firstname.toLowerCase().includes(query) ||
-      contact.lastname.toLowerCase().includes(query) ||
-      contact.email.toLowerCase().includes(query) ||
-      contact.phone.toLowerCase().includes(query) 
-      
+      contact.email.toLowerCase().includes(query)
     );
   });
 
   // Slice the filtered contacts array to display only the items for the current page
-  const currentContacts = filteredContacts.slice(indexOfFirstItem, indexOfLastItem);
+  const currentContacts = filteredContacts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -76,7 +76,6 @@ const ContactUs = () => {
     saveAs(blob, "Contact_us-data.csv");
   };
 
-  
   const downloadPDF = () => {
     // Create a new jsPDF instance
     const doc = new jsPDF();
@@ -84,16 +83,15 @@ const ContactUs = () => {
 
     // Create a table for the data
     doc.autoTable({
-      head: [["Firstname", "Lastname", "Email", "Phone", "Message"]],
+      head: [["Firstname", "subject", "Email", "Message"]],
       body: currentContacts.map((contact) => [
         contact.firstname,
-        contact.lastname,
+        contact.subject,
         contact.email,
-        contact.phone,
+
         contact.message,
       ]),
     });
-
 
     // Save the PDF as "Contact_us-data.pdf"
     doc.save("Contact_us-data.pdf");
@@ -106,15 +104,12 @@ const ContactUs = () => {
   };
 
   const downloadFile = () => {
-    if (selectedOption === 'csv') {
+    if (selectedOption === "csv") {
       downloadCSV();
-    } else if (selectedOption === 'pdf') {
+    } else if (selectedOption === "pdf") {
       downloadPDF();
     }
   };
-
-
-
 
   return (
     <Layout title={"Dashboard - All Contacts"}>
@@ -127,82 +122,70 @@ const ContactUs = () => {
             <div className="add">
               <div className="head-2">
                 <div className="write-title"> Contact_us</div>
-            <div className="search-container-left">
-              <input
-                type="text"
-                placeholder="Search by name, email, phone..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                 />
-              <div className="search-icon">
-                <ImSearch />
-             </div>
-            </div>
-            </div>
+                <div className="search-container-left">
+                  <input
+                    type="text"
+                    placeholder="Search by name, email"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <div className="search-icon">
+                    <ImSearch />
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
-         
           <div className="panel important">
-            
-          
-          <div className="download-1">
+            <div className="download-1">
               <div className="download-options">
-              <div className="download-options-inner">
-              <span> Download Type : </span>
-                <label>
-                  <input
-                    type="radio"
-                    id="csvOption"
-                    name="downloadOption"
-                    value="csv"
-                    checked={selectedOption === 'csv'}
-                    onChange={handleOptionChange}
-                  />
-                  Excel
-                  {/* <label htmlFor="csvOption">Download CSV</label> */}
-                  </label>
-                  
-
-                  
-                
-
-               <label>
-                  <input
-                    type="radio"
-                    id="pdfOption"
-                    name="downloadOption"
-                    value="pdf"
-                    checked={selectedOption === 'pdf'}
-                    onChange={handleOptionChange}
-                  />
-                  PDF
-                  {/* <label htmlFor="pdfOption">Download PDF</label> */}
+                <div className="download-options-inner">
+                  <span> Download Type : </span>
+                  <label>
+                    <input
+                      type="radio"
+                      id="csvOption"
+                      name="downloadOption"
+                      value="csv"
+                      checked={selectedOption === "csv"}
+                      onChange={handleOptionChange}
+                    />
+                    Excel
+                    {/* <label htmlFor="csvOption">Download CSV</label> */}
                   </label>
 
+                  <label>
+                    <input
+                      type="radio"
+                      id="pdfOption"
+                      name="downloadOption"
+                      value="pdf"
+                      checked={selectedOption === "pdf"}
+                      onChange={handleOptionChange}
+                    />
+                    PDF
+                    {/* <label htmlFor="pdfOption">Download PDF</label> */}
+                  </label>
 
-                <button
-                  onClick={downloadFile}
-                  className="download-button"
-                  disabled={selectedOption === ''}
-                >
-                  <span className="button-text">Download</span>
-                </button>
+                  <button
+                    onClick={downloadFile}
+                    className="download-button"
+                    disabled={selectedOption === ""}
+                  >
+                    <span className="button-text">Download</span>
+                  </button>
+                </div>
               </div>
-              </div>
-              </div>
-
-
+            </div>
 
             <div className="twothirds">
-
               <table className="user-table">
                 <thead>
                   <tr>
                     <th>Firstname</th>
-                    <th>Lastname</th>
                     <th>Email</th>
-                    <th>Phone</th>
+                    <th>subject</th>
                     <th>Message</th>
                     <th>Action</th>
                   </tr>
@@ -211,9 +194,8 @@ const ContactUs = () => {
                   {currentContacts.map((contact) => (
                     <tr key={contact._id}>
                       <td>{contact.firstname} </td>
-                      <td>{contact.lastname}</td>
                       <td>{contact.email}</td>
-                      <td >{contact.phone}</td>
+                      <td>{contact.subject}</td>
                       <td>{contact.message}</td>
                       <td>
                         <button
@@ -237,7 +219,7 @@ const ContactUs = () => {
                       <li
                         key={i}
                         className={`page-item ${
-                          currentPage === i + 1 ? 'active' : ''
+                          currentPage === i + 1 ? "active" : ""
                         }`}
                       >
                         <button

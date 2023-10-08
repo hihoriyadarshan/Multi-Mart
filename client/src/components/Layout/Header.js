@@ -7,11 +7,11 @@ import toast from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
-import{Badge} from 'antd'
+import { Badge } from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-  const [cart] =useCart()
+  const [cart] = useCart();
   const categories = useCategory();
 
   const handleLogout = () => {
@@ -48,13 +48,11 @@ const Header = () => {
           </button>
 
           <ul className="dropdown-menu">
-            <li>
-              
-            </li>
+            <li></li>
             <li>
               <NavLink to={"/categories"}>All categories</NavLink>
             </li>
-              
+
             {Array.isArray(categories) &&
               categories.map((c) => (
                 <li key={c.slug}>
@@ -63,8 +61,6 @@ const Header = () => {
                   </Link>
                 </li>
               ))}
-
-           
           </ul>
         </div>
 
@@ -72,7 +68,6 @@ const Header = () => {
           <>
             <NavLink to="/register">Register</NavLink>
             <NavLink to="/login">Login</NavLink>
-
           </>
         ) : (
           <div className="dropdown">
@@ -95,25 +90,23 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-              <NavLink to="/dashboard/user/profile">Profile</NavLink>
+                <NavLink to="/dashboard/user/profile">Profile</NavLink>
               </li>
               <li>
                 <NavLink onClick={handleLogout} to="/logout">
                   Logout
-                  
                 </NavLink>
               </li>
             </ul>
-            <li>
-              </li>
+            <li></li>
           </div>
         )}
-        
+
         <Badge count={cart?.length} showZero>
-        <li>
-        <NavLink to="/Cart">Cart</NavLink>  </li>
+          <li>
+            <NavLink to="/Cart">Cart</NavLink>{" "}
+          </li>
         </Badge>
-      
       </nav>
     </header>
   );

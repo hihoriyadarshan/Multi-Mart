@@ -26,7 +26,7 @@ const SearchInput = () => {
         onSubmit={handleSubmit}
       >
         <input
-          className="form-control me-2"
+          className="form-control-1 me-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
