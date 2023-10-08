@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import Feedback from "./user/Feedback";
+import Footer from "../components/Layout/Footer";
 
 const Product = () => {
   const navigate = useNavigate();
@@ -293,6 +294,7 @@ const Product = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </Layout>
   );
 };

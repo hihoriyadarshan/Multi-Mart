@@ -6,6 +6,7 @@ import "./css/Contact.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Layout/Footer";
 
 const Contact = () => {
   const [firstname, setFirstname] = useState("");
@@ -266,6 +267,7 @@ const Contact = () => {
         {/* JavaScript Libraries */}
         {/* Template Javascript */}
       </div>
+      <Footer/>
     </Layout>
   );
 };

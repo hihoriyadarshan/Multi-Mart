@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout/Layout";
 import "./css/About.css";
 import "./css/bootstrap.min.css";
+import Footer from "../components/Layout/Footer";
 
 const About = () => {
   return (
@@ -216,6 +217,7 @@ const About = () => {
         {/* JavaScript Libraries */}
         {/* Template Javascript */}
       </div>
+      <Footer/>
     </Layout>
   );
 };

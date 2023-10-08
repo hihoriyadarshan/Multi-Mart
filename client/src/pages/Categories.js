@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useCategory from "../hooks/useCategory";
 import Layout from "../components/Layout/Layout";
 import "./css/Categories.css"; // Import your CSS file
+import Footer from "../components/Layout/Footer";
 
 const Categories = () => {
   const categories = useCategory();
@@ -22,6 +23,7 @@ const Categories = () => {
           ))}
         </div>
       </div>
+      <Footer/>
     </Layout>
   );
 };

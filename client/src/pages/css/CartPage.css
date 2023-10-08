@@ -28,3 +28,29 @@
     /* margin-top: -140px !important; */
   }
   
+
+
+/* CartPage.css */
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.quantity-button:hover {
+  background: #0056b3;
+}
+
+.quantity-value {
+  font-size: 18px;
+}

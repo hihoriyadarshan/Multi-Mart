@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import Feedback from "./user/Feedback";
+import Footer from "../components/Layout/Footer";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -297,10 +298,7 @@ const Homepage = () => {
                     </div>
                   </div>
 
-                  
-                  
                   <div className="cart-addmore">
-                  
                     <div className="d-flex border-top">
                       <small className="w-50 text-center border-end py-2">
                         <NavLink
@@ -349,11 +347,11 @@ const Homepage = () => {
                   {loading ? "Loading ..." : "View more"}
                 </button>
               )}
-              {/* <Feedback/> */}
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </Layout>
   );
 };
