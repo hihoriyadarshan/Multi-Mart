@@ -64,7 +64,7 @@ const About = () => {
                 <div className="about-img position-relative overflow-hidden p-5 pe-0">
                   <img
                     className="img-fluid w-100"
-                    src="https://plus.unsplash.com/premium_photo-1686878940830-9031355ec98c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGdyb2Nlcnl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                    src="https://themewagon.github.io/foody2/img/about.jpg"
                     alt=""
                   />
                 </div>

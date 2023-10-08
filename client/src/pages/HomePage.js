@@ -282,11 +282,11 @@ const Homepage = () => {
             <div className="d-flex flex-wrap">
               {products?.map((p) => (
                 <div className="productCard " style={{ width: "18rem" }}>
-                  {/* <img
+                  <img
                     src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
-                  /> */}
+                  />
                   <div className="container">
                     <h5 className="card-title">{p.name}</h5>
                     <p className="card-text ms-25">
@@ -297,63 +297,37 @@ const Homepage = () => {
                     </div>
                   </div>
 
-                  <div
-                    class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-                    data-wow-delay="0.3s"
-                  >
-                    <div class="product-item">
-                      <div class="position-relative bg-light overflow-hidden">
-                        <img
-                          class="img-fluid w-100"
-                          alt=""
-                          src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                          className="card-img-top"
-                          // alt ={p.name}
-                        />
-                        <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                          New
-                        </div>
-                      </div>
-                      <div class="text-center p-4">
-                        <a class="d-block h5 mb-2" href="">
-                          Fresh Tomato
-                        </a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-body text-decoration-line-through">
-                          $29.00
-                        </span>
-                      </div>
+                  
+                  
+                  <div className="cart-addmore">
+                  
+                    <div className="d-flex border-top">
+                      <small className="w-50 text-center border-end py-2">
+                        <NavLink
+                          to={`/product/${p.slug}`}
+                          className="text-body"
+                        >
+                          <i className="fa fa-eye text-primary me-2" />
+                          View detail
+                        </NavLink>
+                      </small>
 
-                      <div className="cart-addmore">
-                        <div className="d-flex border-top">
-                          <small className="w-50 text-center border-end py-2">
-                            <NavLink
-                              to={`/product/${p.slug}`}
-                              className="text-body"
-                            >
-                              <i className="fa fa-eye text-primary me-2" />
-                              View detail
-                            </NavLink>
-                          </small>
-
-                          <small className="w-50 text-center py-2">
-                            <NavLink
-                              className="text-body"
-                              onClick={() => {
-                                setCart([...cart, p]);
-                                localStorage.setItem(
-                                  "cart",
-                                  JSON.stringify([...cart, p])
-                                );
-                                toast.success("Item Added to cart");
-                              }}
-                            >
-                              <i className="fa fa-shopping-bag text-primary me-2" />
-                              Add to cart
-                            </NavLink>
-                          </small>
-                        </div>
-                      </div>
+                      <small className="w-50 text-center py-2">
+                        <NavLink
+                          className="text-body"
+                          onClick={() => {
+                            setCart([...cart, p]);
+                            localStorage.setItem(
+                              "cart",
+                              JSON.stringify([...cart, p])
+                            );
+                            toast.success("Item Added to cart");
+                          }}
+                        >
+                          <i className="fa fa-shopping-bag text-primary me-2" />
+                          Add to cart
+                        </NavLink>
+                      </small>
                     </div>
                   </div>
                 </div>
