@@ -5,7 +5,7 @@ import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import "./css/Home.css";
 import { Prices } from "../components/Prices";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import Feedback from "./user/Feedback";
@@ -227,7 +227,17 @@ const Homepage = () => {
         </a>
       </div> */}
 
-      <h2 className="homeHeading">Featured Products</h2>
+      <div className="col-lg-6">
+        <div
+          className="section-header text-start mb-5 wow fadeInUp"
+          data-wow-delay="0.1s"
+          style={{ maxWidth: 500 }}
+        >
+          <h1 className="display-5 mb-3">Our Products</h1>
+        </div>
+      </div>
+
+      {/* <h2 className="homeHeading">Featured Products</h2> */}
       <div className="row mt-4">
         <div className="col-md-2">
           <h4 className="text-center">Filter By Category</h4>
@@ -272,11 +282,11 @@ const Homepage = () => {
             <div className="d-flex flex-wrap">
               {products?.map((p) => (
                 <div className="productCard " style={{ width: "18rem" }}>
-                  <img
+                  {/* <img
                     src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
-                  />
+                  /> */}
                   <div className="container">
                     <h5 className="card-title">{p.name}</h5>
                     <p className="card-text ms-25">
@@ -287,30 +297,66 @@ const Homepage = () => {
                     </div>
                   </div>
 
-                  <div className="cart-addmore">
-                    <button
-                      className="btn-moredetails"
-                      onClick={() => navigate(`/product/${p.slug}`)}
-                    >
-                      More Details
-                    </button>
-                    <button
-                      className="btn-cart"
-                      onClick={() => {
-                        setCart([...cart, p]);
-                        localStorage.setItem(
-                          "cart",
-                          JSON.stringify([...cart, p])
-                        );
-                        toast.success("Item Added  to cart");
-                      }}
-                    >
-                      ADD TO Cart
-                    </button>
+                  <div
+                    class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
+                    data-wow-delay="0.3s"
+                  >
+                    <div class="product-item">
+                      <div class="position-relative bg-light overflow-hidden">
+                        <img
+                          class="img-fluid w-100"
+                          alt=""
+                          src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                          className="card-img-top"
+                          // alt ={p.name}
+                        />
+                        <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                          New
+                        </div>
+                      </div>
+                      <div class="text-center p-4">
+                        <a class="d-block h5 mb-2" href="">
+                          Fresh Tomato
+                        </a>
+                        <span class="text-primary me-1">$19.00</span>
+                        <span class="text-body text-decoration-line-through">
+                          $29.00
+                        </span>
+                      </div>
+
+                      <div className="cart-addmore">
+                        <div className="d-flex border-top">
+                          <small className="w-50 text-center border-end py-2">
+                            <NavLink
+                              to={`/product/${p.slug}`}
+                              className="text-body"
+                            >
+                              <i className="fa fa-eye text-primary me-2" />
+                              View detail
+                            </NavLink>
+                          </small>
+
+                          <small className="w-50 text-center py-2">
+                            <NavLink
+                              className="text-body"
+                              onClick={() => {
+                                setCart([...cart, p]);
+                                localStorage.setItem(
+                                  "cart",
+                                  JSON.stringify([...cart, p])
+                                );
+                                toast.success("Item Added to cart");
+                              }}
+                            >
+                              <i className="fa fa-shopping-bag text-primary me-2" />
+                              Add to cart
+                            </NavLink>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                // </div>
-                // </div>
               ))}
             </div>
 

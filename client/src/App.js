@@ -31,6 +31,7 @@ import AllProduct from './pages/Admin/AllProduct';
 import Adminprofile from './pages/Admin/Adminprofile';
 import AdminUpdateProfile from './pages/Admin/AdminUpdateProfile';
 import Feedback from './pages/user/Feedback';
+import Product from './pages/Product';
 
 
 
@@ -77,6 +78,8 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword/>}  />
         <Route path='/about' element={<About/>}  />
         <Route path='/contact' element={<Contact/>}  />
+        <Route path='/all-product' element={<Product/>}  />
+
         <Route path='/policy' element={<Policy/>}  />
         <Route path='*' element={<Pagenotfound/>}  />
       </Routes>

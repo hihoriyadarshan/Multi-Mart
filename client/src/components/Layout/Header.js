@@ -35,6 +35,7 @@ const Header = () => {
       <nav className="nav-links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
+        <NavLink to="/all-product">Product</NavLink>
         <NavLink to="/contact">Contact</NavLink>
 
         <div className="dropdown">
