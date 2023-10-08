@@ -107,10 +107,6 @@ const Contact = () => {
               style={{ maxWidth: 500 }}
             >
               <h1 className="display-5 mb-3">Contact Us</h1>
-              <p>
-                Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum
-                diam justo sed rebum vero dolor duo.
-              </p>
             </div>
             <div className="row g-5 justify-content-center">
               <div
@@ -267,7 +263,7 @@ const Contact = () => {
         {/* JavaScript Libraries */}
         {/* Template Javascript */}
       </div>
-      <Footer/>
+      <Footer />
     </Layout>
   );
 };

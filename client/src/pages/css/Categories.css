@@ -34,3 +34,7 @@
     background: rgb(30, 186, 108);
   }
   
+
+  .card-img, .card-img-top, .card-img-bottom{
+    width: 35vh;
+  }

@@ -305,8 +305,8 @@ const Homepage = () => {
                           to={`/product/${p.slug}`}
                           className="text-body"
                         >
-                          <i className="fa fa-eye text-primary me-2" />
-                          View detail
+                          <i className="fa fa-eye text-primary me-3" />
+                          View detailes
                         </NavLink>
                       </small>
 
@@ -322,7 +322,7 @@ const Homepage = () => {
                             toast.success("Item Added to cart");
                           }}
                         >
-                          <i className="fa fa-shopping-bag text-primary me-2" />
+                          <i className="fa fa-shopping-bag text-primary me-3" />
                           Add to cart
                         </NavLink>
                       </small>
