@@ -66,7 +66,9 @@ const AllProduct = () => {
   // Function to delete a product
   const handleDelete = async () => {
     try {
-      let answer = window.prompt("Are you sure you want to delete this product? ");
+      let answer = window.prompt(
+        "Are you sure you want to delete this product? "
+      );
       if (!answer) return;
       // Make the delete request with the product ID
       const response = await axios.delete(
@@ -115,91 +117,94 @@ const AllProduct = () => {
                 </div>
               </section>
 
-              <section className="panel important">
-                <div className="twothirds">
-                  <table className="user-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Description</th>
-                        <th scope="col" className="desc">
-                          Action
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {currentProducts.map((product) => (
-                        <tr key={product._id}>
-                          <td>
-                            <Link
-                              to={`/dashboard/admin/product/${product.slug}`}
-                              className="product-link"
-                            >
-                              {product.name}
-                            </Link>
-                          </td>
-                          <td>
-                            <Link
-                              to={`/dashboard/admin/product/${product.slug}`}
-                              className="product-link"
-                            >
-                              <img
-                                src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
-                                className="card-img-top"
-                                alt={product.name}
-                              />
-                            </Link>
-                          </td>
-                          <td>{product.price}</td>
-                          <td>{product.quantity}</td>
-                          <td className="desc">
-                            {product.description.substring(0, 40)}...
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-danger"
-                              onClick={() => {
-                                setId(product._id);
-                                handleDelete();
-                              }}
-                            >
-                              <AiFillDelete />
-                            </button>
-                          </td>
+              <div className="table-users">
+                <section className="panel important">
+                  <div className="twothirds">
+                    <table className="user-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Brandname</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Description</th>
+                          <th scope="col" className="desc">
+                            Action
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {/* Pagination */}
-                  <ul className="pagination">
-                    {Array(
-                      Math.ceil(
-                        (searchInput ? searchResults.length : products.length) /
-                        itemsPerPage
+                      </thead>
+                      <tbody>
+                        {currentProducts.map((product) => (
+                          <tr key={product._id}>
+                            <td>
+                              <Link
+                                to={`/dashboard/admin/product/${product.slug}`}
+                                className="product-link"
+                              >
+                                {product.name}
+                              </Link>
+                            </td>
+                            <td>
+                              <Link
+                                to={`/dashboard/admin/product/${product.slug}`}
+                                className="product-link"
+                              >
+                                <img
+                                  src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                                  className="All-p-img"
+                                  alt={product.name}
+                                />
+                              </Link>
+                            </td>
+                            <td>Brandname</td>
+                            <td>{product.price}</td>
+                            <td>{product.quantity}</td>
+                            <td>{product.description.substring(0, 40)}...</td>
+                            <td>
+                              <button
+                                className="btn btn-danger"
+                                onClick={() => {
+                                  setId(product._id);
+                                  handleDelete();
+                                }}
+                              >
+                                <AiFillDelete />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {/* Pagination */}
+                    <ul className="pagination">
+                      {Array(
+                        Math.ceil(
+                          (searchInput
+                            ? searchResults.length
+                            : products.length) / itemsPerPage
+                        )
                       )
-                    )
-                      .fill()
-                      .map((_, i) => (
-                        <li
-                          key={i}
-                          className={`page-item ${
-                            currentPage === i + 1 ? "active" : ""
-                          }`}
-                        >
-                          <button
-                            className="page-link"
-                            onClick={() => paginate(i + 1)}
+                        .fill()
+                        .map((_, i) => (
+                          <li
+                            key={i}
+                            className={`page-item ${
+                              currentPage === i + 1 ? "active" : ""
+                            }`}
                           >
-                            {i + 1}
-                          </button>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </section>
+                            <button
+                              className="page-link"
+                              onClick={() => paginate(i + 1)}
+                            >
+                              {i + 1}
+                            </button>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import categoryModel from "../models/categoryModel.js";
 import slugify from "slugify";
+import SubCategory from "../models/sub-categoryModel.js";
 
 export const createCategoryController = async (req, res) => {
   try {
@@ -58,7 +59,6 @@ export const updateCategoryController = async (req, res) => {
   }
 };
 
-
 // get all category
 
 export const categoryControlller = async (req, res) => {
@@ -79,8 +79,6 @@ export const categoryControlller = async (req, res) => {
   }
 };
 
-
-
 // single category
 export const singleCategoryController = async (req, res) => {
   try {
@@ -100,7 +98,6 @@ export const singleCategoryController = async (req, res) => {
   }
 };
 
-
 //delete category
 export const deleteCategoryCOntroller = async (req, res) => {
   try {
@@ -117,5 +114,34 @@ export const deleteCategoryCOntroller = async (req, res) => {
       message: "error while deleting category",
       error,
     });
+  }
+};
+
+//sub- category
+
+export const createSubCategoryController = async (req, res) => {
+  try {
+    // Get the data from the request body
+    const { name, category, slug, photo } = req.body;
+
+    // Create a new sub-category document
+    const subCategory = new SubCategory({
+      name,
+      category, // Assuming this is the parent category's ID
+      slug,
+      photo,
+    });
+
+    // Save the sub-category to the database
+    await subCategory.save();
+
+    res
+      .status(201)
+      .json({ message: "Sub-category created successfully", subCategory });
+  } catch (error) {
+    console.error("Sub-category creation error:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the sub-category" });
   }
 };

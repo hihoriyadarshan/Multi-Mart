@@ -3,12 +3,12 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AiFillDelete } from 'react-icons/ai';
-import { ImSearch } from 'react-icons/im';
-import ReactPaginate from 'react-paginate';
+import { AiFillDelete } from "react-icons/ai";
+import { ImSearch } from "react-icons/im";
+import ReactPaginate from "react-paginate";
 import "./css/users.css";
 import { saveAs } from "file-saver";
-import papaparse from 'papaparse';
+import papaparse from "papaparse";
 import jsPDF from "jspdf";
 
 const Users = () => {
@@ -21,7 +21,9 @@ const Users = () => {
 
   const getAllUsers = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/get-users`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/auth/get-users`
+      );
       setUsers(data.users);
     } catch (error) {
       console.error(error);
@@ -49,12 +51,13 @@ const Users = () => {
     }
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.address.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.answer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.address.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const pageCount = Math.ceil(filteredUsers.length / usersPerPage);
@@ -69,12 +72,12 @@ const Users = () => {
     .slice(offset, offset + usersPerPage)
     .map((user, index) => (
       <tr key={user._id}>
-        {/* <td>{index + 1}</td> */}
+        <td>{index + 1}</td>
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>{user.phone}</td>
         <td>{user.answer}</td>
-        <td className="msg-1">{user.address}</td>
+        <td>{user.address}</td>
         <td>
           <button
             onClick={() => handleDelete(user._id)}
@@ -99,7 +102,7 @@ const Users = () => {
     // Define the columns and rows for your PDF table
     const columns = ["#", "Username", "E-mail", "Phone", "DOB", "Address"];
     const rows = filteredUsers.map((user, index) => [
-      // index + 1,
+      index + 1,
       user.name,
       user.email,
       user.phone,
@@ -137,7 +140,7 @@ const Users = () => {
   return (
     <Layout title={"Dashboard - All Users"}>
       <div className="container-fluid m-3 p-3" ref={contentRef}>
-        <div className="row">
+        <div className="row1">
           <div className="col-md-3">
             <AdminMenu />
           </div>
@@ -161,71 +164,73 @@ const Users = () => {
             </div>
           </section>
 
-          <section className="panel important">
-            <div className="download-1">
-              <div className="download-options-inner">
-                <div className="download-options">
-                  <span>Download Type:</span>
-                  <label>
-                    <input
-                      type="radio"
-                      name="downloadOption"
-                      value="csv"
-                      checked={downloadOption === "csv"}
-                      onChange={handleOptionChange}
-                    />
-                    Excel
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="downloadOption"
-                      value="pdf"
-                      checked={downloadOption === "pdf"}
-                      onChange={handleOptionChange}
-                    />
-                    PDF
-                  </label>
-                  <button
-                    onClick={downloadFile}
-                    className="download-button"
-                    disabled={downloadOption === ""}
-                  >
-                    <span className="button-text">Download</span>
-                  </button>
+          <div className="table-users">
+            <section className="panel important">
+              <div className="download-1">
+                <div className="download-options-inner">
+                  <div className="download-options">
+                    <span>Download Type:</span>
+                    <label>
+                      <input
+                        type="radio"
+                        name="downloadOption"
+                        value="csv"
+                        checked={downloadOption === "csv"}
+                        onChange={handleOptionChange}
+                      />
+                      Excel
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="downloadOption"
+                        value="pdf"
+                        checked={downloadOption === "pdf"}
+                        onChange={handleOptionChange}
+                      />
+                      PDF
+                    </label>
+                    <button
+                      onClick={downloadFile}
+                      className="download-button"
+                      disabled={downloadOption === ""}
+                    >
+                      <span className="button-text">Download</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="twothirds">
-              <table className="user-table">
-                <thead>
-                  <tr>
-                    {/* <th scope="col">#</th> */}
-                    <th scope="col">Username</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col2">DOB</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>{displayedUsers}</tbody>
-              </table>
-              <div className="pagination">
-                <ReactPaginate
-                  previousLabel={"Previous"}
-                  nextLabel={"Next"}
-                  pageCount={pageCount}
-                  onPageChange={changePage}
-                  containerClassName={"pagination"}
-                  previousLinkClassName={"previous"}
-                  nextLinkClassName={"next"}
-                  disabledClassName={"disabled"}
-                  activeClassName={"active"}
-                />
+              <div className="twothirds">
+                <table className="user-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">DOB</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>{displayedUsers}</tbody>
+                </table>
+                <div className="pagination">
+                  <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"pagination"}
+                    previousLinkClassName={"previous"}
+                    nextLinkClassName={"next"}
+                    disabledClassName={"disabled"}
+                    activeClassName={"active"}
+                  />
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
       </div>
     </Layout>
