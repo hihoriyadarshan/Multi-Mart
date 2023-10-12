@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -104,9 +105,9 @@ const Footer = () => {
               <a className="btn btn-link" href>
                 Contact Us
               </a>
-              <a className="btn btn-link" href>
-                Our Services
-              </a>
+              <NavLink to="/feedback" className="btn btn-link">
+                Feedback
+              </NavLink>
               <a className="btn btn-link" href>
                 Terms &amp; Condition
               </a>

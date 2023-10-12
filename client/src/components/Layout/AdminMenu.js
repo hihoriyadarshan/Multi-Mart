@@ -59,7 +59,7 @@ const AdminMenu = () => {
               <li className="edit">
                 <NavLink to="/dashboard/admin/products">Manage Product</NavLink>
               </li>
-              <li className="users">
+              <li className="edit">
                 <NavLink to="/dashboard/admin/AllProduct">All Product</NavLink>
               </li>
               <li className="<FaCartPlus/>">
@@ -70,6 +70,11 @@ const AdminMenu = () => {
               </li>
               <li className="users">
                 <NavLink to="/dashboard/admin/users">Manage Users</NavLink>
+              </li>
+              <li className="users">
+                <NavLink to="/dashboard/admin/get_all_feedback">
+                  view Feedback
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -3,24 +3,22 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AiFillDelete } from "react-icons/ai";
-import "./css/users.css";
 import { saveAs } from "file-saver";
-import papaparse from "papaparse";
+import Papa from "papaparse";
 import jsPDF from "jspdf";
 import { ImSearch } from "react-icons/im";
 
-const ContactUs = () => {
+const Get_feedback = () => {
   const [contacts, setContacts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [itemsPerPage] = useState(10); // Items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
   const [selectedOption, setSelectedOption] = useState("csv");
 
-  const getAllContacts = async () => {
+  const getAllFeedback = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/auth/get-contact`
+        `${process.env.REACT_APP_API}/api/v1/feedback/getAllFeedback`
       );
       setContacts(data.contacts);
     } catch (error) {
@@ -30,28 +28,12 @@ const ContactUs = () => {
   };
 
   useEffect(() => {
-    getAllContacts();
+    getAllFeedback();
   }, []);
 
-  const handleDeleteContact = async (contactId) => {
-    try {
-      await axios.delete(
-        `${process.env.REACT_APP_API}/api/v1/auth/contacts/${contactId}`
-      );
-      toast.success("Contact deleted successfully");
-      getAllContacts();
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to delete contact");
-    }
-  };
-
-  // Calculate index of the last item to be displayed on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
-  // Calculate index of the first item to be displayed on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  // Filter contacts based on the search query
   const filteredContacts = contacts.filter((contact) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -60,7 +42,6 @@ const ContactUs = () => {
     );
   });
 
-  // Slice the filtered contacts array to display only the items for the current page
   const currentContacts = filteredContacts.slice(
     indexOfFirstItem,
     indexOfLastItem
@@ -71,33 +52,27 @@ const ContactUs = () => {
   };
 
   const downloadCSV = () => {
-    const csvData = papaparse.unparse(filteredContacts, { header: true });
+    const csvData = Papa.unparse(filteredContacts, { header: true });
     const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "Contact_us-data.csv");
+    saveAs(blob, "Feedback-data.csv");
   };
 
   const downloadPDF = () => {
-    // Create a new jsPDF instance
     const doc = new jsPDF();
-    doc.text("Contact Us Data", 10, 10);
+    doc.text("Feedback Data", 10, 10);
 
-    // Create a table for the data
     doc.autoTable({
-      head: [["Firstname", "subject", "Email", "Message"]],
+      head: [["Firstname", "Email", "Subject", "Message"]],
       body: currentContacts.map((contact) => [
         contact.firstname,
-        contact.subject,
         contact.email,
-
+        contact.subject,
         contact.message,
       ]),
     });
 
-    // Save the PDF as "Contact_us-data.pdf"
-    doc.save("Contact_us-data.pdf");
+    doc.save("Feedback-data.pdf");
   };
-
-  //pdf csv radio button
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -112,7 +87,7 @@ const ContactUs = () => {
   };
 
   return (
-    <Layout title={"Dashboard - All Contacts"}>
+    <Layout title={"Dashboard - All Feedback"}>
       <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
@@ -121,7 +96,7 @@ const ContactUs = () => {
           <section className="panel important">
             <div className="add">
               <div className="head-2">
-                <div className="write-title"> Contact_us</div>
+                <div className="write-title">Feedback</div>
                 <div className="search-container-left">
                   <input
                     type="text"
@@ -141,7 +116,7 @@ const ContactUs = () => {
             <div className="download-1">
               <div className="download-options">
                 <div className="download-options-inner">
-                  <span> Download Type : </span>
+                  <span>Download Type: </span>
                   <label>
                     <input
                       type="radio"
@@ -151,8 +126,7 @@ const ContactUs = () => {
                       checked={selectedOption === "csv"}
                       onChange={handleOptionChange}
                     />
-                    Excel
-                    {/* <label htmlFor="csvOption">Download CSV</label> */}
+                    CSV
                   </label>
 
                   <label>
@@ -165,7 +139,6 @@ const ContactUs = () => {
                       onChange={handleOptionChange}
                     />
                     PDF
-                    {/* <label htmlFor="pdfOption">Download PDF</label> */}
                   </label>
 
                   <button
@@ -185,28 +158,17 @@ const ContactUs = () => {
                   <tr>
                     <th>name</th>
                     <th>Email</th>
-                    <th>subject</th>
+                    <th>Subject</th>
                     <th>Message</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentContacts.map((contact) => (
                     <tr key={contact._id}>
-                      <td>{contact.firstname} </td>
+                      <td>{contact.firstname}</td>
                       <td>{contact.email}</td>
                       <td>{contact.subject}</td>
                       <td>{contact.message}</td>
-                      <td>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => {
-                            handleDeleteContact(contact._id);
-                          }}
-                        >
-                          <AiFillDelete />
-                        </button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -240,4 +202,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default Get_feedback;
