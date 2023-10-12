@@ -62,11 +62,11 @@ const Get_feedback = () => {
     doc.text("Feedback Data", 10, 10);
 
     doc.autoTable({
-      head: [["Firstname", "Email", "Subject", "Message"]],
+      head: [["Firstname", "Email", "Phone", "Message"]],
       body: currentContacts.map((contact) => [
         contact.firstname,
         contact.email,
-        contact.subject,
+        contact.phone,
         contact.message,
       ]),
     });
@@ -158,7 +158,7 @@ const Get_feedback = () => {
                   <tr>
                     <th>name</th>
                     <th>Email</th>
-                    <th>Subject</th>
+                    <th>Pmohone</th>
                     <th>Message</th>
                   </tr>
                 </thead>
@@ -167,7 +167,7 @@ const Get_feedback = () => {
                     <tr key={contact._id}>
                       <td>{contact.firstname}</td>
                       <td>{contact.email}</td>
-                      <td>{contact.subject}</td>
+                      <td>{contact.phone}</td>
                       <td>{contact.message}</td>
                     </tr>
                   ))}

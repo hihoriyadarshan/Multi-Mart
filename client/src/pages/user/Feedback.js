@@ -10,7 +10,7 @@ import Footer from "../../components/Layout/Footer.js";
 
 const Contact = () => {
   const [firstname, setFirstname] = useState("");
-  const [subject, setSubject] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
   const [message, setMessage] = useState("");
@@ -23,7 +23,7 @@ const Contact = () => {
         `${process.env.REACT_APP_API}/api/v1/feedback/feedbacks`,
         {
           firstname,
-          subject,
+          phone,
           email,
           message,
         }
@@ -32,7 +32,7 @@ const Contact = () => {
       if (data.success) {
         toast.success(data.message);
         setFirstname("");
-        setSubject("");
+        setPhone("");
         setEmail("");
         setMessage("");
         navigate("/feedback");
@@ -205,13 +205,13 @@ const Contact = () => {
                     <div className="col-12">
                       <div className="form-floating">
                         <div className="mb-3">
-                          <label htmlFor="subject" className="form-label">
-                            Subject
+                          <label htmlFor="phone" className="form-label">
+                            Phone
                           </label>
                           <input
                             type="text"
-                            value={subject}
-                            onChange={(e) => setSubject(e.target.value)}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                             className="form-control-1"
                             placeholder="Subject"
                             required

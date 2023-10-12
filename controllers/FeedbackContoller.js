@@ -3,11 +3,11 @@ import FeedbackModel from "../models/FeedbakModel.js";
 //create feedback
 export const createFeedback = async (req, res) => {
   try {
-    const { firstname, subject, email, message } = req.body;
+    const { firstname, phone, email, message } = req.body;
 
     const newContact = new FeedbackModel({
       firstname,
-      subject,
+      phone,
       email,
       message,
     });

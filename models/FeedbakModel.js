@@ -6,8 +6,8 @@ const FeedbackSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  subject: {
-    type: String,
+  phone: {
+    type: Number,
     required: true,
     trim: true,
   },
