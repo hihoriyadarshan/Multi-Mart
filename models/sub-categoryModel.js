@@ -1,23 +1,19 @@
 import mongoose from "mongoose";
 
 const subcategorySchema = new mongoose.Schema({
-  name: {
+  s_name: {
     type: String,
     required: true,
     unique: true,
   },
   category: {
-    type: mongoose.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },
   slug: {
     type: String,
     lowercase: true,
-  },
-  photo: {
-    data: Buffer,
-    contentType: String,
   },
 });
 
