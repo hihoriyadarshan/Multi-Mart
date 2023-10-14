@@ -65,6 +65,24 @@ export const registerController = async (req, res) => {
   }
 };
 
+//user count
+export const userCountController = async (req, res) => {
+  try {
+    const total = await userModel.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error in user count",
+      error,
+      success: false,
+    });
+  }
+};
+
 //download pdf
 
 export const downloadUsersAsPDF = async (req, res) => {
@@ -420,6 +438,26 @@ export const deleteContactController = async (req, res) => {
       success: false,
       message: "Contact while deleting user",
       error,
+    });
+  }
+};
+
+
+
+//user count
+export const ContactCountController = async (req, res) => {
+  try {
+    const total = await ContactModel.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error in user count",
+      error,
+      success: false,
     });
   }
 };
