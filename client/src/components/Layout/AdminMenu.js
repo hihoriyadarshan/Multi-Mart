@@ -4,6 +4,7 @@ import "./css/AdminMenu.css";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { FaCartPlus } from "react-icons/fa";
+import logo from "../../images/logo.png";
 
 const AdminMenu = () => {
   const [auth, setAuth] = useAuth();
@@ -22,7 +23,8 @@ const AdminMenu = () => {
     <div>
       <div>
         <header role="banner">
-          <h1>Admin Panel</h1>
+          <center>Admin Panel</center>
+          <img src={logo} alt="Logo" className="logo" />
           <ul className="utilities">
             <br />
             <li className="users">

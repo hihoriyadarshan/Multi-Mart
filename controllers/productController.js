@@ -309,7 +309,7 @@ export const realtedProductController = async (req, res) => {
 };
 
 
-// get prdocyst by catgory
+// get prODUCT by catgory
 export const productCategoryController = async (req, res) => {
   try {
     const category = await categoryModel.findOne({ slug: req.params.slug });
@@ -385,5 +385,25 @@ export const brainTreePaymentController = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
+  }
+};
+
+
+//ORDER COUNT
+
+export const OrderCountController = async (req, res) => {
+  try {
+    const total = await orderModel.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error in product count",
+      error,
+      success: false,
+    });
   }
 };

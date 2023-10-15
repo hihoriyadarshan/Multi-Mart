@@ -117,7 +117,26 @@ export const deleteCategoryCOntroller = async (req, res) => {
   }
 };
 
-//sub- category
+//count category
+
+export const CategoryCountController = async (req, res) => {
+  try {
+    const total = await categoryModel.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error in Category count",
+      error,
+      success: false,
+    });
+  }
+};
+
+//create sub- category
 
 export const createSubCategoryController = async (req, res) => {
   try {
@@ -150,5 +169,24 @@ export const createSubCategoryController = async (req, res) => {
     res
       .status(500)
       .json({ error: "An error occurred while creating the sub-category" });
+  }
+};
+
+//sub-category count
+
+export const sub_CategoryCountController = async (req, res) => {
+  try {
+    const total = await SubCategory.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error in Category count",
+      error,
+      success: false,
+    });
   }
 };

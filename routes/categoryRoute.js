@@ -7,6 +7,8 @@ import {
   singleCategoryController,
   deleteCategoryCOntroller,
   createSubCategoryController,
+  CategoryCountController,
+  sub_CategoryCountController,
 } from "../controllers/categoryController.js";
 
 const router = express.Router();
@@ -41,7 +43,24 @@ router.delete(
   deleteCategoryCOntroller
 );
 
+//category count
+
+router.get("/category-count", requireSignIn, isAdmin, CategoryCountController);
+
 //create-sub category
-router.post("/subcategories", createSubCategoryController);
+router.post(
+  "/subcategories",
+  requireSignIn,
+  isAdmin,
+  createSubCategoryController
+);
+
+//sub-category count
+router.get(
+  "/sub-category-count",
+  requireSignIn,
+  isAdmin,
+  sub_CategoryCountController
+);
 
 export default router;
