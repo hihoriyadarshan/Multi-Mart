@@ -139,29 +139,136 @@ const AdminDashboard = () => {
 
   return (
     <Layout>
-      <div className="container-fluid m-3 p-3 dashboard">
+      <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
           </div>
-          <div className="col-md-9">
-            <div className="card w-75 p-4">
-              <h5>Dashboard</h5>
-              <p>Total Products: {productCount}</p>
-              <p>Total Users: {userCount}</p>
-              <p>Total Contact:{ContactCount}</p>
-              <p>Total feedback:{feedbackCount}</p>
-              <p>Total Category:{categoryCount}</p>
-              <p>Total sub-Category:{sub_categoryCount}</p>
-              <p>Total Order:{orderCount}</p>
+          <section className="panel important">
+            <div className="add">
+              <div className="head-2">
+                <div className="write-title12"> Dashboard </div>
+              </div>
             </div>
+            {/* </div> */}
+          </section>
+        </div>
+      </div>
 
-            {/* <Link to="/">
-              <div className="dashboard-item">Page 1</div>
+      <div className="container-22">
+        <div className="row-21">
+          <div className="card-21">
+            <Link to="/dashboard/admin/users">
+              <center>
+                {" "}
+                <h2>Users</h2>
+              </center>
+              <br />
+              <br />
+              <p1 font-size="200px;">{userCount} </p1>
             </Link>
-            <Link to="/">
-              <div className="dashboard-item">Page 2</div>
-            </Link> */}
+          </div>
+
+          <div className="card-21">
+            <Link to="/dashboard/admin/AllProduct">
+              <center>
+                {" "}
+                <h2>Total Product</h2>
+              </center>
+              <br />
+              <br />
+              <p1> {productCount}</p1>
+            </Link>
+          </div>
+
+          <div className="card-21">
+            <Link to="/dashboard/admin/create-category">
+              <center>
+                {" "}
+                <h2>Category</h2>
+              </center>
+              <br />
+              <br />
+              <p1> {categoryCount} </p1>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-22">
+        <div className="row-21">
+          <div className="card-21">
+            <Link to="/dashboard/admin/CreateSub_categoty">
+              <center>
+                {" "}
+                <h2>Sub-Category</h2>
+              </center>
+              <br />
+              <br />
+              <p1 font-size="200px;">{sub_categoryCount} </p1>
+            </Link>
+          </div>
+
+          <div className="card-21">
+            <Link to="/dashboard/admin/orders">
+              <center>
+                <h2>Order</h2>
+              </center>
+              <br />
+              <br />
+              <p1> {orderCount}</p1>
+            </Link>
+          </div>
+
+          <div className="card-21">
+            <Link to="/dashboard/admin/contact_us">
+              <center>
+                <h2>Contact Us</h2>
+              </center>
+              <br />
+              <br />
+              <p1> {ContactCount} </p1>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-22">
+        <div className="row-21">
+          <div className="card-21">
+            <Link to="/dashboard/admin/get_all_feedback">
+              <center>
+                {" "}
+                <h2>Feedback</h2>{" "}
+              </center>
+              <br />
+              <br />
+              <p1 font-size="200px;">{feedbackCount} </p1>
+            </Link>
+          </div>
+
+          <div className="card-21">
+            <Link to="">
+              <center>
+                {" "}
+                <h2>Total Product</h2>{" "}
+              </center>
+              <br />
+              <br />
+              <p1>0 </p1>
+            </Link>
+          </div>
+
+          <div className="card-21">
+            <Link to="">
+              <center>
+                {" "}
+                <h2>Category</h2>
+              </center>
+              <br />
+              <br />
+              <p1> 0</p1>
+            </Link>
           </div>
         </div>
       </div>

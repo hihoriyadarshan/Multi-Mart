@@ -9,6 +9,7 @@ import {
   createSubCategoryController,
   CategoryCountController,
   sub_CategoryCountController,
+  get_all_sub_categoryControlller,
 } from "../controllers/categoryController.js";
 
 const router = express.Router();
@@ -54,6 +55,17 @@ router.post(
   isAdmin,
   createSubCategoryController
 );
+
+//get all sub-category
+
+router.get("/get_all_subcategory", get_all_sub_categoryControlller);
+
+//update-sub category
+
+
+//delete sub-category
+
+
 
 //sub-category count
 router.get(

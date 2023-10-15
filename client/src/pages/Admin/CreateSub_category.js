@@ -12,6 +12,7 @@ const CreateSubCategory = () => {
   const [categories, setCategories] = useState([]);
   const [s_name, setS_Name] = useState("");
   const [category, setCategory] = useState("");
+  const [getsub_category, setgetsub_category] = useState([]);
 
   useEffect(() => {
     // Fetch categories when the component mounts
@@ -61,8 +62,26 @@ const CreateSubCategory = () => {
     }
   };
 
+  //get all-sub category
+
+  const getAllsub_category = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/category/get_all_subcategory`
+      );
+      setgetsub_category(data.getsub_category);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something Went Wrong");
+    }
+  };
+
+  useEffect(() => {
+    getAllsub_category();
+  }, []);
+
   return (
-    <Layout>
+    <Layout title="sub-category">
       <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">

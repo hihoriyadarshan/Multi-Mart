@@ -17,6 +17,9 @@ const ContactUs = () => {
   const [itemsPerPage] = useState(10); // Items per page
   const [selectedOption, setSelectedOption] = useState("csv");
 
+
+
+  //get all contact
   const getAllContacts = async () => {
     try {
       const { data } = await axios.get(
@@ -33,6 +36,8 @@ const ContactUs = () => {
     getAllContacts();
   }, []);
 
+
+  //delete contact
   const handleDeleteContact = async (contactId) => {
     try {
       await axios.delete(

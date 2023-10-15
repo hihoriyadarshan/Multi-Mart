@@ -50,7 +50,7 @@ const AdminMenu = () => {
               </li>
               <li className="write">
                 <NavLink to="/dashboard/admin/CreateSub_categoty">
-                  create sub-Category
+                  sub-Category
                 </NavLink>
               </li>
               <li className="write">

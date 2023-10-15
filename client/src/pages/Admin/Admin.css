@@ -3,9 +3,53 @@ body{
     padding: 0;
     overflow-x: hidden;
 }
+/* Dashboard */
+
+.container-22 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-left: 260px;
+}
 
 
+.row-21 {
+  display: flex;
+  justify-content: space-between;
+}
 
+
+.card-21 {
+  width: calc(33.33% - 20px);
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 13px;
+  margin: 20px;
+  margin: 29px 
+  /* margin-bottom: 20px; */
+  /* transition: transform 0.2s ease-in-out; */
+}
+
+.card-21:hover {
+  transform: translateY(-10px);
+}
+
+p1 {
+  margin-top: 5px;
+  padding-top: 5px;
+  font-size: 40px;
+  margin-bottom: 10px;
+  font-weight: 900;
+  /* text-align: center; */
+  margin-left: 130px;
+}
+
+.write-title12{
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
 
 .banner{
     background-image: linear-gradient(to right, #635dc0, #3027ae);

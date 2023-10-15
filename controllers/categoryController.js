@@ -190,3 +190,23 @@ export const sub_CategoryCountController = async (req, res) => {
     });
   }
 };
+
+// get all sub-category
+
+export const get_all_sub_categoryControlller = async (req, res) => {
+  try {
+    const category = await SubCategory.find({});
+    res.status(200).send({
+      success: true,
+      message: "All Sub-Categories List",
+      category,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error while getting all sub-categories",
+    });
+  }
+};
