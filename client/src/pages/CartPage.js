@@ -114,129 +114,137 @@ const CartPage = () => {
             </p>
           </div>
         </div>
-        <div className={styles.cartDiv1}>
-          <div className="container">
-            <div className="row">
-              <div className={`col-md-7 ${styles.cartItemsContainer}`}>
-                {cart?.map((p) => (
-                  <div
-                    className={`row card mb-3 ${styles.cartItem}`}
-                    key={p._id}
-                  >
-                    <div className="col-md-4">
+
+        <div class="small-container cart-page">
+          <table className="table-w">
+            <thead>
+              <tr>
+                <th className="th-1">Product Image</th>
+                <th className="th-1">Product Name</th>
+                <th className="th-1">Price</th>
+                <th className="th-1">Quantity</th>
+                <th className="th-1">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart?.map((item) => (
+                <tr key={item._id}>
+                  <td className="td-1">
+                    <div className="cart-info-1">
                       <img
-                        src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                        className="card-img-top"
-                        alt={p.name}
+                        src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${item._id} `}
+                        alt={item.name}
+                        className="cart-img"
                       />
+                      <p6
+                        className="danger "
+                        onClick={() => removeCartItem(item._id)}
+                      >
+                        Remove
+                      </p6>
+                      <div></div>
                     </div>
-                    <div className="col-md-8">
-                      <div className="card-body">
-                        <h5 className="card-title">{p.name}</h5>
-                        <p className="card-text">
-                          {p.description.substring(0, 30)}
-                        </p>
-                        <p className="card-text">Price: {p.price}</p>
-                        <div className="quantity">
-                          <button
-                            className={`quantity-button btn btn-secondary ${styles.quantityButton}`}
-                            onClick={() =>
-                              updateItemQuantity(p._id, p.quantity - 1)
-                            }
-                          >
-                            -
-                          </button>
-                          <span className={styles.quantityValue}>
-                            {p.quantity}
-                          </span>
-                          <button
-                            className={`quantity-button btn btn-secondary ${styles.quantityButton}`}
-                            onClick={() =>
-                              updateItemQuantity(p._id, p.quantity + 1)
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                        <button
-                          className={`btn btn-danger mt-2 ${styles.removeItemButton}`}
-                          onClick={() => removeCartItem(p._id)}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className={`col-md-5 ${styles.cartSummary}`}>
-                <h2>Cart Summary</h2>
-                <p>Total | Checkout | Payment</p>
-                <hr />
-                <h4>Total: {totalPrice()} </h4>
-                {auth?.user?.address ? (
-                  <>
-                    <div className="mb-3">
-                      <h4>Current Address</h4>
-                      <h5>{auth?.user?.address}</h5>
-                      <button
-                        className="btn btn-outline-warning"
-                        onClick={() => navigate("/dashboard/user/profile")}
-                      >
-                        Update Address
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div className="mb-3">
-                    {auth?.token ? (
-                      <button
-                        className="btn btn-outline-warning"
-                        onClick={() => navigate("/dashboard/user/profile")}
-                      >
-                        Update Address
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-outline-warning"
-                        onClick={() =>
-                          navigate("/login", {
-                            state: "/cart",
-                          })
-                        }
-                      >
-                        Please Login to checkout
-                      </button>
-                    )}
-                  </div>
-                )}
-                <div className="mt-2">
-                  {clientToken && auth?.token && cart?.length && (
-                    <>
-                      <DropIn
-                        options={{
-                          authorization: clientToken,
-                          paypal: {
-                            flow: "vault",
-                          },
-                        }}
-                        onInstance={(instance) => setInstance(instance)}
-                      />
-                      <button
-                        className={`btn btn-primary ${styles.paymentButton}`}
-                        onClick={handlePayment}
-                        disabled={loading || !instance || !auth?.user?.address}
-                      >
-                        {loading ? "Processing ...." : "Make Payment"}
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+                  </td>
+
+                  <td>
+                    <p5>{item.name}</p5>
+                  </td>
+                  <td>
+                    <p5>Price: {item.price}</p5>
+                  </td>
+                  <td>
+                    <button
+                      className={`quantity-button btn btn-secondary ${styles.quantityButton}`}
+                      onClick={() =>
+                        updateItemQuantity(item._id, item.quantity - 1)
+                      }
+                    >
+                      -
+                    </button>
+                    <span1 className={styles.quantityValue}>
+                      {item.quantity}
+                    </span1>
+                    <button
+                      className={`quantity-button btn btn-secondary ${styles.quantityButton}`}
+                      onClick={() =>
+                        updateItemQuantity(item._id, item.quantity + 1)
+                      }
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td className="td-1">₹{item.price * item.quantity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <div className="bottom-d">
+        {/* <p>Total | Checkout | Payment</p> */}
+        <hr />
+        <h4>Total: {totalPrice()} </h4>
+        {auth?.user?.address ? (
+          <>
+            <div className="mb-3">
+              <h4>Current Address</h4>
+              <h5>{auth?.user?.address}</h5>
+              <button
+                className="btn btn-outline-warning"
+                onClick={() => navigate("/dashboard/user/profile")}
+              >
+                Update Address
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="mb-3">
+            {auth?.token ? (
+              <button
+                className="btn btn-outline-warning"
+                onClick={() => navigate("/dashboard/user/profile")}
+              >
+                Update Address
+              </button>
+            ) : (
+              <button
+                className="btn btn-outline-warning"
+                onClick={() =>
+                  navigate("/login", {
+                    state: "/cart",
+                  })
+                }
+              >
+                Please Login to checkout
+              </button>
+            )}
+          </div>
+        )}
+        <div className="mt-2">
+          {clientToken && auth?.token && cart?.length && (
+            <>
+              <DropIn
+                options={{
+                  authorization: clientToken,
+                  paypal: {
+                    flow: "vault",
+                  },
+                }}
+                onInstance={(inst) => setInstance(inst)}
+              />
+              <button
+                className={`btn btn-primary ${styles.paymentButton}`}
+                onClick={handlePayment}
+                disabled={loading || !instance || !auth?.user?.address}
+              >
+                {loading ? "Processing ...." : "Make Payment"}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="div122"></div>
     </Layout>
   );
 };

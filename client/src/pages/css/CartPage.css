@@ -1,56 +1,98 @@
+
+p5 {
+  color: #555;
+}
+
+
 .cart-page {
-    margin-top: 64px;
-  }
-  
-  .cart-page h1 {
-    padding: 15px !important;
-    font-family: "roboto", sans-serif;
-    font-weight: normal;
-    background-color: rgba(0, 0, 255, 0.072) !important;
-  }
-  .cart-page h1 > p {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-  
-  .cart-page .card {
-    padding: 5px !important;
-    height: 150px !important;
-    margin-bottom: 5px !important;
-  }
-  .cart-page .cart-remove-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .cart-page .cart-summary {
-    text-align: center;
-    /* margin-top: -140px !important; */
-  }
-  
+  margin: 90px auto;
+}
+
+.table-w{
+  width: 70%;
+  margin-left: 220px;
+}
 
 
-/* CartPage.css */
-.quantity {
+.table-p{
+  margin-left: 100px;
+  float: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-info-1 {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.th-1 {
+  text-align: center;
+  padding: 5px;
+  color: #ffffff;
+  background: #ff523b;
+  font-weight: normal;
+
+}
+.td-1 {
+  padding: 10px 5px;
   align-items: center;
 }
 
-.quantity-button {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 16px;
-  margin: 0 5px;
+p6{
+  color: #ff523b;
 }
 
-.quantity-button:hover {
-  background: #0056b3;
+td input {
+  width: 40px;
+  height: 30px;
+  padding: 5px;
 }
 
-.quantity-value {
-  font-size: 18px;
+td a {
+  color: #ff523b;
+  font-size: 12px;
 }
+
+td img {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total-price table {
+  border-top: 3px solid #ff523b;
+  width: 100%;
+  max-width: 400px;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+th:last-child {
+  text-align: right;
+}
+
+.bottom-d{
+  margin-top: -40px;
+  max-width: 30%;
+  max-height: 600px;
+  margin-left: 800px;
+  margin-bottom: 80px;
+}
+
+.div122{
+  /* margin: 200px; */
+  height: 20px;
+
+}
+

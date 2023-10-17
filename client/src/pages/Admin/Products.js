@@ -5,8 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import "./Admin.css";
-import {ImSearch} from 'react-icons/im';
-
+import { ImSearch } from "react-icons/im";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +37,9 @@ const Products = () => {
   // Calculate index of the first item to be displayed on the current page
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // Slice the products array to display only the items for the current page
-  const currentProducts = searchInput ? searchResults : products.slice(indexOfFirstItem, indexOfLastItem);
+  const currentProducts = searchInput
+    ? searchResults
+    : products.slice(indexOfFirstItem, indexOfLastItem);
 
   // Function to change the current page
   const paginate = (pageNumber) => {
@@ -69,25 +70,23 @@ const Products = () => {
               <div className="head-2">
                 <div className="write-title"> Manage Product</div>
                 <div className="search-container-left">
-                {/* Search input */}
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchInput}
-                  onChange={handleSearchInputChange}
-                />
-                <div className="search-icon">
-                <ImSearch />
+                  {/* Search input */}
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchInput}
+                    onChange={handleSearchInputChange}
+                  />
+                  <div className="search-icon">
+                    <ImSearch />
+                  </div>
+                </div>
               </div>
-              </div>
-            </div>
             </div>
           </section>
           <div className="product-left-3">
             <div className="col-md-9">
               <div className="All-Product-Card">
-                
-
                 <div className="d-flex flex-wrap">
                   {currentProducts.map((product) => (
                     <Link
@@ -95,7 +94,7 @@ const Products = () => {
                       className="product-link"
                       key={product._id}
                     >
-                      <div className="productCard" style={{ width: "18rem" }}>
+                      <div className="productCard-1" style={{ width: "18rem" }}>
                         <img
                           src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                           className="card-img-top"
@@ -110,7 +109,12 @@ const Products = () => {
                 </div>
                 {/* Pagination */}
                 <ul className="pagination">
-                  {Array(Math.ceil((searchInput ? searchResults.length : products.length) / itemsPerPage))
+                  {Array(
+                    Math.ceil(
+                      (searchInput ? searchResults.length : products.length) /
+                        itemsPerPage
+                    )
+                  )
                     .fill()
                     .map((_, i) => (
                       <li
