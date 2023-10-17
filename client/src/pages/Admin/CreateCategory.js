@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout/Layout";
-import AdminMenu from "../../components/Layout/AdminMenu";
-import toast from "react-hot-toast";
-import axios from "axios";
-import CategoryForm from "../../components/Form/CategoryForm";
-import { Modal, Input, Button } from "antd";
-import Papa from "papaparse";
-import "./Admin.css";
-import { ImSearch } from "react-icons/im";
+import React, { useEffect, useState } from 'react';
+import Layout from '../../components/Layout/Layout';
+import AdminMenu from '../../components/Layout/AdminMenu';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import CategoryForm from '../../components/Form/CategoryForm';
+import { Modal, Input, Button } from 'antd';
+import Papa from 'papaparse'; 
+import './Admin.css';
+import {ImSearch} from 'react-icons/im';
+
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
-  const [updatedName, setUpdatedName] = useState("");
+  const [updatedName, setUpdatedName] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [csvData, setCsvData] = useState([]); // Initialize csvData state
 
   // Function to populate the csvData state with category data
@@ -31,12 +32,9 @@ const CreateCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/category/create-category`,
-        {
-          name,
-        }
-      );
+      const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/category/create-category`, {
+        name,
+      });
       if (data?.success) {
         toast.success(`${name} is created`);
         getAllCategory();
@@ -51,16 +49,14 @@ const CreateCategory = () => {
   // Get all categories and set the currentPage to 1
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/category/get-category`
-      );
+      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
         setCurrentPage(1); // Reset current page when fetching new data
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong in getting categories");
+      toast.error('Something went wrong in getting categories');
     }
   };
 
@@ -79,7 +75,7 @@ const CreateCategory = () => {
       if (data?.success) {
         toast.success(`${updatedName} is updated`);
         setSelected(null);
-        setUpdatedName("");
+        setUpdatedName('');
         setVisible(false);
         getAllCategory();
       } else {
@@ -103,20 +99,20 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error('Something went wrong');
     }
   };
 
   // Function to generate and download a CSV file
   const downloadCSV = () => {
     const dataForCSV = prepareCSVData(categories);
-    const csv = Papa.unparse({ fields: ["Name"], data: dataForCSV });
-    const blob = new Blob([csv], { type: "text/csv" });
+    const csv = Papa.unparse({ fields: ['Name'], data: dataForCSV });
+    const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.style.display = "none";
+    const a = document.createElement('a');
+    a.style.display = 'none';
     a.href = url;
-    a.download = "categories.csv";
+    a.download = 'categories.csv';
     document.body.appendChild(a);
     a.click();
     URL.revokeObjectURL(url);
@@ -149,45 +145,45 @@ const CreateCategory = () => {
               <div className="head-2">
                 <div className="write-title"> Manage Category</div>
                 <div className="search-container-left">
-                  <Input
-                    placeholder="Search categories"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="mb-3"
-                  />
-                  <div className="search-icon">
-                    <ImSearch />
-                  </div>
-                </div>
+                <Input
+                placeholder="Search categories"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="mb-3"
+              />
+              <div className="search-icon">
+                <ImSearch />
               </div>
+              </div>
+            </div>
             </div>
           </section>
 
           <div className="panel important">
-            <h2>Add Category</h2>
+          <h2>Add Category</h2>
             <div className="twothirds">
-              <CategoryForm
-                handleSubmit={handleSubmit}
-                value={name}
-                setValue={setName}
-              />
-            </div>
-          </div>
+              <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
 
-          <div className="panel important">
-            <div className="download-3">
-              <div className="download-options-inner">
-                <div className="download-options">
-                  <Button className="download-button" onClick={downloadCSV}>
-                    Download Excel
-                  </Button>
-                </div>
               </div>
-            </div>
+              </div>
 
-            <div className="twothirds">
+              <div className="panel important">
+              <div className="download-3">
+            <div className="download-options-inner">
+            <div className="download-options">
+            
+              <Button className="download-button" onClick={downloadCSV} >
+                Download Excel
+              </Button>
+              </div>
+              </div>
+              </div>
+
+
+              <div className="twothirds">
+                
               <div className="w-75">
-                <table className="table">
+                <table className="table" >
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
@@ -224,16 +220,8 @@ const CreateCategory = () => {
                   </tbody>
                 </table>
               </div>
-              <Modal
-                onCancel={() => setVisible(false)}
-                footer={null}
-                visible={visible}
-              >
-                <CategoryForm
-                  value={updatedName}
-                  setValue={setUpdatedName}
-                  handleSubmit={handleUpdate}
-                />
+              <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
+                <CategoryForm value={updatedName} setValue={setUpdatedName} handleSubmit={handleUpdate} />
               </Modal>
               {/* Pagination */}
               <div className="pagination">
@@ -241,16 +229,8 @@ const CreateCategory = () => {
                   {Array(Math.ceil(categories.length / itemsPerPage))
                     .fill()
                     .map((_, i) => (
-                      <li
-                        key={i}
-                        className={`page-item ${
-                          currentPage === i + 1 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="page-link"
-                          onClick={() => paginate(i + 1)}
-                        >
+                      <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                        <button className="page-link" onClick={() => paginate(i + 1)}>
                           {i + 1}
                         </button>
                       </li>
@@ -260,7 +240,7 @@ const CreateCategory = () => {
             </div>
           </div>
         </div>
-      </div>
+       </div>
     </Layout>
   );
 };

@@ -7,7 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import moment from "moment";
 import { CSVLink } from "react-csv";
 import { ImSearch } from "react-icons/im";
-import { Select, Input, Radio, Button } from "antd";
+import { Select, Input, Radio ,Button} from "antd";
 
 const { Option } = Select;
 
@@ -82,7 +82,10 @@ const AdminOrders = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentOrders = filteredOrders.slice(indexOfFirstItem, indexOfLastItem);
+  const currentOrders = filteredOrders.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -110,11 +113,11 @@ const AdminOrders = () => {
       // Prepare CSV data and trigger download
       const csvData = currentOrders.map((o, i) => ({
         "#": i + 1,
-        Status: o?.status,
-        Buyer: o.buyer?.name,
-        Date: moment(o.createAt).fromNow(),
-        Payment: o.payment.success ? "Success" : "Failed",
-        Quantity: o.products.length,
+        "Status": o?.status,
+        "Buyer": o.buyer?.name,
+        "Date": moment(o.createAt).fromNow(),
+        "Payment": o.payment.success ? "Success" : "Failed",
+        "Quantity": o.products.length,
       }));
 
       const csvHeaders = headers.map((header) => header.label).join(",");
@@ -157,27 +160,29 @@ const AdminOrders = () => {
             </div>
           </section>
           <div className="panel important">
-            <div className="download-2">
-              <div className="download-options-inner">
-                <div className="download-options">
-                  Download Type:
-                  <Radio.Group
-                    value={exportFormat}
-                    onChange={(e) => setExportFormat(e.target.value)}
-                  >
-                    <Radio value="pdf" className="download-button">
-                      PDF
-                    </Radio>
-                    <Radio value="csv" className="download-button">
-                      Excel
-                    </Radio>
-                  </Radio.Group>
-                  <Button onClick={generateExport}>
-                    <span className="button-text">Download</span>
-                  </Button>
-                </div>
-              </div>
-            </div>
+          
+          <div className="download-2">
+                <div className="download-options-inner">
+                    <div className="download-options">
+                    Download Type:
+              <Radio.Group
+                value={exportFormat}
+                onChange={(e) => setExportFormat(e.target.value)}
+              >
+                <Radio value="pdf" className="download-button">PDF</Radio>
+                <Radio value="csv" className="download-button">Excel</Radio>
+              </Radio.Group>
+            
+            <Button onClick={generateExport} >
+            <span className="button-text">Download</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+
+
+
 
             {currentOrders.map((o, i) => {
               return (
@@ -187,7 +192,6 @@ const AdminOrders = () => {
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Price</th>
                         <th scope="col">Buyer</th>
                         <th scope="col"> date</th>
                         <th scope="col">Payment</th>
@@ -213,7 +217,6 @@ const AdminOrders = () => {
                         <td>{o.buyer?.name}</td>
                         <td>{moment(o.createAt).fromNow()}</td>
                         <td>{o.payment.success ? "Success" : "Failed"}</td>
-                        <td>{o.payment.price}</td>
                         <td>{o.products.length}</td>
                       </tr>
                     </tbody>
