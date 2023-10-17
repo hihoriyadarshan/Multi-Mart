@@ -55,7 +55,7 @@ router.delete("/delete-product/:pid", deleteProductController);
 router.post("/product-filters", productFiltersController);
 
 //product count
-router.get("/product-count", requireSignIn, isAdmin, productCountController);
+router.get("/product-count", productCountController);
 
 //product per page
 router.get("/product-list/:page", productListController);
