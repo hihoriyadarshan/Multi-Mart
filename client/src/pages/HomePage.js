@@ -123,6 +123,29 @@ const Homepage = () => {
     }
   };
 
+  const handleAddToCart = (p) => {
+    const existingProduct = cart.find((item) => item._id === p._id);
+
+    if (existingProduct) {
+      // Product already in the cart, so increment the quantity
+      const updatedCart = cart.map((item) =>
+        item._id === p._id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+
+      setCart(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } else {
+      // Product not in the cart, so add it as a new product
+      setCart([...cart, { ...p, quantity: 1 }]);
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...cart, { ...p, quantity: 1 }])
+      );
+    }
+
+    toast.success("Item Added to cart");
+  };
+
   return (
     <Layout title="MultiMart">
       <div
@@ -313,14 +336,7 @@ const Homepage = () => {
                       <small className="w-50 text-center py-2">
                         <NavLink
                           className="text-body"
-                          onClick={() => {
-                            setCart([...cart, p]);
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify([...cart, p])
-                            );
-                            toast.success("Item Added to cart");
-                          }}
+                          onClick={() => handleAddToCart(p)}
                         >
                           <i className="fa fa-shopping-bag text-primary me-3" />
                           Add to cart
