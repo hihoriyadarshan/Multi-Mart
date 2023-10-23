@@ -99,12 +99,12 @@ const Footer = () => {
             </div>
             <div className="col-lg-3 col-md-6">
               <h4 className="text-light mb-4">Quick Links</h4>
-              <a className="btn btn-link" href>
+              <NavLink to="/about" className="btn btn-link">
                 About Us
-              </a>
-              <a className="btn btn-link" href>
+              </NavLink>
+              <NavLink to="/contact" className="btn btn-link" href>
                 Contact Us
-              </a>
+              </NavLink>
               <NavLink to="/feedback" className="btn btn-link">
                 Feedback
               </NavLink>

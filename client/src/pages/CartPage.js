@@ -137,7 +137,7 @@ const CartPage = () => {
                         className="cart-img"
                       />
                       <p6
-                        className="danger "
+                        className="danger12"
                         onClick={() => removeCartItem(item._id)}
                       >
                         Remove

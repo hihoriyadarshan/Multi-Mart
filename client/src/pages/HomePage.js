@@ -251,7 +251,7 @@ const Homepage = () => {
         </a>
       </div> */}
 
-      <div className="col-lg-6">
+      {/* <div className="col-lg-6">
         <div
           className="section-header text-start mb-5 wow fadeInUp"
           data-wow-delay="0.1s"
@@ -259,9 +259,9 @@ const Homepage = () => {
         >
           <h1 className="display-5 mb-3">Our Products</h1>
         </div>
-      </div>
+      </div> */}
 
-      {/* <h2 className="homeHeading">Featured Products</h2> */}
+      <h2 className="homeHeading">Featured Products</h2>
       <div className="row mt-4">
         <div className="col-md-2">
           <h4 className="text-center">Filter By Category</h4>
