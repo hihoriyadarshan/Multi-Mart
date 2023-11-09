@@ -17,8 +17,6 @@ const ContactUs = () => {
   const [itemsPerPage] = useState(10); // Items per page
   const [selectedOption, setSelectedOption] = useState("csv");
 
-
-
   //get all contact
   const getAllContacts = async () => {
     try {
@@ -35,7 +33,6 @@ const ContactUs = () => {
   useEffect(() => {
     getAllContacts();
   }, []);
-
 
   //delete contact
   const handleDeleteContact = async (contactId) => {
@@ -188,16 +185,18 @@ const ContactUs = () => {
               <table className="user-table">
                 <thead>
                   <tr>
-                    <th>name</th>
+                    <th>No</th>
+                    <th>Name</th>
                     <th>Email</th>
-                    <th>subject</th>
+                    <th>Subject</th>
                     <th>Message</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentContacts.map((contact) => (
+                  {currentContacts.map((contact, index) => (
                     <tr key={contact._id}>
+                      <td>{index + 1}</td>
                       <td>{contact.firstname} </td>
                       <td>{contact.email}</td>
                       <td>{contact.subject}</td>

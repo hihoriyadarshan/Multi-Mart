@@ -10,6 +10,8 @@ import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 import Feedback from "./user/Feedback";
 import Footer from "../components/Layout/Footer";
+import bg from "../../src/pages/css/img/carousel-1.jpg";
+import bg2 from "../../src/pages/css/img/carousel-2.jpg";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -123,6 +125,7 @@ const Homepage = () => {
     }
   };
 
+  //cart
   const handleAddToCart = (p) => {
     const existingProduct = cart.find((item) => item._id === p._id);
 
@@ -159,11 +162,7 @@ const Homepage = () => {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img
-                className="w-100"
-                src="https://themewagon.github.io/foody2/img/carousel-1.jpg"
-                alt="Image"
-              />
+              <img src={bg} className="w-100" />
               <div className="carousel-caption">
                 <div className="container">
                   <div className="row justify-content-start">
@@ -171,12 +170,12 @@ const Homepage = () => {
                       <h1 className="display-2 mb-5 animated slideInDown">
                         Organic Food Is Good For Health
                       </h1>
-                      <a
-                        href
+                      <NavLink
+                        to="/all-product"
                         className="btn btn-primary rounded-pill py-sm-3 px-sm-5"
                       >
                         Products
-                      </a>
+                      </NavLink>
                       <a
                         href
                         className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
@@ -189,11 +188,7 @@ const Homepage = () => {
               </div>
             </div>
             <div className="carousel-item">
-              <img
-                className="w-100"
-                src="https://themewagon.github.io/foody2/img/carousel-2.jpg"
-                alt="Image"
-              />
+              <img src={bg2} className="w-100" />
               <div className="carousel-caption">
                 <div className="container">
                   <div className="row justify-content-start">
@@ -201,12 +196,66 @@ const Homepage = () => {
                       <h1 className="display-2 mb-5 animated slideInDown">
                         Natural Food Is Always Healthy
                       </h1>
-                      <a
-                        href
+                      <NavLink
+                        to="/all-product"
                         className="btn btn-primary rounded-pill py-sm-3 px-sm-5"
                       >
                         Products
+                      </NavLink>
+                      <a
+                        href
+                        className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                      >
+                        Services
                       </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-item">
+              <img src={bg2} className="w-100" />
+              <div className="carousel-caption">
+                <div className="container">
+                  <div className="row justify-content-start">
+                    <div className="col-lg-7">
+                      <h1 className="display-2 mb-5 animated slideInDown">
+                        Natural Food Is Always Healthy
+                      </h1>
+                      <NavLink
+                        to="/all-product"
+                        className="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                      >
+                        Products
+                      </NavLink>
+                      <a
+                        href
+                        className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
+                      >
+                        Services
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-item">
+              <img src={bg2} className="w-100" />
+              <div className="carousel-caption">
+                <div className="container">
+                  <div className="row justify-content-start">
+                    <div className="col-lg-7">
+                      <h1 className="display-2 mb-5 animated slideInDown">
+                        Natural Food Is Always Healthy
+                      </h1>
+                      <NavLink
+                        to="/all-product"
+                        className="btn btn-primary rounded-pill py-sm-3 px-sm-5"
+                      >
+                        Products
+                      </NavLink>
                       <a
                         href
                         className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3"
@@ -239,27 +288,6 @@ const Homepage = () => {
           </button>
         </div>
       </div>
-
-      {/* <div className="banner">
-        <p>Welcome To Multi-Mart</p>
-        <h1>Find Amazing Products Below</h1>
-
-        <a href="#container">
-          <button>
-            Scroll <CgMouse />
-          </button>
-        </a>
-      </div> */}
-
-      {/* <div className="col-lg-6">
-        <div
-          className="section-header text-start mb-5 wow fadeInUp"
-          data-wow-delay="0.1s"
-          style={{ maxWidth: 500 }}
-        >
-          <h1 className="display-5 mb-3">Our Products</h1>
-        </div>
-      </div> */}
 
       <h2 className="homeHeading">Featured Products</h2>
       <div className="row mt-4">

@@ -1,18 +1,19 @@
-import React,{useState,useEffect} from 'react'
-import Layout from '../../components/Layout/Layout'
-import UserMenu from '../../components/Layout/UserMenu'
-import { useAuth } from '../../context/auth'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import Layout from "../../components/Layout/Layout";
+import UserMenu from "../../components/Layout/UserMenu";
+import { useAuth } from "../../context/auth";
+import axios from "axios";
 import moment from "moment";
 
 const Orders = () => {
-
   const [auth, setAuth] = useAuth();
-  const [orders, setOrders] = useState([])
- 
+  const [orders, setOrders] = useState([]);
+
   const getOrders = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/orders`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/auth/orders`
+      );
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -21,9 +22,9 @@ const Orders = () => {
   useEffect(() => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
-return (
-  <Layout title={"your Orders"}>
-    <div className="container-flui p-3 m-3 dashboard">
+  return (
+    <Layout title={"your Orders"}>
+      <div className="container-flui p-3 m-3 dashboard">
         <div className="row">
           <div className="col-md-3">
             <UserMenu />
@@ -36,7 +37,7 @@ return (
                   <table className="table">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Status</th>
                         <th scope="col">Buyer</th>
                         <th scope="col"> date</th>
@@ -81,8 +82,8 @@ return (
           </div>
         </div>
       </div>
-      </Layout>
-  )
-}
+    </Layout>
+  );
+};
 
-export default Orders
+export default Orders;

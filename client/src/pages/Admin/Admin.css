@@ -13,11 +13,16 @@ body{
 }
 
 
+
+
 .row-21 {
   display: flex;
   justify-content: space-between;
 }
 
+.user-table{
+  width: 100%;
+}
 
 .card-21 {
   width: calc(33.33% - 20px);

@@ -117,17 +117,17 @@ const Contact = () => {
                   <h5 className="text-white">Call Us</h5>
                   <p className="mb-5">
                     <i className="fa fa-phone-alt me-3" />
-                    +012 345 67890
+                    +91 83472 05167
                   </p>
                   <h5 className="text-white">Email Us</h5>
                   <p className="mb-5">
                     <i className="fa fa-envelope me-3" />
-                    info@example.com
+                    multi-mart3194@gmail.com
                   </p>
                   <h5 className="text-white">Office Address</h5>
                   <p className="mb-5">
                     <i className="fa fa-map-marker-alt me-3" />
-                    123 Street, New York, USA
+                    123 Street, Ahmedabad, Gujrat
                   </p>
                   <h5 className="text-white">Follow Us</h5>
                   <div className="d-flex pt-2">

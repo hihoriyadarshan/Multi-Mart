@@ -4,8 +4,8 @@
 }
 
 .container123 {
-  /* background-color: #ffffff; */
-  background-color: #9debe5;
+  background-color: #ffffff;
+
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -16,7 +16,7 @@
 }
 
 .container-11 {
-  background-color: #48444470;
+  background-color: #f76a2b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,3 +60,8 @@
 .form-control{
   background-color: #9debe5;
 }
+
+
+/* orange= f76a2b */
+/* green =59c338 */
+/* white= f1f2f7 */

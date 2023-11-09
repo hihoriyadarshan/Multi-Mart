@@ -1,3 +1,10 @@
+.sc-x{
+  overflow-x: auto;
+  /* overflow-x: hidden; */
+}
+
+
+
 table {
   margin-top: 20px;
   border-collapse: collapse;
@@ -5,6 +12,8 @@ table {
   background-color: #857a11;
   margin-left: 0px;
 }
+
+
 
 th {
   text-align: left;

@@ -123,6 +123,7 @@ const AllProduct = () => {
                     <table className="user-table">
                       <thead>
                         <tr>
+                          <th scope="col">N0</th>
                           <th scope="col">Name</th>
                           <th scope="col">Image</th>
                           <th scope="col">Brandname</th>
@@ -135,8 +136,9 @@ const AllProduct = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {currentProducts.map((product) => (
+                        {currentProducts.map((product, index) => (
                           <tr key={product._id}>
+                            <td>{index + 1}</td>
                             <td>
                               <Link
                                 to={`/dashboard/admin/product/${product.slug}`}
@@ -157,7 +159,7 @@ const AllProduct = () => {
                                 />
                               </Link>
                             </td>
-                            <td>Brandname</td>
+                            <td>{product.brandname}</td>
                             <td>{product.price}</td>
                             <td>{product.quantity}</td>
                             <td>{product.description.substring(0, 40)}...</td>

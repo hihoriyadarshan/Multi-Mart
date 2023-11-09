@@ -156,15 +156,17 @@ const Get_feedback = () => {
               <table className="user-table">
                 <thead>
                   <tr>
+                    <th>no</th>
                     <th>name</th>
                     <th>Email</th>
-                    <th>Pmohone</th>
+                    <th>Phone</th>
                     <th>Message</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentContacts.map((contact) => (
+                  {currentContacts.map((contact, index) => (
                     <tr key={contact._id}>
+                      <td>{index + 1}</td>
                       <td>{contact.firstname}</td>
                       <td>{contact.email}</td>
                       <td>{contact.phone}</td>

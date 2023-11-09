@@ -138,7 +138,9 @@ const Users = () => {
   };
 
   return (
+    
     <Layout title={"Dashboard - All Users"}>
+    <div className="sc-x">
       <div className="container-fluid m-3 p-3" ref={contentRef}>
         <div className="row1">
           <div className="col-md-3">
@@ -232,6 +234,7 @@ const Users = () => {
             </section>
           </div>
         </div>
+      </div>
       </div>
     </Layout>
   );
