@@ -125,7 +125,7 @@ const Homepage = () => {
     }
   };
 
-  //cart
+  //cart handling
   const handleAddToCart = (p) => {
     const existingProduct = cart.find((item) => item._id === p._id);
 

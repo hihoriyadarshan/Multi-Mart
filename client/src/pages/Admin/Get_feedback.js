@@ -32,7 +32,7 @@ const Get_feedback = () => {
   }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
 
   const filteredContacts = contacts.filter((contact) => {
     const query = searchQuery.toLowerCase();
@@ -104,8 +104,9 @@ const Get_feedback = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
+                  
                   <div className="search-icon">
-                    <ImSearch />
+                    <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>
@@ -166,7 +167,7 @@ const Get_feedback = () => {
                 <tbody>
                   {currentContacts.map((contact, index) => (
                     <tr key={contact._id}>
-                      <td>{index + 1}</td>
+                      <td>{indexOfFirstItem + index + 1}</td>
                       <td>{contact.firstname}</td>
                       <td>{contact.email}</td>
                       <td>{contact.phone}</td>

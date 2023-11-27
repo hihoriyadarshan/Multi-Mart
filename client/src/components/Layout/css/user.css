@@ -434,3 +434,39 @@ body {
   color: var(--bs-heading-color);
   margin-left: 0vh;
 }
+
+/* order-page */
+
+.order-title{
+  height: 45px;
+  width: 175vh;
+  margin-left: 15vh;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+.border-shadow{
+  margin-left: 15vh;
+  border: 1px solid #dee2e6;
+  width: 170vh;
+}
+
+
+
+
+/* img  */
+.card-img-top-1{
+  /* height: 120px; */
+  /* width: 13px; */
+  margin-left: -130vh;
+}
+
+/* desccription */
+
+.col-md-8-9{
+  margin-left: 120px;
+  margin-top: -80px;
+}

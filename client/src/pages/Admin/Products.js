@@ -78,7 +78,7 @@ const Products = () => {
                     onChange={handleSearchInputChange}
                   />
                   <div className="search-icon">
-                    <ImSearch />
+                    <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>
@@ -108,30 +108,32 @@ const Products = () => {
                   ))}
                 </div>
                 {/* Pagination */}
-                <ul className="pagination">
-                  {Array(
-                    Math.ceil(
-                      (searchInput ? searchResults.length : products.length) /
-                        itemsPerPage
+                <div className="pagination">
+                  <ul className="pagination">
+                    {Array(
+                      Math.ceil(
+                        (searchInput ? searchResults.length : products.length) /
+                          itemsPerPage
+                      )
                     )
-                  )
-                    .fill()
-                    .map((_, i) => (
-                      <li
-                        key={i}
-                        className={`page-item ${
-                          currentPage === i + 1 ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="page-link"
-                          onClick={() => paginate(i + 1)}
+                      .fill()
+                      .map((_, i) => (
+                        <li
+                          key={i}
+                          className={`page-item ${
+                            currentPage === i + 1 ? "active" : ""
+                          }`}
                         >
-                          {i + 1}
-                        </button>
-                      </li>
-                    ))}
-                </ul>
+                          <button
+                            className="page-link"
+                            onClick={() => paginate(i + 1)}
+                          >
+                            {i + 1}
+                          </button>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

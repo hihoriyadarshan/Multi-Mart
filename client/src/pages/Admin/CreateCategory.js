@@ -7,6 +7,7 @@ import CategoryForm from "../../components/Form/CategoryForm";
 import { Modal, Input, Button } from "antd";
 import Papa from "papaparse";
 import "./Admin.css";
+import "./css/create_category.css";
 import { ImSearch } from "react-icons/im";
 
 const CreateCategory = () => {
@@ -30,6 +31,13 @@ const CreateCategory = () => {
   // Handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate if the category name is blank
+    if (!name.trim()) {
+      alert("Please Enter your Product Category");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/category/create-category`,
@@ -40,6 +48,7 @@ const CreateCategory = () => {
       if (data?.success) {
         toast.success(`${name} is created`);
         getAllCategory();
+        setName("");
       } else {
         toast.error(data.message);
       }
@@ -125,7 +134,7 @@ const CreateCategory = () => {
   // Calculate index of the last item to be displayed on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   // Calculate index of the first item to be displayed on the current page
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
 
   // Filter and slice the categories array based on search term and pagination
   const filteredCategories = categories
@@ -149,14 +158,14 @@ const CreateCategory = () => {
               <div className="head-2">
                 <div className="write-title"> Manage Category</div>
                 <div className="search-container-left">
-                  <Input
+                  <input
                     placeholder="Search categories"
                     value={searchTerm}
+                    className="search-container1"
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="mb-3"
                   />
                   <div className="search-icon">
-                    <ImSearch />
+                    <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>
@@ -199,7 +208,7 @@ const CreateCategory = () => {
                   <tbody>
                     {filteredCategories.map((c, index) => (
                       <tr key={c._id}>
-                        <td>{index + 1}</td>
+                        <td>{indexOfFirstItem + index + 1}</td>
                         <td>{c.name}</td>
                         <td>
                           <button

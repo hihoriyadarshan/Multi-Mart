@@ -67,12 +67,19 @@ const AdminMenu = () => {
               <li className="<FaCartPlus/>">
                 <NavLink to="/dashboard/admin/orders">Manage Orders</NavLink>
               </li>
+
+              <li className="write">
+                <NavLink to="/dashboard/admin/AdminBlog">Blog Post</NavLink>
+              </li>
+
               <li className="comments">
                 <NavLink to="/dashboard/admin/contact_us">Contact</NavLink>
               </li>
+
               <li className="users">
                 <NavLink to="/dashboard/admin/users">Manage Users</NavLink>
               </li>
+
               <li className="users">
                 <NavLink to="/dashboard/admin/get_all_feedback">
                   view Feedback

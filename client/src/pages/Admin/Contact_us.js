@@ -17,7 +17,7 @@ const ContactUs = () => {
   const [itemsPerPage] = useState(10); // Items per page
   const [selectedOption, setSelectedOption] = useState("csv");
 
-  //get all contact
+  // Get all contacts
   const getAllContacts = async () => {
     try {
       const { data } = await axios.get(
@@ -34,7 +34,7 @@ const ContactUs = () => {
     getAllContacts();
   }, []);
 
-  //delete contact
+  // Delete contact
   const handleDeleteContact = async (contactId) => {
     try {
       await axios.delete(
@@ -51,7 +51,7 @@ const ContactUs = () => {
   // Calculate index of the last item to be displayed on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   // Calculate index of the first item to be displayed on the current page
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
 
   // Filter contacts based on the search query
   const filteredContacts = contacts.filter((contact) => {
@@ -90,7 +90,6 @@ const ContactUs = () => {
         contact.firstname,
         contact.subject,
         contact.email,
-
         contact.message,
       ]),
     });
@@ -99,8 +98,7 @@ const ContactUs = () => {
     doc.save("Contact_us-data.pdf");
   };
 
-  //pdf csv radio button
-
+  // PDF CSV radio button
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -132,7 +130,7 @@ const ContactUs = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <div className="search-icon">
-                    <ImSearch />
+                    <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>
@@ -154,7 +152,6 @@ const ContactUs = () => {
                       onChange={handleOptionChange}
                     />
                     Excel
-                    {/* <label htmlFor="csvOption">Download CSV</label> */}
                   </label>
 
                   <label>
@@ -167,7 +164,6 @@ const ContactUs = () => {
                       onChange={handleOptionChange}
                     />
                     PDF
-                    {/* <label htmlFor="pdfOption">Download PDF</label> */}
                   </label>
 
                   <button
@@ -196,7 +192,7 @@ const ContactUs = () => {
                 <tbody>
                   {currentContacts.map((contact, index) => (
                     <tr key={contact._id}>
-                      <td>{index + 1}</td>
+                      <td>{indexOfFirstItem + index + 1}</td>
                       <td>{contact.firstname} </td>
                       <td>{contact.email}</td>
                       <td>{contact.subject}</td>

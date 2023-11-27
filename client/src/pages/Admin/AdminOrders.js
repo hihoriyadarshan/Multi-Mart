@@ -153,7 +153,7 @@ const AdminOrders = () => {
                     value={searchQuery}
                   />
                   <div className="search-icon">
-                    <ImSearch />
+                  <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>

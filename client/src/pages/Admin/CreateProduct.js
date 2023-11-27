@@ -43,6 +43,43 @@ const CreateProduct = () => {
   //create product
   const handleCreate = async (e) => {
     e.preventDefault();
+
+    // Validate individual fields
+    if (!category) {
+      alert("Please select a category.");
+      return;
+    }
+
+    if (!name.trim()) {
+      alert("Please enter the product name.");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("Please enter the product description.");
+      return;
+    }
+
+    if (!brandname.trim()) {
+      alert("Please enter the brand name.");
+      return;
+    }
+
+    if (!price.trim()) {
+      alert("Please enter the product price.");
+      return;
+    }
+
+    if (!quantity.trim()) {
+      alert("Please enter the product quantity.");
+      return;
+    }
+
+    if (!photo) {
+      alert("Please upload a product photo.");
+      return;
+    }
+
     try {
       const productData = new FormData();
       productData.append("name", name);

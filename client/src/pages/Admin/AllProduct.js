@@ -14,7 +14,7 @@ const AllProduct = () => {
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current page
-  const [itemsPerPage] = useState(9); // Items per page
+  const [itemsPerPage] = useState(10); // Items per page
   const [searchInput, setSearchInput] = useState(""); // Search input
   const [searchResults, setSearchResults] = useState([]); // Search results;
   const [id, setId] = useState("");
@@ -40,7 +40,7 @@ const AllProduct = () => {
   // Calculate index of the last item to be displayed on the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   // Calculate index of the first item to be displayed on the current page
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
   // Slice the products array to display only the items for the current page
   const currentProducts = searchInput
     ? searchResults
@@ -63,31 +63,35 @@ const AllProduct = () => {
     setSearchResults(filteredProducts);
   };
 
-  // Function to delete a product
+  // delete a product
   const handleDelete = async () => {
-    try {
-      let answer = window.prompt(
-        "Are you sure you want to delete this product? "
-      );
-      if (!answer) return;
-      // Make the delete request with the product ID
-      const response = await axios.delete(
-        `${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`
-      );
-      // Check if the delete operation was successful
-      if (response.status === 200) {
-        toast.success("Product Deleted Successfully");
-        // Navigate to the appropriate page after successful deletion
-        navigate("/dashboard/admin/AllProduct");
-      } else {
-        toast.error("Product Deletion Failed");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
+    if (isConfirmed) {
+      try {
+        // Make the delete request with the product ID
+        const response = await axios.delete(
+          `${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`
+        );
+
+        // Check if the delete operation was successful
+        if (response.status === 200) {
+          toast.success("Product Deleted Successfully");
+          // Navigate to the appropriate page after successful deletion
+          navigate("/dashboard/admin/AllProduct");
+          // Reload the page
+          window.location.reload();
+        } else {
+          toast.error("Product Deletion Failed");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
       }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
     }
   };
-
   return (
     <Layout>
       <div className="all-product-1">
@@ -110,7 +114,7 @@ const AllProduct = () => {
                         onChange={handleSearchInputChange}
                       />
                       <div className="search-icon">
-                        <ImSearch />
+                        <ImSearch className="search-md" />
                       </div>
                     </div>
                   </div>
@@ -123,7 +127,7 @@ const AllProduct = () => {
                     <table className="user-table">
                       <thead>
                         <tr>
-                          <th scope="col">N0</th>
+                          <th scope="col">No</th>
                           <th scope="col">Name</th>
                           <th scope="col">Image</th>
                           <th scope="col">Brandname</th>
@@ -138,7 +142,7 @@ const AllProduct = () => {
                       <tbody>
                         {currentProducts.map((product, index) => (
                           <tr key={product._id}>
-                            <td>{index + 1}</td>
+                            <td>{indexOfFirstItem + index + 1}</td>
                             <td>
                               <Link
                                 to={`/dashboard/admin/product/${product.slug}`}
@@ -179,31 +183,33 @@ const AllProduct = () => {
                       </tbody>
                     </table>
                     {/* Pagination */}
-                    <ul className="pagination">
-                      {Array(
-                        Math.ceil(
-                          (searchInput
-                            ? searchResults.length
-                            : products.length) / itemsPerPage
+                    <div className="pagination">
+                      <ul className="pagination">
+                        {Array(
+                          Math.ceil(
+                            (searchInput
+                              ? searchResults.length
+                              : products.length) / itemsPerPage
+                          )
                         )
-                      )
-                        .fill()
-                        .map((_, i) => (
-                          <li
-                            key={i}
-                            className={`page-item ${
-                              currentPage === i + 1 ? "active" : ""
-                            }`}
-                          >
-                            <button
-                              className="page-link"
-                              onClick={() => paginate(i + 1)}
+                          .fill()
+                          .map((_, i) => (
+                            <li
+                              key={i}
+                              className={`page-item ${
+                                currentPage === i + 1 ? "active" : ""
+                              }`}
                             >
-                              {i + 1}
-                            </button>
-                          </li>
-                        ))}
-                    </ul>
+                              <button
+                                className="page-link"
+                                onClick={() => paginate(i + 1)}
+                              >
+                                {i + 1}
+                              </button>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
                   </div>
                 </section>
               </div>

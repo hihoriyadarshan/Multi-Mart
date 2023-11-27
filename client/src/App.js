@@ -34,6 +34,7 @@ import Feedback from "./pages/user/Feedback";
 import Product from "./pages/Product";
 import CreateSub_category from "./pages/Admin/CreateSub_category";
 import Get_feedback from "./pages/Admin/Get_feedback";
+import AdminBlog from "./pages/Admin/AdminBlog.js";
 
 function App() {
   return (
@@ -69,6 +70,8 @@ function App() {
           <Route path="admin/AllProduct" element={<AllProduct />} />
           <Route path="admin/Adminprofile" element={<Adminprofile />} />
           <Route path="admin/get_all_feedback" element={<Get_feedback />} />
+          <Route path="admin/AdminBlog" element={<AdminBlog />} />
+
           <Route
             path="admin/AdminUpdateProfile"
             element={<AdminUpdateProfile />}

@@ -385,7 +385,6 @@ export const createContact = async (req, res) => {
       firstname,
       subject,
       email,
-
       message,
     });
 

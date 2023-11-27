@@ -16,16 +16,19 @@
 }
 
 .container-11 {
-  background-color: #f76a2b;
+  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
-  box-shadow: 0px 0px 3px #ffffff95;
+  border: 1px solid navy;
+  box-shadow: 0px 0px 3px #333;
   width: 995px;
   height: 500px;  
   border-radius: 20px;
 }
+
+
+
 
 .img1 {
   margin-left: 90px;

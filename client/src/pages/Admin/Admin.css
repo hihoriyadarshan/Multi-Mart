@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
+  }
 /* Dashboard */
 
 .container-22 {
@@ -21,7 +21,8 @@ body{
 }
 
 .user-table{
-  width: 100%;
+  width: 143%;
+  /* text-align: center; */
 }
 
 .card-21 {
