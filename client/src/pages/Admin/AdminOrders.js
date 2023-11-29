@@ -7,7 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import moment from "moment";
 import { CSVLink } from "react-csv";
 import { ImSearch } from "react-icons/im";
-import { Select, Input, Radio ,Button} from "antd";
+import { Select, Input, Radio, Button } from "antd";
 
 const { Option } = Select;
 
@@ -82,10 +82,7 @@ const AdminOrders = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentOrders = filteredOrders.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const currentOrders = filteredOrders.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -113,11 +110,11 @@ const AdminOrders = () => {
       // Prepare CSV data and trigger download
       const csvData = currentOrders.map((o, i) => ({
         "#": i + 1,
-        "Status": o?.status,
-        "Buyer": o.buyer?.name,
-        "Date": moment(o.createAt).fromNow(),
-        "Payment": o.payment.success ? "Success" : "Failed",
-        "Quantity": o.products.length,
+        Status: o?.status,
+        Buyer: o.buyer?.name,
+        Date: moment(o.createAt).fromNow(),
+        Payment: o.payment.success ? "Success" : "Failed",
+        Quantity: o.products.length,
       }));
 
       const csvHeaders = headers.map((header) => header.label).join(",");
@@ -153,36 +150,34 @@ const AdminOrders = () => {
                     value={searchQuery}
                   />
                   <div className="search-icon">
-                  <ImSearch className="search-md" />
+                    <ImSearch className="search-md" />
                   </div>
                 </div>
               </div>
             </div>
           </section>
           <div className="panel important">
-          
-          <div className="download-2">
-                <div className="download-options-inner">
-                    <div className="download-options">
-                    Download Type:
-              <Radio.Group
-                value={exportFormat}
-                onChange={(e) => setExportFormat(e.target.value)}
-              >
-                <Radio value="pdf" className="download-button">PDF</Radio>
-                <Radio value="csv" className="download-button">Excel</Radio>
-              </Radio.Group>
-            
-            <Button onClick={generateExport} >
-            <span className="button-text">Download</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-
-
-
+            <div className="download-2">
+              <div className="download-options-inner">
+                <div className="download-options">
+                  Download Type:
+                  <Radio.Group
+                    value={exportFormat}
+                    onChange={(e) => setExportFormat(e.target.value)}
+                  >
+                    <Radio value="pdf" className="download-button">
+                      PDF
+                    </Radio>
+                    <Radio value="csv" className="download-button">
+                      Excel
+                    </Radio>
+                  </Radio.Group>
+                  <Button onClick={generateExport}>
+                    <span className="button-text">Download</span>
+                  </Button>
+                </div>
+              </div>
+            </div>
 
             {currentOrders.map((o, i) => {
               return (
@@ -193,7 +188,7 @@ const AdminOrders = () => {
                         <th scope="col">No</th>
                         <th scope="col">Status</th>
                         <th scope="col">Buyer</th>
-                        <th scope="col"> date</th>
+                        <th scope="col"> date </th>
                         <th scope="col">Payment</th>
                         <th scope="col">Quantity</th>
                       </tr>
@@ -215,7 +210,10 @@ const AdminOrders = () => {
                           </Select>
                         </td>
                         <td>{o.buyer?.name}</td>
-                        <td>{moment(o.createAt).fromNow()}</td>
+                        <td>
+                          {moment(o.createdAt).format("MMMM D, YYYY ")}
+                          {/* {moment(o.createdAt).format("MMMM D, YYYY h:mm A")} */}
+                        </td>
                         <td>{o.payment.success ? "Success" : "Failed"}</td>
                         <td>{o.products.length}</td>
                       </tr>
@@ -224,19 +222,19 @@ const AdminOrders = () => {
                   <div className="container">
                     {o.products.map((p, i) => (
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
-                        <div className="col-md-4">
+                        <div className="order-div">
                           <img
                             src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                             className="card-img-top"
                             alt={p.name}
                             width="100px"
-                            height={"100px"}
+                            height={"180px"}
                           />
                         </div>
-                        <div className="col-md-8">
+                        <div className="order-desc">
                           <p>{p.name}</p>
                           <p>{p.description.substring(0, 30)}</p>
-                          <p>Price: {p.price}</p>
+                          <p>Price: ₹{p.price}</p>
                         </div>
                       </div>
                     ))}

@@ -251,7 +251,7 @@ const AdminDashboard = () => {
             <Link to="">
               <center>
                 {" "}
-                <h2>Total Product</h2>{" "}
+                <h2>Unused Auhtority</h2>{" "}
               </center>
               <br />
               <br />
@@ -263,7 +263,7 @@ const AdminDashboard = () => {
             <Link to="">
               <center>
                 {" "}
-                <h2>Category</h2>
+                <h2>Unused Auhtority</h2>
               </center>
               <br />
               <br />

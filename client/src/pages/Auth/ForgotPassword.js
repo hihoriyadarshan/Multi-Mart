@@ -3,27 +3,33 @@ import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "../Auth/css/Login.css";
 
 const ForgotPasssword = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
+  const [birthdate, setBirthdate] = useState(new Date()); // state for the date picker
 
   const navigate = useNavigate();
- 
+
   // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/forgot-password`, {
-        email,
-        newPassword,
-        answer,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/forgot-password`,
+        {
+          email,
+          newPassword,
+          answer,
+          birthdate: birthdate.toISOString().split("T")[0], // Convert date to string in YYYY-MM-DD format
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
-
         navigate("/login");
       } else {
         toast.error(res.data.message);
@@ -33,9 +39,10 @@ const ForgotPasssword = () => {
       toast.error("Something went wrong");
     }
   };
+
   return (
     <Layout title={"Forgot Password - Ecommerce APP"}>
-      <div className="form-container ">
+      <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h4 className="title">RESET PASSWORD</h4>
 
@@ -46,18 +53,17 @@ const ForgotPasssword = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
               id="exampleInputEmail1"
-              placeholder="Enter Your Email "
+              placeholder="Enter Your Email"
               required
             />
           </div>
           <div className="mb-3">
-            <input
-              type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
+            <DatePicker
+              selected={birthdate}
+              onChange={(date) => setBirthdate(date)}
               className="form-control"
-              id="exampleInputEmail1"
-              placeholder="Enter Your birthdate"
+              placeholderText="Select Your Birthdate"
+              dateFormat="dd/MM/yyyy"
               required
             />
           </div>

@@ -1,6 +1,7 @@
 import categoryModel from "../models/categoryModel.js";
 import slugify from "slugify";
 import SubCategory from "../models/sub-categoryModel.js";
+import subCategoryModel from "../models/sub-categoryModel.js";
 
 export const createCategoryController = async (req, res) => {
   try {
@@ -207,6 +208,52 @@ export const get_all_sub_categoryControlller = async (req, res) => {
       success: false,
       error,
       message: "Error while getting all sub-categories",
+    });
+  }
+};
+
+//delete sub-category
+
+export const deletesubCategoryCOntroller = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await subCategoryModel.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: "sub-Categry Deleted  Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error while deleting sub-category",
+      error,
+    });
+  }
+};
+
+//update sub-category
+
+export const updatesubCategoryController = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const { id } = req.params;
+    const category = await subCategoryModel.findByIdAndUpdate(
+      id,
+      { name, slug: slugify(name) },
+      { new: true }
+    );
+    res.status(200).send({
+      success: true,
+      messsage: "Category Updated Successfully",
+      category,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error while updating category",
     });
   }
 };

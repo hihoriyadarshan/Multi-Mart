@@ -147,7 +147,7 @@ p1 {
   
 .productCard .container{
   /* position: absolute; */
-  top: 14rem;
+  top: 2rem;
 }
 
 .cart-addmore{
@@ -645,4 +645,26 @@ margin-top: 30px;
 .productCard-1 img{
  width: 18vmax;
  height: 17vmax;
+}
+
+
+/* Admin order page */
+
+.order-div{
+  width: 200px;
+  align-items: center;
+  margin-top: 0px;
+}
+ 
+.order-desc{
+  align-items: center;
+}
+
+/* sub-category */
+
+.form-control-2{
+  width: 200px;
+}
+.pagination-functionality{
+  margin-bottom: 10vh;
 }

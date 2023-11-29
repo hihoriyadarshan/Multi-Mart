@@ -50,9 +50,11 @@ const AdminMenu = () => {
               </li>
               <li className="write">
                 <NavLink to="/dashboard/admin/CreateSub_categoty">
-                  sub-Category
+                   sub-Category
                 </NavLink>
               </li>
+
+
               <li className="write">
                 <NavLink to="/dashboard/admin/create-product">
                   Create Product
@@ -68,9 +70,7 @@ const AdminMenu = () => {
                 <NavLink to="/dashboard/admin/orders">Manage Orders</NavLink>
               </li>
 
-              <li className="write">
-                <NavLink to="/dashboard/admin/AdminBlog">Blog Post</NavLink>
-              </li>
+              
 
               <li className="comments">
                 <NavLink to="/dashboard/admin/contact_us">Contact</NavLink>

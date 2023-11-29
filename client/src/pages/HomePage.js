@@ -341,12 +341,10 @@ const Homepage = () => {
                   />
                   <div className="container">
                     <h5 className="card-title">{p.name}</h5>
-                    <p className="card-text ms-25">
-                      {p.description.substring(0, 35)}...
+                    <p className="card-text">
+                      {p.description.substring(0, 26)}...
                     </p>
-                    <div className="price">
-                      <p className="card-text ms-2">₹{p.price}</p>
-                    </div>
+                    <p className="card-text">₹{p.price}</p>
                   </div>
 
                   <div className="cart-addmore">

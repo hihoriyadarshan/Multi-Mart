@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/Layout/Layout";
+import { Layout, Pagination, Select } from "antd";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
+
 const { Option } = Select;
 
 const CreateSubCategory = () => {
@@ -12,27 +12,69 @@ const CreateSubCategory = () => {
   const [categories, setCategories] = useState([]);
   const [s_name, setS_Name] = useState("");
   const [category, setCategory] = useState("");
-  const [getsub_category, setgetsub_category] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/category/get-category`
+      );
+      if (data?.success) {
+        setCategories(data?.category);
+      } else {
+        toast.error(data?.message || "Failed to fetch categories.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong while getting categories.");
+    }
+  };
+
+  const fetchSubCategories = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/category/get_all_subcategory`
+      );
+
+      if (response.data?.success) {
+        setSubCategories(response.data?.category);
+      } else {
+        console.error(response.data?.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    // Fetch categories when the component mounts
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/category/get-category`
-        );
-        if (data?.success) {
-          setCategories(data?.category);
-        }
-      } catch (error) {
-        console.error(error);
-        toast.error("Something went wrong while getting categories.");
-      }
-    };
-
     fetchCategories();
+    fetchSubCategories();
   }, []);
 
+  const handleDelete = async (subCategoryId) => {
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_API}/api/v1/category/delete-subcategory/${subCategoryId}`
+      );
+      if (data.success) {
+        toast.success("Sub-Category deleted successfully");
+        // Update the list of subcategories after deletion
+        setSubCategories((prevSubCategories) =>
+          prevSubCategories.filter(
+            (subCategory) => subCategory._id !== subCategoryId
+          )
+        );
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  //create sub-category
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
@@ -48,9 +90,14 @@ const CreateSubCategory = () => {
 
       if (response.data?.success) {
         toast.success("Sub-category Created Successfully");
-        navigate("dashboard/admin/CreateSub_category");
+
+        // Reset state values
+        setS_Name("");
+        setCategory("");
+        // Refresh the list of subcategories after creation
+        fetchSubCategories();
       } else {
-        toast.error(response.data?.message);
+        toast.error(response?.data?.message || "Failed to create sub-category");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -62,23 +109,16 @@ const CreateSubCategory = () => {
     }
   };
 
-  //get all-sub category
-
-  const getAllsub_category = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/category/get_all_subcategory`
-      );
-      setgetsub_category(data.getsub_category);
-    } catch (error) {
-      console.error(error);
-      toast.error("Something Went Wrong");
-    }
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
-  useEffect(() => {
-    getAllsub_category();
-  }, []);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentSubCategories = subCategories.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <Layout title="sub-category">
@@ -91,12 +131,13 @@ const CreateSubCategory = () => {
           <section className="panel important">
             <div className="add">
               <div className="head-3">
-                <div className="write-title"> Create Sub-category</div>
+                <div className="write-title">Create Sub-category</div>
               </div>
             </div>
           </section>
 
           <div className="panel important">
+            <h2>Add Sub-Category</h2>
             <div className="twothirds">
               <Select
                 bordered={false}
@@ -105,6 +146,8 @@ const CreateSubCategory = () => {
                 showSearch
                 className="form-select mb-3"
                 onChange={(value) => setCategory(value)}
+                value={category}
+                placement="select category"
               >
                 {categories.map((c) => (
                   <Option key={c._id} value={c._id}>
@@ -129,6 +172,55 @@ const CreateSubCategory = () => {
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="panel important">
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentSubCategories.map((subCategory, index) => (
+                <tr key={subCategory._id}>
+                  <td>{index + 1}</td>
+                  <td>{subCategory.s_name}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary ms-2"
+                      onClick={() => {
+                       
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger ms-2"
+                      onClick={() => {
+                        handleDelete(subCategory._id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <center>
+            <Pagination
+              current={currentPage}
+              pageSize={itemsPerPage}
+              total={subCategories.length}
+              onChange={handlePageChange}
+            />
+          </center>
+          <div className="pagination-functionality"></div>
         </div>
       </div>
     </Layout>

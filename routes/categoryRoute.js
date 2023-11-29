@@ -10,6 +10,8 @@ import {
   CategoryCountController,
   sub_CategoryCountController,
   get_all_sub_categoryControlller,
+  deletesubCategoryCOntroller,
+  updatesubCategoryController,
 } from "../controllers/categoryController.js";
 
 const router = express.Router();
@@ -62,10 +64,12 @@ router.get("/get_all_subcategory", get_all_sub_categoryControlller);
 
 //update-sub category
 
-
-//delete sub-category
-
-
+router.put(
+  "/update-subcategory/:id",
+  requireSignIn,
+  isAdmin,
+  updatesubCategoryController
+);
 
 //sub-category count
 router.get(
@@ -74,5 +78,15 @@ router.get(
   isAdmin,
   sub_CategoryCountController
 );
+
+
+//delete sub-category
+router.delete(
+  "/delete-subcategory/:id",
+  requireSignIn,
+  isAdmin,
+  deletesubCategoryCOntroller
+);
+
 
 export default router;

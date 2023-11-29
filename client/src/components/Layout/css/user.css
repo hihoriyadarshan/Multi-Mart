@@ -455,8 +455,6 @@ body {
 }
 
 
-
-
 /* img  */
 .card-img-top-1{
   /* height: 120px; */
@@ -469,4 +467,8 @@ body {
 .col-md-8-9{
   margin-left: 120px;
   margin-top: -80px;
+}
+
+.order-pagination{
+  margin-left: 65vh;
 }

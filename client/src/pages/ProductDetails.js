@@ -73,7 +73,11 @@ const ProductDetails = () => {
               currency: "USD",
             })}
           </h6>
+
+          <h6>brandname: {product.brandname}</h6>
+        
           <h6>Category: {product?.category?.name}</h6>
+
           <button className="btn btn-secondary ms-1" onClick={() => addToCart(product)}>ADD TO CART</button>
         </div>
       </div>

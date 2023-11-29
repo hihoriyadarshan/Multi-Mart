@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import Layout from '../../components/Layout/Layout';
-import './css/Register.css';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { MdDriveFileRenameOutline, MdEmail } from 'react-icons/md'; 
-import { RiLockPasswordFill } from 'react-icons/ri';
-import { GiRotaryPhone } from 'react-icons/gi';
-import { AiFillHome } from 'react-icons/ai';
+import React, { useState } from "react";
+import Layout from "../../components/Layout/Layout";
+import "./css/Register.css";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { MdDriveFileRenameOutline, MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { GiRotaryPhone } from "react-icons/gi";
+import { AiFillHome } from "react-icons/ai";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
-  const [password, setPassword] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,28 +24,33 @@ const Register = () => {
     // Password validation
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error('Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one numeric character.');
+      toast.error(
+        "Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one numeric character."
+      );
       return;
     }
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/register`, {
-        name,
-        email,
-        phone,
-        address,
-        password,
-        answer
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/register`,
+        {
+          name,
+          email,
+          phone,
+          address,
+          password,
+          answer,
+        }
+      );
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate('/login');
+        navigate("/login");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     }
   };
 
@@ -53,9 +58,11 @@ const Register = () => {
     <Layout title="Register - Ecommer App">
       <div className="form-container">
         <div className="form-box">
-          <center><h4 className="form-title">REGISTER FORM</h4></center>
+          <center>
+            <h4 className="form-title">REGISTER FORM</h4>
+          </center>
           <form onSubmit={handleSubmit}>
-            <MdDriveFileRenameOutline/>
+            <MdDriveFileRenameOutline />
             <input
               type="text"
               value={name}
@@ -65,7 +72,7 @@ const Register = () => {
               required
               autoFocus
             />
-            <MdEmail/>
+            <MdEmail />
             <input
               type="email"
               value={email}
@@ -74,7 +81,7 @@ const Register = () => {
               placeholder="Enter Your Email"
               required
             />
-            <RiLockPasswordFill/>
+            <RiLockPasswordFill />
             <input
               type="password"
               value={password}
@@ -83,7 +90,7 @@ const Register = () => {
               placeholder="Enter Your Password"
               required
             />
-            <GiRotaryPhone/>
+            <GiRotaryPhone />
             <input
               type="text"
               value={phone}
@@ -92,7 +99,7 @@ const Register = () => {
               placeholder="Enter Your Phone"
               required
             />
-            <AiFillHome/>
+            <AiFillHome />
             <input
               type="text"
               value={address}
