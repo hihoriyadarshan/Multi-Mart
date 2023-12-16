@@ -1,0 +1,194 @@
+.sc-x{
+  overflow-x: auto;
+  /* overflow-x: hidden; */
+}
+
+
+
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width:  50%;
+  background-color: #857a11;
+  margin-left: 0px;
+}
+
+
+
+th {
+  text-align: left;
+  font-weight: 900;
+  font-size: 13px;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+  padding: 0 40px;
+  padding-bottom: 14px;
+  color: black;
+  border-color: #e5e5e5 ;
+  
+  /* width: 96%; */
+
+}
+
+tr:not(:first-child):hover {
+  background: rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color:black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
+
+
+}
+
+td {
+  font-size: 14px;
+  line-height: 40px;
+  font-weight: 400;
+  padding: 0 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
+  background-color: #ffffff;
+  color:black;
+  border-color: #e5e5e5 ;
+
+  /* width: 96%; */
+
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--bs-heading-color);
+  margin-left: 0vh;
+}
+
+.m-1 {
+  margin-left: 21.25rem!important;
+}
+
+
+.panel.important {
+  width: 87%;
+  margin-left: 30vh;
+}
+
+.section.panel.important {
+    margin-left: 243px;
+}
+
+.table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 50%;
+  background-color: #857a11;
+  margin-left: 0px;
+}
+.write-title{
+  margin-top: 10px;
+  margin-left:70vh;
+  font-size: 26px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 1px;
+}
+
+.pagination{
+  margin-left: 225px;
+  font-size: 18px;
+}
+
+.search-container-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0px; 
+}
+
+/* Style the input */
+.search-container-left input {
+  width: 29%;
+  height: 37px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  font-size: 16px;
+  outline: none;
+  float: right;
+  margin-left: 110vh;
+  margin-bottom: 10px;
+}
+
+
+.search-container-left .search-icon {
+  /* margin-left: 100vh; */
+  font-size: 20px;
+  margin-bottom: 7px;  
+  color: #fff;  
+  cursor: pointer;
+  align-items: center;
+  width: 43px;
+  height: 38px;
+  margin-right: 65px;
+  background-color: #333;
+  margin-bottom: 9px;
+}
+
+
+.search-md{
+  margin-left: 10px;
+}
+
+/* pdf csv */
+
+.download-1{
+  margin-left: 850px;
+  margin-bottom: -30px;
+}
+
+.download-2{
+  margin-left: 790px;
+  margin-bottom: 0px;
+}
+
+.download-3{
+  margin-left: 1080px;
+  margin-bottom: 0px;
+}
+
+
+.container-fluid {
+  margin: 1rem;
+}
+
+
+.download-options-inner {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0; 
+}
+
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+label {
+  font-size: 16px;
+  margin: 5px;
+
+}
+
+
+.download-button {
+
+  color: #000;
+  padding: 1.5px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+ 
+}
+
+
+
+
