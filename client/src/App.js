@@ -35,6 +35,8 @@ import Product from "./pages/Product";
 import CreateSub_category from "./pages/Admin/CreateSub_category";
 import Get_feedback from "./pages/Admin/Get_feedback";
 import AdminBlog from "./pages/Admin/AdminBlog.js";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (

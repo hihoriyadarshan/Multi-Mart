@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
-import { CgMouse } from "react-icons/cg";
+
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import "./css/Home.css";
